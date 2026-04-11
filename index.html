@@ -9,8 +9,8 @@
   <!-- OGP Tags -->
   <meta property="og:title" content="ComfyUI 動画API コスパ＆ベンチマーク比較表 2026">
   <meta property="og:description" content="ComfyUI公式パートナーノードの動画生成モデルを5秒あたりのコストとELOスコアで比較。最新の価格と品質評価を一覧化。">
-  <meta property="og:image" content="https://earthkey.github.io/comfyui-cost-table/og-image.png">
-  <meta property="og:url" content="https://earthkey.github.io/comfyui-cost-table/">
+  <meta property="og:image" content="https://comfyui-cost-table.vercel.app/og-image.png">
+  <meta property="og:url" content="https://comfyui-cost-table.vercel.app">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -92,7 +92,7 @@
 
     .eyebrow {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 13px;
       color: var(--accent);
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -113,7 +113,7 @@
     }
 
     .header-sub {
-      font-size: 13px;
+      font-size: 15px;
       color: var(--text-muted);
       margin-top: 6px;
       line-height: 1.7;
@@ -121,7 +121,7 @@
 
     .header-meta {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-top: 10px;
     }
@@ -143,7 +143,7 @@
 
     .legend-label {
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-dim);
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -154,7 +154,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      font-size: 11px;
+      font-size: 13px;
       font-family: var(--mono);
       color: var(--text-muted);
     }
@@ -177,7 +177,7 @@
     }
 
     .controls-label {
-      font-size: 11px;
+      font-size: 13px;
       font-family: var(--mono);
       color: var(--text-muted);
       letter-spacing: 0.1em;
@@ -190,7 +190,7 @@
       border: 1px solid var(--border);
       color: var(--text-muted);
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 13px;
       padding: 6px 14px;
       border-radius: 6px;
       cursor: pointer;
@@ -214,7 +214,7 @@
 
     .count-label {
       margin-left: auto;
-      font-size: 11px;
+      font-size: 13px;
       font-family: var(--mono);
       color: var(--text-dim);
     }
@@ -234,7 +234,7 @@
 
     thead th {
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -287,7 +287,7 @@
 
     td {
       padding: 11px 10px;
-      font-size: 12.5px;
+      font-size: 14px;
       vertical-align: middle;
     }
 
@@ -297,7 +297,7 @@
 
     .rank {
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 14px;
       color: var(--text-dim);
       font-weight: 500;
       display: inline-block;
@@ -311,13 +311,13 @@
 
     .co-name {
       font-family: var(--display);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
     }
 
     .model-id {
       font-family: var(--mono);
-      font-size: 10.5px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-top: 2px;
     }
@@ -325,7 +325,7 @@
     .badge {
       display: inline-block;
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 11px;
       padding: 1px 6px;
       border-radius: 4px;
       font-weight: 500;
@@ -371,7 +371,7 @@
 
     .mono-val {
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .cost-green {
@@ -407,7 +407,7 @@
 
     .elo-val {
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 500;
       min-width: 38px;
       text-align: right;
@@ -467,7 +467,7 @@
     }
 
     .fnote {
-      font-size: 11px;
+      font-size: 13px;
       font-family: var(--mono);
       color: var(--text-muted);
       line-height: 2.2;
@@ -481,7 +481,7 @@
       display: inline-block;
       margin-top: 10px;
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 13px;
       color: var(--accent);
       text-decoration: none;
       border-bottom: 1px solid rgba(124, 109, 250, 0.3);
@@ -584,7 +584,8 @@
       ★ <strong>Seedance 2.0</strong> は2026年4月時点でパートナーノード未掲載。ELO 1274で実質2位の実力。<br>
       ★ <strong>Sora 2</strong> は2026年4月26日にアプリ終了予定（API は9月24日まで）。<br>
       ★ <strong>Wan 2.7 / LTX-2</strong> はローカル実行なら無料。この価格はAPI経由。<br>
-      ★ <strong>Luma ray-flash-2</strong> は最安だがELO未掲載・品質制限あり。<strong>Luma ray-2</strong> はELO 1203（T2V 17位）。
+      ★ <strong>Luma ray-flash-2</strong> は最安だがELO未掲載・品質制限あり。<strong>Luma ray-2</strong> はELO 1203（T2V 17位）。<br>
+      ★ <strong>Kling v3.0</strong> のコストは実機計測値（1 storyboard / 5秒）。ストーリーボードは最大6枚まで設定可能（複数枚では合計クレジットが増加）。
     </div>
     <a class="src-link" href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank">→
       docs.comfy.org/ja/tutorials/partner-nodes/pricing</a>
@@ -616,8 +617,9 @@
       { company: 'Kling', model: 'v2-1 std (5sec)', res: '—', audio: false, crSec: null, cr5: 59.08, tier: 'blue', elo: null, eloNote: '旧世代' },
       { company: 'Kling', model: 'v2-1 Pro (5sec)', res: '—', audio: false, crSec: null, cr5: 103.39, tier: 'amber', elo: null, eloNote: '旧世代' },
       { company: 'Kling', model: 'v2-master (5sec)', res: '—', audio: false, crSec: null, cr5: 295.4, tier: 'red', elo: null, eloNote: '旧世代' },
-      { company: 'Kling', model: 'v3.0 1080P Pro', res: '1080P', audio: false, crSec: null, cr5: null, tier: 'amber', elo: 1243, eloNote: 'T2V 4位 ★最高' },
-      { company: 'Kling', model: 'Omni v3.0 1080P Pro', res: '1080P', audio: false, crSec: null, cr5: null, tier: 'amber', elo: 1229, eloNote: 'T2V 5位' },
+      { company: 'Kling', model: 'v3.0 1080P Pro 音声OFF', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1243, eloNote: 'T2V 4位 ★最高' },
+      { company: 'Kling', model: 'v3.0 1080P Pro 音声ON', res: '1080P', audio: true, crSec: 35.44, cr5: 177.2, tier: 'amber', elo: 1243, eloNote: 'T2V 4位 ★最高' },
+      { company: 'Kling', model: 'Omni v3.0 1080P Pro', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1229, eloNote: 'T2V 5位 ※音声有無同額' },
       // Vidu
       { company: 'Vidu', model: 'Q3 Turbo 540P', res: '540P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 1223, eloNote: 'Q3 Pro参照' },
       { company: 'Vidu', model: 'Q3 Turbo 720P', res: '720P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 1223, eloNote: 'Q3 Pro参照' },
