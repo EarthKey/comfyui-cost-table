@@ -520,8 +520,8 @@
       ELO = Artificial Analysis Video Arena（ブラインドユーザー投票による品質評価）
     </p>
     <div class="header-meta">
-      コスト出典: <strong>docs.comfy.org/ja/tutorials/partner-nodes/pricing</strong> (2026-04-11)
-      &nbsp;|&nbsp; ELO出典: <strong>artificialanalysis.ai/video/leaderboard</strong> (2026-04-11)
+      コスト出典: <a href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank" style="color:var(--accent); text-decoration:underline;">docs.comfy.org/ja/tutorials/partner-nodes/pricing</a> (2026-04-11)
+      &nbsp;|&nbsp; ELO出典: <a href="https://artificialanalysis.ai/video/leaderboard/text-to-video" target="_blank" style="color:var(--accent); text-decoration:underline;">artificialanalysis.ai/video/leaderboard/text-to-video</a>
       &nbsp;|&nbsp; <strong>211 credits = $1.00</strong>
     </div>
   </header>
@@ -581,7 +581,7 @@
     <div class="fnote">
       ★ <strong>5秒CR</strong> = クレジット/秒 × 5（固定実行の場合はそのままの価格を掲載）<br>
       ★ <strong>ELO</strong> = Artificial Analysis Video Arena によるブラインドユーザー投票スコア。T2V（テキスト→動画）の音声なし版を基準。<br>
-      ★ <strong>Seedance 2.0</strong> は2026年4月時点でパートナーノード未掲載。ELO 1274で実質2位の実力。<br>
+      ★ <strong>Seedance 2.0</strong> は T2V で ELO 1274（2位）の実力を持ち、約228.1cr/5秒で利用可能。オーディオの有無で金額の差はありません。<br>
       ★ <strong>Sora 2</strong> は2026年4月26日にアプリ終了予定（API は9月24日まで）。<br>
       ★ <strong>Wan 2.7 / LTX-2</strong> はローカル実行なら無料。この価格はAPI経由。<br>
       ★ <strong>Luma ray-flash-2</strong> は最安だがELO未掲載・品質制限あり。<strong>Luma ray-2</strong> はELO 1203（T2V 17位）。<br>
@@ -646,6 +646,8 @@
       { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 480P', res: '480P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'green', elo: null, eloNote: '2.6参照' },
       { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 720P', res: '720P', audio: false, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1187, eloNote: 'Wan2.6 T2V23位' },
       { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 1080P', res: '1080P', audio: false, crSec: 31.65, cr5: 158.25, tier: 'amber', elo: 1187, eloNote: 'Wan2.6参照' },
+      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声OFF', res: '720P', audio: false, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1274, eloNote: 'T2V 2位' },
+      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声ON', res: '720P', audio: true, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1274, eloNote: 'T2V 2位' },
       // Google
       { company: 'Google', model: 'Veo 3.0 Fast 音声OFF', res: '—', audio: false, crSec: null, cr5: 168.8, tier: 'amber', elo: 1219, eloNote: 'Veo3 T2V 10位' },
       { company: 'Google', model: 'Veo 3.0 Fast 音声ON', res: '—', audio: true, crSec: null, cr5: 253.2, tier: 'red', elo: 1219, eloNote: 'Veo3参照' },
