@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComfyUI 動画API コスパ＆ベンチマーク比較表 2026</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%8E%A6</text></svg>">
+
+  <!-- OGP Tags -->
+  <meta property="og:title" content="ComfyUI 動画API コスパ＆ベンチマーク比較表 2026">
+  <meta property="og:description" content="ComfyUI公式パートナーノードの動画生成モデルを5秒あたりのコストとELOスコアで比較。最新の価格と品質評価を一覧化。">
+  <meta property="og:image" content="https://comfyui-cost-table.vercel.app/og-image.png">
+  <meta property="og:url" content="https://comfyui-cost-table.vercel.app">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: rgba(255, 255, 255, 0.07);
+      --border-hover: rgba(255, 255, 255, 0.15);
+      --text: #e8e8f0;
+      --text-muted: #6b6b80;
+      --text-dim: #3a3a50;
+      --accent: #7c6dfa;
+      --green: #4ade80;
+      --green-dim: rgba(74, 222, 128, 0.12);
+      --amber: #fbbf24;
+      --amber-dim: rgba(251, 191, 36, 0.1);
+      --red: #f87171;
+      --red-dim: rgba(248, 113, 113, 0.1);
+      --blue: #60a5fa;
+      --blue-dim: rgba(96, 165, 250, 0.1);
+      --purple: #c084fc;
+      --purple-dim: rgba(192, 132, 252, 0.12);
+      --gray-dim: rgba(107, 114, 128, 0.1);
+      --mono: 'DM Mono', monospace;
+      --display: 'Syne', sans-serif;
+      --body: 'Noto Sans JP', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== 共通ナビゲーション（動画API比較 ⇔ AIモデル比較ラボ） ===== */
+    .site-nav {
+      display: flex;
+      gap: 8px;
+      padding: 12px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .site-nav-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .site-nav a {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: var(--surface2);
+    }
+
+    .site-nav a[aria-current="page"] {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    header {
+      padding: 48px 40px 28px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -40px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 109, 250, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: 80px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(74, 222, 128, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(20px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .header-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.7;
+    }
+
+    .header-meta {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .header-meta strong {
+      color: var(--text);
+    }
+
+    /* LEGEND */
+    .legend-bar {
+      padding: 14px 40px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .legend-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* CONTROLS */
+    .controls {
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .controls-label {
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .sort-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .sort-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .sort-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .count-label {
+      margin-left: auto;
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-dim);
+    }
+
+    /* TABLE */
+    .table-wrap {
+      padding: 0 40px 48px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    thead th {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 10px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    thead th:hover {
+      color: var(--text);
+    }
+
+    thead th.r {
+      text-align: right;
+    }
+
+    thead th.active-col {
+      color: var(--accent);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+      animation: rowIn 0.25s ease both;
+    }
+
+    tbody tr:hover {
+      background: var(--surface2);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes rowIn {
+      from {
+        opacity: 0;
+        transform: translateY(3px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    td {
+      padding: 11px 10px;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    td.r {
+      text-align: right;
+    }
+
+    .rank {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text-dim);
+      font-weight: 500;
+      display: inline-block;
+      min-width: 22px;
+      text-align: right;
+    }
+
+    .rank.top3 {
+      color: var(--amber);
+    }
+
+    .co-name {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .model-id {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .bg {
+      background: var(--green-dim);
+      color: var(--green);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+    }
+
+    .bb {
+      background: var(--blue-dim);
+      color: var(--blue);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
+    .ba {
+      background: var(--amber-dim);
+      color: var(--amber);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+    }
+
+    .br {
+      background: var(--red-dim);
+      color: var(--red);
+      border: 1px solid rgba(248, 113, 113, 0.2);
+    }
+
+    .bx {
+      background: var(--gray-dim);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .bp {
+      background: var(--purple-dim);
+      color: var(--purple);
+      border: 1px solid rgba(192, 132, 252, 0.2);
+    }
+
+    .mono-val {
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+
+    .cost-green {
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .cost-blue {
+      color: var(--blue);
+      font-weight: 500;
+    }
+
+    .cost-amber {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    .cost-red {
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    .cost-muted {
+      color: var(--text-muted);
+    }
+
+    /* ELO meter */
+    .elo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .elo-val {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 500;
+      min-width: 38px;
+      text-align: right;
+    }
+
+    .elo-bar-bg {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      height: 5px;
+      overflow: hidden;
+      min-width: 50px;
+    }
+
+    .elo-bar-fill {
+      height: 5px;
+      border-radius: 3px;
+      background: var(--purple);
+      transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* bar */
+    .bar-bg {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      height: 5px;
+      overflow: hidden;
+      width: 80px;
+    }
+
+    .bar-fill {
+      height: 5px;
+      border-radius: 3px;
+      transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .bar-green {
+      background: var(--green);
+    }
+
+    .bar-blue {
+      background: var(--blue);
+    }
+
+    .bar-amber {
+      background: var(--amber);
+    }
+
+    .bar-red {
+      background: var(--red);
+    }
+
+    footer {
+      padding: 24px 40px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .fnote {
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      line-height: 2.2;
+    }
+
+    .fnote strong {
+      color: var(--text);
+    }
+
+    .src-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(124, 109, 250, 0.3);
+      transition: border-color 0.15s;
+    }
+
+    .src-link:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+
+      header,
+      .controls,
+      .legend-bar,
+      .table-wrap,
+      footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 共通ナビゲーション: 動画API比較 と AIモデル比較ラボ の相互リンク（同一タブ遷移） -->
+  <nav class="site-nav" aria-label="サイト内比較ページ">
+    <span class="site-nav-label">Compare:</span>
+    <a href="comfyui_video_cost_table.html" aria-current="page">🎦 動画API比較</a>
+    <a href="ai_model_comparison_lab.html">🧪 AIモデル比較ラボ</a>
+  </nav>
+
+  <header>
+    <div class="eyebrow">ComfyUI Partner Nodes × Artificial Analysis ELO</div>
+    <h1>動画API <span>コスパ</span> &amp; ベンチマーク比較</h1>
+    <p class="header-sub">
+      ComfyUI公式パートナーノードの動画生成モデルを<strong>5秒あたりのコスト</strong>と<strong>ELOスコア</strong>で比較<br>
+      ELO = Artificial Analysis Video Arena（ブラインドユーザー投票による品質評価）
+    </p>
+    <div class="header-meta">
+      コスト出典: <a href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank" style="color:var(--accent); text-decoration:underline;">docs.comfy.org/ja/tutorials/partner-nodes/pricing</a> (2026-07-17 更新)
+      &nbsp;|&nbsp; ELO出典: <a href="https://artificialanalysis.ai/video/leaderboard/text-to-video" target="_blank" style="color:var(--accent); text-decoration:underline;">artificialanalysis.ai/video/leaderboard/text-to-video</a>
+      &nbsp;|&nbsp; <strong>211 credits = $1.00</strong>
+    </div>
+  </header>
+
+  <div class="legend-bar">
+    <span class="legend-label">コスパ:</span>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--green)"></div>安い
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--blue)"></div>中間
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--amber)"></div>やや高
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--red)"></div>高い
+    </div>
+    <span class="legend-label" style="margin-left:16px;">ELO:</span>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--purple)"></div>Artificial Analysis Video Arena スコア（高いほど高品質）
+    </div>
+    <div class="legend-item" style="margin-left:4px;"><span style="font-size:10px;color:var(--text-dim)">※ELO「—」=
+        Arena未掲載</span></div>
+  </div>
+
+  <div class="controls">
+    <span class="controls-label">並び替え：</span>
+    <button class="sort-btn" id="btn-name" onclick="setSort('name')">名前順 ↕</button>
+    <button class="sort-btn active" id="btn-cost" onclick="setSort('cost')">コスト安い順 ↑</button>
+    <button class="sort-btn" id="btn-costDesc" onclick="setSort('costDesc')">コスト高い順 ↓</button>
+    <button class="sort-btn" id="btn-elo" onclick="setSort('elo')">ELO高い順 ★</button>
+    <span class="count-label" id="count-label"></span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:28px">#</th>
+          <th onclick="setSort('name')" id="h-name">会社 / モデル</th>
+          <th>解像度</th>
+          <th>音声</th>
+          <th class="r">CR/秒</th>
+          <th class="r" onclick="setSort('cost')" id="h-cost">5秒CR</th>
+          <th class="r">5秒USD</th>
+          <th>コスパ</th>
+          <th style="min-width:140px" onclick="setSort('elo')" id="h-elo">ELO スコア ★</th>
+          <th style="width:80px" class="r">コスト感</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div class="fnote">
+      ★ <strong>5秒CR</strong> = クレジット/秒 × 5（固定実行の場合はそのままの価格を掲載）<br>
+      ★ <strong>ELO</strong> = Artificial Analysis Video Arena によるブラインドユーザー投票スコア。T2V（テキスト→動画）の音声なし版を基準。<br>
+      ★ <strong>【重要】ELO Arenaは2026年7月に再調整（リセット）</strong>されました。旧スコア（1100〜1290帯）と新スコア（900〜1240帯）に互換性はありません。旧版から順位が大きく変動しています。現1位は <strong>Gemini Omni Flash</strong>（ELO 1240）ですが、ComfyUIパートナーノード未提供のため本表には未掲載。<br>
+      ★ <strong>Seedance 2.0</strong> が再調整後の<strong>T2V 2位</strong>（ELO 1224、Dreamina Seedance 2.0名義）。<strong>HappyHorse</strong> は1.1が4位（1151）・1.0が5位（1126）に後退し、順位も1.1＞1.0に逆転。3位は <strong>Wan2.7-260612</strong> スナップショット版（1158）。<br>
+      ★ <strong>Kling Video O1</strong>（新・2026-07-17追加）は動画生成＋編集の統合モデル。音声生成オプションなし。V2V編集は720P 26.59cr/秒・1080P 35.45cr/秒（表の値は生成時）。ELO Arena未掲載。<br>
+      ★ <strong>grok-imagine-video</strong>（新）はbeta版が正式版に移行（旧beta 38.19cr/秒の行を置き換え）。さらに上位版 <strong>grok-imagine-video-1.5</strong>（新・高価格帯）が追加。正式版はELO 1067（T2V 17位）、1.5はArena未掲載。<br>
+      ★ <strong>Veo 3.1 / 3.1 Fast</strong>（新・価格正式掲載）は<strong>4K対応</strong>。Veo 3.1は720Pと1080Pが同額。Veo 3.1 Liteは軽量高速版（480P非対応）。旧Veo 3.0系はArena掲載終了。<br>
+      ★ <strong>Vidu Q3 Pro 2K</strong>（新・2026-07-17追加）は2K解像度対応版（42.2cr/秒）。<br>
+      ★ <strong>Luma Ray 3.2</strong> に360P/540Pの低解像度帯（新・2026-07-17追加）。360Pは12.66cr/5秒でドラフト用途に最安クラス。<br>
+      ★ <strong>Seedance 2.0 Fast</strong> は高速版（実機計測: 480P/5秒 ≈ 84.9cr、720P/5秒 ≈ 182.5cr）。<strong>Mini</strong>（2026-06-25追加）はさらに安いドラフト用（480P/5秒 ≈ 50.8cr、1080P/4Kなし）。<br>
+      ★ <strong>Sora 2</strong> は2026年4月26日にアプリ終了（APIは9月24日まで）。Arena掲載も終了。<br>
+      ★ <strong>Wan 2.7 / LTX-2</strong> はローカル実行なら無料。この価格はAPI経由。<br>
+      ★ <strong>Runway Gen-4 / Sora 2 / Hailuo / Luma ray-2 / Kling v2-5 / Veo 3.0・Veo 2</strong> は再調整後のArenaから掲載外（旧スコアは表内の注記に残置）。<br>
+      ★ <strong>Kling v3.0 / Omni</strong> はストーリーボードが最大6枚まで設定できるのが特徴です（複数枚では合計クレジットが増加します）。記載コストは 1 storyboard / 5秒 の実機計測値です。
+    </div>
+    <a class="src-link" href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank">→
+      docs.comfy.org/ja/tutorials/partner-nodes/pricing</a>
+    &nbsp;&nbsp;
+    <a class="src-link" href="https://artificialanalysis.ai/video/leaderboard/text-to-video" target="_blank">→
+      artificialanalysis.ai/video/leaderboard</a>
+  </footer>
+
+  <script>
+    // ELO = Artificial Analysis T2V leaderboard (no audio), 2026-07-17
+    // ※Arenaは2026-07に再調整（リセット）済み。旧スコア（1100〜1290帯）とは互換なし
+    // null = not listed in arena
+    const DATA = [
+      // Luma
+      { company: 'Luma', model: 'ray-flash-2', res: '—', audio: false, crSec: 0.66, cr5: 3.3, tier: 'green', elo: null, eloNote: '未掲載' },
+      { company: 'Luma', model: 'ray-1-6', res: '—', audio: false, crSec: 0.97, cr5: 4.85, tier: 'green', elo: null, eloNote: '未掲載' },
+      { company: 'Luma', model: 'ray-2 (Ray 3)', res: '—', audio: false, crSec: 1.93, cr5: 9.65, tier: 'green', elo: null, eloNote: '掲載終了(旧1203)' },
+      { company: 'Luma', model: 'Ray 3.2 360P（新）', res: '360P', audio: false, crSec: 2.53, cr5: 12.66, tier: 'green', elo: null, eloNote: '未掲載/7-17追加' },
+      { company: 'Luma', model: 'Ray 3.2 540P（新）', res: '540P', audio: false, crSec: 6.33, cr5: 31.65, tier: 'green', elo: null, eloNote: '未掲載/7-17追加' },
+      { company: 'Luma', model: 'Ray 3.2 720P', res: '720P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: null, eloNote: 'Ray2後継/6-19追加' },
+      { company: 'Luma', model: 'Ray 3.2 1080P', res: '1080P', audio: false, crSec: 50.64, cr5: 253.2, tier: 'red', elo: null, eloNote: 'Ray2後継/6-19追加' },
+      // LTX-2 Lightricks
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2-fast 1080P', res: '1080P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 948, eloNote: 'T2V 23位' },
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2-pro 1080P', res: '1080P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 920, eloNote: 'T2V 25位' },
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2.3-fast 1080P', res: '1080P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 974, eloNote: 'T2V 21位' },
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2.3-pro 1080P', res: '1080P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 962, eloNote: 'T2V 22位' },
+      // Runway
+      { company: 'Runway', model: 'Gen-4 Turbo', res: '—', audio: false, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: null, eloNote: '掲載終了(旧1223)' },
+      { company: 'Runway', model: 'Gen-3a Turbo', res: '—', audio: false, crSec: 15.09, cr5: 75.45, tier: 'blue', elo: null, eloNote: '旧世代' },
+      // Kling
+      { company: 'Kling', model: 'v2-6 Pro 音声OFF', res: '—', audio: false, crSec: 14.77, cr5: 73.85, tier: 'green', elo: 990, eloNote: 'T2V 20位' },
+      { company: 'Kling', model: 'v2-6 Pro 音声ON', res: '—', audio: true, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 990, eloNote: 'T2V 20位' },
+      { company: 'Kling', model: 'v2-5 Turbo Pro', res: '—', audio: false, crSec: null, cr5: 73.85, tier: 'blue', elo: null, eloNote: '掲載終了(旧1212)' },
+      { company: 'Kling', model: 'v2-1 std (5sec)', res: '—', audio: false, crSec: null, cr5: 59.08, tier: 'blue', elo: null, eloNote: '旧世代' },
+      { company: 'Kling', model: 'v2-1 Pro (5sec)', res: '—', audio: false, crSec: null, cr5: 103.39, tier: 'amber', elo: null, eloNote: '旧世代' },
+      { company: 'Kling', model: 'v2-master (5sec)', res: '—', audio: false, crSec: null, cr5: 295.4, tier: 'red', elo: null, eloNote: '旧世代' },
+      { company: 'Kling', model: 'v3.0 1080P Pro 音声OFF', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1110, eloNote: 'T2V 6位' },
+      { company: 'Kling', model: 'v3.0 1080P Pro 音声ON', res: '1080P', audio: true, crSec: 35.44, cr5: 177.2, tier: 'amber', elo: 1110, eloNote: 'T2V 6位' },
+      { company: 'Kling', model: 'Omni v3.0 1080P Pro 音声OFF', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1095, eloNote: 'T2V 10位' },
+      { company: 'Kling', model: 'Omni v3.0 1080P Pro 音声ON', res: '1080P', audio: true, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 1095, eloNote: 'T2V 10位' },
+      { company: 'Kling', model: 'Omni v3.0 720P Pro 音声OFF', res: '720P', audio: false, crSec: 17.72, cr5: 88.6, tier: 'blue', elo: 1093, eloNote: 'T2V 12位(Std版)' },
+      { company: 'Kling', model: 'Omni v3.0 720P Pro 音声ON', res: '720P', audio: true, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1093, eloNote: 'T2V 12位(Std版)' },
+      { company: 'Kling', model: 'v3.0/Omni 4K Pro', res: '4K', audio: false, crSec: null, cr5: 443.1, tier: 'red', elo: 1110, eloNote: 'v3.0参照/計算値' },
+      { company: 'Kling', model: 'Video O1 720P（新）', res: '720P', audio: false, crSec: 17.72, cr5: 88.6, tier: 'blue', elo: null, eloNote: '未掲載/7-17追加' },
+      { company: 'Kling', model: 'Video O1 1080P（新）', res: '1080P', audio: false, crSec: 23.63, cr5: 118.15, tier: 'amber', elo: null, eloNote: '未掲載/7-17追加' },
+      // Vidu
+      { company: 'Vidu', model: 'Q3 Turbo 540P', res: '540P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 1083, eloNote: 'Q3 Pro参照' },
+      { company: 'Vidu', model: 'Q3 Turbo 720P', res: '720P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 1083, eloNote: 'Q3 Pro参照' },
+      { company: 'Vidu', model: 'Q3 Turbo 1080P', res: '1080P', audio: false, crSec: 16.88, cr5: 84.4, tier: 'blue', elo: 1083, eloNote: 'Q3 Pro参照' },
+      { company: 'Vidu', model: 'Q3 Pro 720P', res: '720P', audio: false, crSec: 31.65, cr5: 158.25, tier: 'amber', elo: 1083, eloNote: 'T2V 15位' },
+      { company: 'Vidu', model: 'Q3 Pro 1080P', res: '1080P', audio: false, crSec: 33.76, cr5: 168.8, tier: 'amber', elo: 1083, eloNote: 'T2V 15位' },
+      { company: 'Vidu', model: 'Q3 Pro 2K（新）', res: '2K', audio: false, crSec: 42.2, cr5: 211, tier: 'red', elo: 1083, eloNote: 'T2V 15位/7-17追加' },
+      { company: 'Vidu', model: 'Q2', res: '—', audio: false, crSec: null, cr5: null, tier: 'blue', elo: null, eloNote: '掲載終了(旧1168)' },
+      { company: 'Vidu', model: '2.0 img2video 720P 4s', res: '720P', audio: false, crSec: null, cr5: 42.2, tier: 'green', elo: null, eloNote: '旧世代' },
+      // Minimax Hailuo
+      { company: 'Minimax', model: 'Hailuo-02 768P/6秒', res: '768P', audio: false, crSec: null, cr5: 49.2, tier: 'green', elo: null, eloNote: '掲載終了(旧1176)' },
+      { company: 'Minimax', model: 'Hailuo-02 1080P/6秒', res: '1080P', audio: false, crSec: null, cr5: 86.2, tier: 'blue', elo: null, eloNote: '掲載終了(旧1161)' },
+      { company: 'Minimax', model: 'Hailuo 2.3', res: '—', audio: false, crSec: null, cr5: null, tier: 'blue', elo: null, eloNote: '掲載終了(旧1183)' },
+      { company: 'Minimax', model: 'i2v-01 / t2v-01', res: '—', audio: false, crSec: null, cr5: 75.6, tier: 'blue', elo: null, eloNote: '旧世代' },
+      // Pixverse
+      { company: 'Pixverse', model: 'v3.5 Normal 540P 5s', res: '540P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: 'v3.5は掲載外(V6=1070)' },
+      { company: 'Pixverse', model: 'v3.5 Normal 720P 5s', res: '720P', audio: false, crSec: null, cr5: 126.6, tier: 'amber', elo: null, eloNote: 'v3.5は掲載外(V6=1070)' },
+      { company: 'Pixverse', model: 'v3.5 Normal 360P 5s', res: '360P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: 'v3.5は掲載外(V6=1070)' },
+      // Pika
+      { company: 'Pika', model: '2.2 t2v 720P 5s', res: '720P', audio: false, crSec: null, cr5: 42.2, tier: 'green', elo: null, eloNote: '未掲載' },
+      { company: 'Pika', model: '2.2 i2v 720P 5s', res: '720P', audio: false, crSec: null, cr5: 42.2, tier: 'green', elo: null, eloNote: '未掲載' },
+      { company: 'Pika', model: '2.2 t2v 1080P 5s', res: '1080P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: '未掲載' },
+      // Wan
+      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 480P', res: '480P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'green', elo: 1104, eloNote: '2.7本体参照' },
+      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 720P', res: '720P', audio: false, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1104, eloNote: 'T2V 8位' },
+      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 1080P', res: '1080P', audio: false, crSec: 31.65, cr5: 158.25, tier: 'amber', elo: 1104, eloNote: 'T2V 8位' },
+      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声OFF', res: '720P', audio: false, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1224, eloNote: 'T2V 2位' },
+      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声ON', res: '720P', audio: true, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1224, eloNote: 'T2V 2位' },
+      { company: 'ByteDance', model: 'Seedance 2.0 480P 音声OFF', res: '480P', audio: false, crSec: 21.22, cr5: 106.1, tier: 'blue', elo: 1224, eloNote: '720P参照' },
+      { company: 'ByteDance', model: 'Seedance 2.0 480P 音声ON', res: '480P', audio: true, crSec: 21.22, cr5: 106.1, tier: 'blue', elo: 1224, eloNote: '720P参照' },
+      { company: 'ByteDance', model: 'Seedance 2.0 4K 音声OFF', res: '4K', audio: false, crSec: null, cr5: null, tier: 'purple', elo: 1224, eloNote: '4K対応/トークン課金' },
+      { company: 'ByteDance', model: 'Seedance 2.0 Fast 480P 音声ON', res: '480P', audio: true, crSec: 16.98, cr5: 84.9, tier: 'blue', elo: 1224, eloNote: 'Fast/実機計測' },
+      { company: 'ByteDance', model: 'Seedance 2.0 Fast 720P 音声ON', res: '720P', audio: true, crSec: 36.50, cr5: 182.5, tier: 'amber', elo: 1224, eloNote: 'Fast/実機計測' },
+      { company: 'ByteDance', model: 'Seedance 2.0 Mini 480P', res: '480P', audio: false, crSec: 10.15, cr5: 50.8, tier: 'green', elo: 1224, eloNote: 'Mini/計算値・6/25追加' },
+      { company: 'ByteDance', model: 'Seedance 2.0 Mini 720P', res: '720P', audio: false, crSec: 22.81, cr5: 114.1, tier: 'blue', elo: 1224, eloNote: 'Mini/計算値・6/25追加' },
+      // HappyHorse (Alibaba ATH)
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.0 720P', res: '720P', audio: false, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 1126, eloNote: 'T2V 5位' },
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.0 1080P', res: '1080P', audio: false, crSec: 50.64, cr5: 253.2, tier: 'red', elo: 1126, eloNote: 'T2V 5位' },
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.1 720P', res: '720P', audio: false, crSec: 42.24, cr5: 211.2, tier: 'red', elo: 1151, eloNote: 'T2V 4位' },
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.1 1080P', res: '1080P', audio: false, crSec: 54.31, cr5: 271.55, tier: 'red', elo: 1151, eloNote: 'T2V 4位' },
+      // Google
+      { company: 'Google', model: 'Veo 3.0 Fast 音声OFF', res: '—', audio: false, crSec: null, cr5: 168.8, tier: 'amber', elo: null, eloNote: '掲載終了(旧1219)' },
+      { company: 'Google', model: 'Veo 3.0 Fast 音声ON', res: '—', audio: true, crSec: null, cr5: 253.2, tier: 'red', elo: null, eloNote: '掲載終了(旧1219)' },
+      { company: 'Google', model: 'Veo 3.0 音声OFF', res: '—', audio: false, crSec: null, cr5: 337.6, tier: 'red', elo: null, eloNote: '掲載終了(旧1219)' },
+      { company: 'Google', model: 'Veo 3.0 音声ON', res: '—', audio: true, crSec: null, cr5: 675.2, tier: 'red', elo: null, eloNote: '掲載終了(旧1219)' },
+      { company: 'Google', model: 'Veo 3.1 Fast 720P 音声OFF（新）', res: '720P', audio: false, crSec: 16.88, cr5: 84.4, tier: 'blue', elo: 1089, eloNote: 'T2V 14位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 720P 音声ON（新）', res: '720P', audio: true, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1089, eloNote: 'T2V 14位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 1080P 音声OFF（新）', res: '1080P', audio: false, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1089, eloNote: 'T2V 14位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 1080P 音声ON（新）', res: '1080P', audio: true, crSec: 25.32, cr5: 126.6, tier: 'amber', elo: 1089, eloNote: 'T2V 14位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 4K 音声OFF（新）', res: '4K', audio: false, crSec: 52.75, cr5: 263.75, tier: 'red', elo: 1089, eloNote: '4K新対応' },
+      { company: 'Google', model: 'Veo 3.1 Fast 4K 音声ON（新）', res: '4K', audio: true, crSec: 63.3, cr5: 316.5, tier: 'red', elo: 1089, eloNote: '4K新対応' },
+      { company: 'Google', model: 'Veo 3.1 720P/1080P 音声OFF（新）', res: '720P/1080P', audio: false, crSec: 42.2, cr5: 211, tier: 'red', elo: 1093, eloNote: 'T2V 11位' },
+      { company: 'Google', model: 'Veo 3.1 720P/1080P 音声ON（新）', res: '720P/1080P', audio: true, crSec: 84.4, cr5: 422, tier: 'red', elo: 1093, eloNote: 'T2V 11位' },
+      { company: 'Google', model: 'Veo 3.1 4K 音声OFF（新）', res: '4K', audio: false, crSec: 84.4, cr5: 422, tier: 'red', elo: 1093, eloNote: '4K新対応' },
+      { company: 'Google', model: 'Veo 3.1 4K 音声ON（新）', res: '4K', audio: true, crSec: 126.6, cr5: 633, tier: 'red', elo: 1093, eloNote: '4K新対応' },
+      { company: 'Google', model: 'Veo 3.1 Lite 720P 音声OFF', res: '720P', audio: false, crSec: 6.33, cr5: 31.65, tier: 'green', elo: 1090, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Lite 720P 音声ON', res: '720P', audio: true, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: 1090, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Lite 1080P 音声OFF', res: '1080P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: 1090, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Lite 1080P 音声ON', res: '1080P', audio: true, crSec: 16.88, cr5: 84.4, tier: 'amber', elo: 1090, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 2', res: '—', audio: false, crSec: null, cr5: 105.5, tier: 'blue', elo: null, eloNote: '掲載終了(旧1122)' },
+      // OpenAI Sora
+      { company: 'OpenAI', model: 'Sora-2 720P', res: '720P', audio: false, crSec: 21.10, cr5: 105.5, tier: 'amber', elo: null, eloNote: '掲載終了(旧1172)' },
+      { company: 'OpenAI', model: 'Sora-2-Pro 720P', res: '720P', audio: false, crSec: 63.30, cr5: 316.5, tier: 'red', elo: null, eloNote: '掲載終了(旧1196)' },
+      // xAI Grok
+      { company: 'xAI (Grok)', model: 'grok-imagine-video 480P（新）', res: '480P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'green', elo: 1067, eloNote: 'T2V 17位' },
+      { company: 'xAI (Grok)', model: 'grok-imagine-video 720P（新）', res: '720P', audio: false, crSec: 14.77, cr5: 73.85, tier: 'blue', elo: 1067, eloNote: 'T2V 17位' },
+      { company: 'xAI (Grok)', model: 'grok-imagine-video-1.5 480P（新）', res: '480P', audio: false, crSec: 24.14, cr5: 120.7, tier: 'amber', elo: null, eloNote: '未掲載/7-17追加' },
+      { company: 'xAI (Grok)', model: 'grok-imagine-video-1.5 720P（新）', res: '720P', audio: false, crSec: 42.24, cr5: 211.2, tier: 'red', elo: null, eloNote: '未掲載/7-17追加' },
+      { company: 'xAI (Grok)', model: 'grok-imagine-video-1.5 1080P（新）', res: '1080P', audio: false, crSec: 75.43, cr5: 377.15, tier: 'red', elo: null, eloNote: '未掲載/7-17追加' },
+      // Moonvalley
+      { company: 'Moonvalley', model: 'T2V/I2V 5秒', res: '—', audio: false, crSec: null, cr5: 316.5, tier: 'red', elo: null, eloNote: '未掲載' },
+    ];
+
+    const TIER_LABEL = { green: '安い', blue: '中間', amber: 'やや高', red: '高い' };
+    const ELO_MIN = 900, ELO_MAX = 1240;
+    const COST_MAX = Math.max(...DATA.filter(d => d.cr5).map(d => d.cr5));
+
+    let currentSort = 'cost';
+
+    function eloColor(elo) {
+      if (!elo) return 'var(--text-dim)';
+      if (elo >= 1100) return 'var(--purple)';
+      if (elo >= 1050) return 'var(--blue)';
+      if (elo >= 980) return 'var(--text-muted)';
+      return 'var(--text-dim)';
+    }
+    function eloBarW(elo) {
+      if (!elo) return 0;
+      return Math.round(Math.min(100, Math.max(2, (elo - ELO_MIN) / (ELO_MAX - ELO_MIN) * 100)));
+    }
+    function usd(cr) { if (!cr) return '—'; return '$' + (cr / 211).toFixed(3); }
+    function crFmt(cr) { if (cr === null || cr === undefined) return '—'; return cr.toFixed(1); }
+    function setSort(type) {
+      currentSort = type;
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + type)?.classList.add('active');
+      ['name', 'cost', 'elo'].forEach(k => {
+        const el = document.getElementById('h-' + k);
+        if (el) el.classList.toggle('active-col', k === type || k + 'Desc' === type);
+      });
+      render();
+    }
+    function render() {
+      let rows = [...DATA];
+      if (currentSort === 'name') rows.sort((a, b) => a.company.localeCompare(b.company, 'ja') || a.model.localeCompare(b.model));
+      else if (currentSort === 'cost') rows.sort((a, b) => (a.cr5 ?? Infinity) - (b.cr5 ?? Infinity));
+      else if (currentSort === 'costDesc') rows.sort((a, b) => (b.cr5 ?? -1) - (a.cr5 ?? -1));
+      else if (currentSort === 'elo') rows.sort((a, b) => (b.elo ?? 0) - (a.elo ?? 0));
+
+      const tbody = document.getElementById('tbody');
+      tbody.innerHTML = '';
+      rows.forEach((d, i) => {
+        const isTop3 = currentSort === 'elo' && d.elo && i < 3;
+        const rankCls = (currentSort === 'cost' || currentSort === 'elo') ? (isTop3 ? 'rank top3' : 'rank') : 'rank';
+        const rankN = (currentSort === 'name') ? '' : (i + 1);
+        const audioMk = d.audio
+          ? `<span class="badge ba">ON</span>`
+          : `<span style="color:var(--text-dim);font-size:10px;font-family:var(--mono)">—</span>`;
+        const crSecStr = d.crSec != null ? d.crSec.toFixed(2) : '—';
+        const cr5Str = crFmt(d.cr5);
+        const usdStr = d.cr5 ? usd(d.cr5) : '—';
+        const costCls = `cost-${d.tier}`;
+        const barCls = `bar-${d.tier}`;
+        const barW = d.cr5 ? Math.round(d.cr5 / COST_MAX * 100) : 0;
+        const eloStr = d.elo ? d.elo.toLocaleString() : '—';
+        const eloW = eloBarW(d.elo);
+        const eloC = eloColor(d.elo);
+        const noteBadge = d.eloNote ? `<span class="badge bx" style="margin-left:4px;font-size:9px">${d.eloNote}</span>` : '';
+
+        const tr = document.createElement('tr');
+        tr.style.animationDelay = (i * 15) + 'ms';
+        tr.innerHTML = `
+      <td><span class="${rankCls}">${rankN}</span></td>
+      <td>
+        <div class="co-name">${d.company}</div>
+        <div class="model-id">${d.model}</div>
+      </td>
+      <td><span class="mono-val" style="color:var(--text-muted);font-size:11px">${d.res}</span></td>
+      <td>${audioMk}</td>
+      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${crSecStr}</span></td>
+      <td class="r"><span class="mono-val ${costCls}">${cr5Str}</span></td>
+      <td class="r"><span class="mono-val ${costCls}">${usdStr}</span></td>
+      <td><span class="badge b${d.tier[0]}">${TIER_LABEL[d.tier]}</span></td>
+      <td>
+        <div class="elo-wrap">
+          <span class="elo-val" style="color:${eloC}">${eloStr}</span>
+          <div class="elo-bar-bg"><div class="elo-bar-fill" style="width:${eloW}%"></div></div>
+          ${noteBadge}
+        </div>
+      </td>
+      <td>
+        <div class="bar-bg"><div class="bar-fill ${barCls}" style="width:${barW}%"></div></div>
+      </td>
+    `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('count-label').textContent = rows.length + ' models';
+    }
+
+    setSort('cost');
+  </script>
+</body>
+
+</html>
