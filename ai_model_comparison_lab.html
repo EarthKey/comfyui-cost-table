@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIモデル比較ラボ — 性能・トークン単価・簡易コスパ 2026</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%A7%AA</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* 深いネイビーを土台に、シアン〜ブルーを主役にする配色（紫は使わない） */
+      --bg: #050b16;
+      --surface: #0a1322;
+      --surface2: #101d31;
+      --border: rgba(148, 197, 255, 0.10);
+      --border-hover: rgba(148, 197, 255, 0.25);
+      --text: #e6eefb;
+      --text-muted: #7b8ba6;
+      --text-dim: #42506a;
+      --accent: #22d3ee;       /* シアン: 主アクセント */
+      --accent2: #3b82f6;      /* ブルー: 副アクセント */
+      --green: #4ade80;        /* 補助色: 良い/安い */
+      --green-dim: rgba(74, 222, 128, 0.12);
+      --amber: #fbbf24;        /* 補助色: 注意 */
+      --amber-dim: rgba(251, 191, 36, 0.1);
+      --red: #f87171;          /* 補助色: 高い/警告 */
+      --red-dim: rgba(248, 113, 113, 0.1);
+      --cyan-dim: rgba(34, 211, 238, 0.12);
+      --blue-dim: rgba(59, 130, 246, 0.12);
+      --gray-dim: rgba(107, 114, 128, 0.12);
+      --mono: 'IBM Plex Mono', monospace;
+      --display: 'Unbounded', sans-serif;
+      --body: 'Noto Sans JP', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse 700px 380px at 85% -60px, rgba(34, 211, 238, 0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 300px at 0% 0%, rgba(59, 130, 246, 0.09) 0%, transparent 70%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== 共通ナビゲーション（2サイト相互移動） ===== */
+    .site-nav {
+      display: flex;
+      gap: 8px;
+      padding: 12px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 11, 22, 0.7);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .site-nav-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .site-nav a {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: var(--surface2);
+    }
+
+    .site-nav a[aria-current="page"] {
+      color: #04222b;
+      background: var(--accent);
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ===== ヘッダー ===== */
+    header {
+      padding: 44px 40px 26px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(20px, 4vw, 34px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .header-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.7;
+      max-width: 900px;
+    }
+
+    .header-sub strong {
+      color: var(--text);
+    }
+
+    .header-meta {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      line-height: 1.9;
+    }
+
+    .header-meta strong {
+      color: var(--text);
+    }
+
+    .ref-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--amber);
+      background: var(--amber-dim);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin-left: 6px;
+      vertical-align: 1px;
+    }
+
+    /* ===== 操作エリア ===== */
+    .controls {
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .controls-label {
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .sort-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .sort-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .sort-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .sort-btn.active {
+      background: linear-gradient(120deg, var(--accent2), var(--accent));
+      border-color: transparent;
+      color: #04121f;
+      font-weight: 500;
+    }
+
+    .count-label {
+      margin-left: auto;
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-dim);
+    }
+
+    /* ===== メイン比較表 ===== */
+    .table-wrap {
+      padding: 0 40px 8px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1080px;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    thead th {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 10px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    thead th.sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    thead th.sortable:hover,
+    thead th.sortable:focus-visible {
+      color: var(--text);
+      outline: none;
+    }
+
+    thead th.sortable:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    thead th.r {
+      text-align: right;
+    }
+
+    thead th.active-col {
+      color: var(--accent);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+      animation: rowIn 0.3s ease both;
+    }
+
+    tbody tr:hover {
+      background: var(--surface2);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes rowIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    td {
+      padding: 12px 10px;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    td.r {
+      text-align: right;
+    }
+
+    .rank {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text-dim);
+      font-weight: 500;
+      display: inline-block;
+      min-width: 22px;
+      text-align: right;
+    }
+
+    .rank.top3 {
+      color: var(--accent);
+    }
+
+    .co-name {
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .model-id {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .mono-val {
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+
+    .val-strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .val-good {
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .val-warn {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    .val-high {
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .badge-unknown {
+      background: var(--gray-dim);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .badge-note {
+      background: var(--blue-dim);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+
+    /* 知能指数のバーメーター（シアン） */
+    .idx-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .idx-val {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent);
+      min-width: 26px;
+      text-align: right;
+    }
+
+    .idx-bar-bg {
+      background: rgba(148, 197, 255, 0.08);
+      border-radius: 3px;
+      height: 5px;
+      overflow: hidden;
+      width: 70px;
+    }
+
+    .idx-bar-fill {
+      height: 5px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .feature-cell {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      min-width: 190px;
+    }
+
+    /* ===== 補足エリア ===== */
+    .notes-section {
+      padding: 20px 40px 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+    }
+
+    .note-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .note-card h2 {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .note-card p,
+    .note-card li {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .note-card strong {
+      color: var(--text);
+    }
+
+    .note-card ul {
+      padding-left: 18px;
+    }
+
+    .note-card code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      color: #93c5fd;
+    }
+
+    .formula {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 8px 0;
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    /* Coding Agent Index の注意書き（表の直下に置く） */
+    .cai-note {
+      margin: 14px 40px 4px;
+      padding: 12px 16px;
+      border-left: 3px solid var(--amber);
+      background: var(--amber-dim);
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 980px;
+    }
+
+    .cai-note strong {
+      color: var(--amber);
+    }
+
+    footer {
+      padding: 24px 40px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .fnote {
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      line-height: 2.1;
+    }
+
+    .fnote strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+
+      .site-nav,
+      header,
+      .controls,
+      .table-wrap,
+      .notes-section,
+      footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .cai-note {
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+
+      h1 {
+        font-size: 19px;
+      }
+
+      .notes-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 共通ナビゲーション: 動画API比較 と AIモデル比較ラボ の相互リンク（同一タブ遷移） -->
+  <nav class="site-nav" aria-label="サイト内比較ページ">
+    <span class="site-nav-label">Compare:</span>
+    <a href="comfyui_video_cost_table.html">🎦 動画API比較</a>
+    <a href="ai_model_comparison_lab.html" aria-current="page">🧪 AIモデル比較ラボ</a>
+  </nav>
+
+  <header>
+    <div class="eyebrow">Artificial Analysis Index × API Pricing</div>
+    <h1>AIモデル<span>比較ラボ</span></h1>
+    <p class="header-sub">
+      主要AIモデル（OpenAI / Anthropic / Google / SpaceXAI）の<strong>総合知能指数</strong>・<strong>Coding Agent
+        Index</strong>・<strong>トークン単価</strong>・<strong>簡易コスパ</strong>を一覧比較。
+      モデル選定の判断材料を透明に示すことが目的であり、特定モデルの断定的な推奨はしません。
+    </p>
+    <div class="header-meta">
+      参照データ更新日: <strong>2026-07-17</strong>
+      &nbsp;<a href="https://artificialanalysis.ai/" target="_blank" rel="noopener"
+        style="color:var(--accent);text-decoration:underline;">artificialanalysis.ai</a>
+      <span class="ref-badge">数値はすべて参考値</span><br>
+      指数出典: Artificial Analysis（Intelligence Index v4.1 / Coding Agent Index）&nbsp;|&nbsp; 価格出典: 各社公式ページ
+    </div>
+  </header>
+
+  <div class="controls">
+    <span class="controls-label">並び替え：</span>
+    <!-- 並び替えボタン: 押すと setSort() が呼ばれ、activeクラスとaria-pressedが切り替わる -->
+    <button class="sort-btn active" id="btn-intel" aria-pressed="true" onclick="setSort('intel')">総合知能指数順 ↓</button>
+    <button class="sort-btn" id="btn-name" aria-pressed="false" onclick="setSort('name')">モデル名順 ↑</button>
+    <button class="sort-btn" id="btn-value" aria-pressed="false" onclick="setSort('value')">簡易コスパ順 ↓</button>
+    <button class="sort-btn" id="btn-company" aria-pressed="false" onclick="setSort('company')">会社名順 ↑</button>
+    <span class="count-label" id="count-label"></span>
+  </div>
+
+  <div class="table-wrap">
+    <table aria-describedby="cai-note">
+      <thead>
+        <tr>
+          <th style="width:28px">#</th>
+          <!-- 列見出しクリックでも並び替え可能（tabindex + Enter/Space対応） -->
+          <th class="sortable" id="h-company" tabindex="0" data-sort="company">会社</th>
+          <th class="sortable" id="h-name" tabindex="0" data-sort="name">モデル・条件</th>
+          <th class="r sortable active-col" id="h-intel" tabindex="0" data-sort="intel" aria-sort="descending"
+            style="min-width:130px">総合知能指数 ↓</th>
+          <th class="r">Coding Agent Index</th>
+          <th class="r">入力 $/1M</th>
+          <th class="r">出力 $/1M</th>
+          <th class="r">簡易混合価格※</th>
+          <th class="r sortable" id="h-value" tabindex="0" data-sort="value">知能/簡易価格</th>
+          <th>Context</th>
+          <th>主な特徴</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Coding Agent Index の評価単位に関する注意（要件7: 表の近くに明示） -->
+  <p class="cai-note" id="cai-note">
+    ⚠ <strong>Coding Agent Index はモデル単体の成績ではありません。</strong>
+    「モデル ＋ 推論レベル ＋ エージェント基盤」（例: GPT-5.6 Sol + Codex、Claude系 + Claude Code、Grok 4.5 + Grok Build）の組み合わせ評価です。
+    異なるIDEやCLIで同じ点数が再現される保証はありません。
+  </p>
+
+  <section class="notes-section">
+    <div class="note-card">
+      <h2>指標の定義</h2>
+      <ul>
+        <li><strong>総合知能指数</strong> = Artificial Analysis Intelligence Index v4.1。GDPval-AA v2、Terminal-Bench
+          v2.1、SciCode、Humanity's Last Exam、GPQA Diamond など複数評価の合成値。高いほど総合的な推論・知識・科学・コーディング能力が高い。</li>
+        <li><strong>Coding Agent Index</strong> = DeepSWE、Terminal-Bench v2、SWE-Atlas-QnA で構成されるコーディングエージェント評価。</li>
+        <li><strong>入力/出力単価</strong> = 100万トークンあたりの標準価格（USD）。推論モデルは出力側の費用が支配的になりやすい。</li>
+      </ul>
+    </div>
+    <div class="note-card">
+      <h2>簡易混合価格の計算式</h2>
+      <p>「入力80万 + 出力20万 = 計100万トークン」の仮想ワークロードで比較する簡易指標です。</p>
+      <div class="formula">
+        簡易混合価格 = 入力単価 × 0.8 + 出力単価 × 0.2<br>
+        知能/簡易価格 = 総合知能指数 ÷ 簡易混合価格
+      </div>
+      <p><strong>これは実際のエージェント費用ではありません。</strong>キャッシュ、推論トークン量、再試行、ツール呼び出し、長文料金を無視しています。</p>
+    </div>
+    <div class="note-card">
+      <h2>数値を鵜呑みにできない理由</h2>
+      <ul>
+        <li>ベンチマークは実務そのものではない。数点差は常に体感できる絶対差ではない。</li>
+        <li>推論レベルを上げると性能と消費量が同時に上がる。</li>
+        <li>Codex、Claude Code、Grok Build などエージェント基盤の差が大きい。</li>
+        <li>Claude Sonnet 5 は新Tokenizerが同じ文章を約30％多いトークンに分割するため、同じ名目単価でも請求トークンが増える可能性が公式に明記されている。</li>
+        <li>Gemini 3.5 Flash は同価格帯の推論モデルより出力トークン量が多めと報告されている。</li>
+        <li>Artificial Analysis の指数は評価バージョン更新で変動する。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fnote">
+      ★ 参照データ更新日: <strong>2026-07-17</strong>（初版。OpenAI、Anthropic、Google、SpaceXAIの主要モデルを統合）<br>
+      ★ 同日、Claude Opus 4.8 / GPT-5.5 / Gemini 3.1 Pro の3モデルを <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener" style="color:var(--accent2)">artificialanalysis.ai</a> の個別モデルページを一次情報として追加。あわせて既存7モデルを同サイトと突き合わせ、GPT-5.6 Solの総合知能指数を59→<strong>58</strong>へ補正（価格は変更なし。ベンチマーク再評価による変動と見られる）。<br>
+      ★ 価格・モデル構成・ベンチマークは短期間で変わるため、<strong>利用前に公式ページを再確認してください。</strong><br>
+      ★ ※ Claude Sonnet 5 の単価は2026年8月31日までの導入価格（通常価格: 入力$3.00 / 出力$15.00）。<br>
+      ★ ※ GPT-5.6の価格は通常コンテキスト帯。長文帯では価格が上がる場合があります。<br>
+      ★ ※ 簡易混合価格は「入力80％・出力20％」での架空の計算値です。
+    </div>
+  </footer>
+
+  <script>
+    // =====================================================================
+    // データ配列
+    // 出典: ai_model_performance_token_cost_comparison_2026-07-17.md（Step 3-1）
+    // 数値を更新する場合は、このDATA配列の値だけを差し替えればよい。
+    //   intel   : 総合知能指数（Artificial Analysis Intelligence Index v4.1）
+    //   coding  : Coding Agent Index。数値がない場合は資料の表記文字列をそのまま入れる
+    //   inPrice / outPrice : $/100万トークン。注記付きは priceNote に補足
+    //   blend   : 簡易混合価格（入力×0.8 + 出力×0.2）
+    //   value   : 知能/簡易価格（簡易コスパ）
+    //   order   : 資料に記載された行順（同値時のタイブレークに使用）
+    // =====================================================================
+    const DATA = [
+      { order: 1, company: 'Anthropic', model: 'Claude Fable 5', cond: 'max・fallbackあり', intel: 60, coding: '未確認', inPrice: 10.00, outPrice: 50.00, priceNote: '', blend: 18.00, value: 3.33, context: '1M', feature: '総合性能首位。高価だが長時間・高難度向け' },
+      { order: 2, company: 'OpenAI', model: 'GPT-5.6 Sol', cond: 'max・Codex', intel: 58, coding: 80, inPrice: 5.00, outPrice: 30.00, priceNote: '', blend: 10.00, value: 5.80, context: '1M級', feature: 'コーディング首位。Fableに近い総合性能' },
+      { order: 3, company: 'OpenAI', model: 'GPT-5.6 Terra', cond: 'max・Codex', intel: 55, coding: 77, inPrice: 2.50, outPrice: 15.00, priceNote: '', blend: 5.00, value: 11.00, context: '1M級', feature: '通常開発の有力候補' },
+      { order: 4, company: 'SpaceXAI', model: 'Grok 4.5', cond: 'high・Grok Build', intel: 54, coding: 76, inPrice: 2.00, outPrice: 6.00, priceNote: '', blend: 2.80, value: 19.29, context: '公式ダッシュボード確認', feature: '高い性能と低い出力単価' },
+      { order: 5, company: 'Anthropic', model: 'Claude Sonnet 5', cond: 'max', intel: 53, coding: '公開表で個別確認', inPrice: 2.00, outPrice: 10.00, priceNote: '※導入価格', blend: 3.60, value: 14.72, context: '1M', feature: '実務・エージェント性能が強い' },
+      { order: 6, company: 'OpenAI', model: 'GPT-5.6 Luna', cond: 'max・Codex', intel: 51, coding: 75, inPrice: 1.00, outPrice: 6.00, priceNote: '', blend: 2.00, value: 25.50, context: '1M級', feature: '明確な作業では非常に高効率' },
+      { order: 7, company: 'Google', model: 'Gemini 3.5 Flash', cond: 'high', intel: 50, coding: '公開表で個別確認', inPrice: 1.50, outPrice: 9.00, priceNote: '', blend: 3.00, value: 16.67, context: '1M', feature: '157 token/s前後の高速出力' },
+      // 追加分（2026-07-17 Web調査）: artificialanalysis.ai/models/ の各モデル個別ページを一次情報として採用。
+      // 記事・SNS速報等で別スコア（例: Opus 4.8=61.4等）を見かける場合があるが、
+      // 評価版・reasoning設定・掲載時期の違いによる差の可能性があり、本表は他行と同じ「モデル個別ページ」基準に統一した。
+      { order: 8, company: 'Anthropic', model: 'Claude Opus 4.8', cond: 'max（Adaptive Reasoning）', intel: 56, coding: '未確認', inPrice: 5.00, outPrice: 25.00, priceNote: 'Web調査', blend: 9.00, value: 6.22, context: '1M', feature: 'Anthropic最上位Opus系。高性能だが高価・低速・出力が冗長と報告' },
+      { order: 9, company: 'OpenAI', model: 'GPT-5.5', cond: 'xhigh・Codex参考', intel: 55, coding: 76, inPrice: 5.00, outPrice: 30.00, priceNote: 'Web調査', blend: 10.00, value: 5.50, context: '922k', feature: '旧世代最上位。Coding Agent IndexはCodex基盤での参考値(旧基準)' },
+      { order: 10, company: 'Google', model: 'Gemini 3.1 Pro', cond: 'Preview', intel: 46, coding: '未確認', inPrice: 2.00, outPrice: 12.00, priceNote: 'Web調査', blend: 4.00, value: 11.50, context: '1M', feature: '推論強化・テキスト/画像/音声/動画入力対応。単価は比較的安い' },
+    ];
+
+    const INTEL_MAX = 60; // バーメーターの满尺（資料内の最高値）
+
+    // =====================================================================
+    // 並び替え
+    //   intel   : 総合知能指数 降順（初期表示。同値は order 昇順 = 資料記載順を維持）
+    //   name    : モデル名 昇順（localeCompare + numeric で日本語・英数字を自然に扱う）
+    //   value   : 簡易コスパ（知能/簡易価格）降順
+    //   company : 会社名 昇順
+    // 数値のないセルは昇順・降順を問わず常に末尾に置く。
+    // =====================================================================
+    let currentSort = 'intel'; // 初期ソート: 総合知能指数の降順
+
+    // 数値でない値（'未確認' など）を常に末尾に置くための比較ヘルパー
+    function numDesc(a, b, key) {
+      const av = typeof a[key] === 'number' ? a[key] : null;
+      const bv = typeof b[key] === 'number' ? b[key] : null;
+      if (av === null && bv === null) return a.order - b.order;
+      if (av === null) return 1;  // 数値なしは末尾へ
+      if (bv === null) return -1;
+      return (bv - av) || (a.order - b.order); // 同値は資料記載順
+    }
+
+    const SORTERS = {
+      intel: (a, b) => numDesc(a, b, 'intel'),
+      value: (a, b) => numDesc(a, b, 'value'),
+      name: (a, b) => a.model.localeCompare(b.model, 'ja', { numeric: true }) || (a.order - b.order),
+      company: (a, b) => a.company.localeCompare(b.company, 'ja') || (a.order - b.order),
+    };
+
+    // ボタン・列見出しの見た目とARIA状態を現在のソートに同期する
+    function syncSortUI() {
+      document.querySelectorAll('.sort-btn').forEach(b => {
+        const isActive = b.id === 'btn-' + currentSort;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', String(isActive));
+      });
+      document.querySelectorAll('thead th.sortable').forEach(th => {
+        const isActive = th.dataset.sort === currentSort;
+        th.classList.toggle('active-col', isActive);
+        if (isActive) {
+          th.setAttribute('aria-sort', (currentSort === 'name' || currentSort === 'company') ? 'ascending' : 'descending');
+        } else {
+          th.removeAttribute('aria-sort');
+        }
+      });
+    }
+
+    function setSort(type) {
+      currentSort = type;
+      syncSortUI();
+      render();
+    }
+
+    // 価格セルの色分け（青系サイトの補助色: 安い=green / 中間=そのまま / 高い=red）
+    function priceClass(v) {
+      if (v <= 3) return 'val-good';
+      if (v >= 15) return 'val-high';
+      return 'val-strong';
+    }
+
+    function render() {
+      const rows = [...DATA].sort(SORTERS[currentSort]);
+      const tbody = document.getElementById('tbody');
+      tbody.innerHTML = '';
+
+      rows.forEach((d, i) => {
+        const isTop3 = currentSort === 'intel' && i < 3;
+        const rankN = (currentSort === 'name' || currentSort === 'company') ? '' : (i + 1);
+
+        // Coding Agent Index: 数値ならそのまま、文字列（未確認等）はバッジ表示
+        const codingCell = (typeof d.coding === 'number')
+          ? `<span class="mono-val val-strong">${d.coding}</span>`
+          : `<span class="badge badge-unknown">${d.coding}</span>`;
+
+        const noteBadge = d.priceNote ? ` <span class="badge badge-note">${d.priceNote}</span>` : '';
+        const barW = Math.round(d.intel / INTEL_MAX * 100);
+
+        const tr = document.createElement('tr');
+        tr.style.animationDelay = (i * 30) + 'ms';
+        tr.innerHTML = `
+      <td><span class="rank${isTop3 ? ' top3' : ''}">${rankN}</span></td>
+      <td><span class="co-name">${d.company}</span></td>
+      <td>
+        <div class="mono-val val-strong">${d.model}</div>
+        <div class="model-id">${d.cond}</div>
+      </td>
+      <td class="r">
+        <div class="idx-wrap">
+          <span class="idx-val">${d.intel}</span>
+          <div class="idx-bar-bg"><div class="idx-bar-fill" style="width:${barW}%"></div></div>
+        </div>
+      </td>
+      <td class="r">${codingCell}</td>
+      <td class="r"><span class="mono-val ${priceClass(d.inPrice)}">$${d.inPrice.toFixed(2)}</span></td>
+      <td class="r"><span class="mono-val ${priceClass(d.outPrice)}">$${d.outPrice.toFixed(2)}</span>${noteBadge}</td>
+      <td class="r"><span class="mono-val ${priceClass(d.blend)}">$${d.blend.toFixed(2)}</span></td>
+      <td class="r"><span class="mono-val ${d.value >= 15 ? 'val-good' : 'val-strong'}">${d.value.toFixed(2)}</span></td>
+      <td><span class="mono-val" style="color:var(--text-muted);font-size:11.5px">${d.context}</span></td>
+      <td class="feature-cell">${d.feature}</td>
+    `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('count-label').textContent = rows.length + ' models';
+    }
+
+    // 列見出しのクリック / Enter / Space でも並び替えできるようにする
+    document.querySelectorAll('thead th.sortable').forEach(th => {
+      th.addEventListener('click', () => setSort(th.dataset.sort));
+      th.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setSort(th.dataset.sort);
+        }
+      });
+    });
+
+    // 初期表示: 総合知能指数の降順
+    setSort('intel');
+  </script>
+</body>
+
+</html>

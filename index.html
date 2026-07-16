@@ -62,6 +62,51 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ===== 共通ナビゲーション（動画API比較 ⇔ AIモデル比較ラボ） ===== */
+    .site-nav {
+      display: flex;
+      gap: 8px;
+      padding: 12px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .site-nav-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .site-nav a {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: var(--surface2);
+    }
+
+    .site-nav a[aria-current="page"] {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
     header {
       padding: 48px 40px 28px;
       border-bottom: 1px solid var(--border);
@@ -512,6 +557,13 @@
 </head>
 
 <body>
+
+  <!-- 共通ナビゲーション: 動画API比較 と AIモデル比較ラボ の相互リンク（同一タブ遷移） -->
+  <nav class="site-nav" aria-label="サイト内比較ページ">
+    <span class="site-nav-label">Compare:</span>
+    <a href="comfyui_video_cost_table.html" aria-current="page">🎦 動画API比較</a>
+    <a href="ai_model_comparison_lab.html">🧪 AIモデル比較ラボ</a>
+  </nav>
 
   <header>
     <div class="eyebrow">ComfyUI Partner Nodes × Artificial Analysis ELO</div>
