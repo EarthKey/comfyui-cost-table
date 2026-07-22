@@ -579,7 +579,7 @@
       モデル選定の判断材料を透明に示すことが目的であり、特定モデルの断定的な推奨はしません。
     </p>
     <div class="header-meta">
-      参照データ更新日: <strong>2026-07-17</strong>
+      参照データ更新日: <strong>2026-07-23</strong>
       &nbsp;<a href="https://artificialanalysis.ai/" target="_blank" rel="noopener"
         style="color:var(--accent);text-decoration:underline;">artificialanalysis.ai</a>
       <span class="ref-badge">数値はすべて参考値</span><br>
@@ -663,6 +663,7 @@
     <div class="fnote">
       ★ 参照データ更新日: <strong>2026-07-17</strong>（初版。OpenAI、Anthropic、Google、SpaceXAIの主要モデルを統合）<br>
       ★ 同日、Claude Opus 4.8 / GPT-5.5 / Gemini 3.1 Pro の3モデルを <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener" style="color:var(--accent2)">artificialanalysis.ai</a> の個別モデルページを一次情報として追加。あわせて既存7モデルを同サイトと突き合わせ、GPT-5.6 Solの総合知能指数を59→<strong>58</strong>へ補正（価格は変更なし。ベンチマーク再評価による変動と見られる）。<br>
+      ★ <strong>2026-07-23</strong>、2026-07-21登場の <strong>Gemini 3.6 Flash</strong>（high・reasoning版）を追加。知能指数50で自社の3.1 Pro(46)を上回りつつ、3.5 Flashより低価格($1.50/$7.50)。artificialanalysis.aiの個別モデルページを一次情報として採用。<br>
       ★ 価格・モデル構成・ベンチマークは短期間で変わるため、<strong>利用前に公式ページを再確認してください。</strong><br>
       ★ ※ Claude Sonnet 5 の単価は2026年8月31日までの導入価格（通常価格: 入力$3.00 / 出力$15.00）。<br>
       ★ ※ GPT-5.6の価格は通常コンテキスト帯。長文帯では価格が上がる場合があります。<br>
@@ -696,6 +697,8 @@
       { order: 8, company: 'Anthropic', model: 'Claude Opus 4.8', cond: 'max（Adaptive Reasoning）', intel: 56, coding: '未確認', inPrice: 5.00, outPrice: 25.00, priceNote: 'Web調査', blend: 9.00, value: 6.22, context: '1M', feature: 'Anthropic最上位Opus系。高性能だが高価・低速・出力が冗長と報告' },
       { order: 9, company: 'OpenAI', model: 'GPT-5.5', cond: 'xhigh・Codex参考', intel: 55, coding: 76, inPrice: 5.00, outPrice: 30.00, priceNote: 'Web調査', blend: 10.00, value: 5.50, context: '922k', feature: '旧世代最上位。Coding Agent IndexはCodex基盤での参考値(旧基準)' },
       { order: 10, company: 'Google', model: 'Gemini 3.1 Pro', cond: 'Preview', intel: 46, coding: '未確認', inPrice: 2.00, outPrice: 12.00, priceNote: 'Web調査', blend: 4.00, value: 11.50, context: '1M', feature: '推論強化・テキスト/画像/音声/動画入力対応。単価は比較的安い' },
+      // 追加分（2026-07-23 Web調査）: artificialanalysis.ai/models/gemini-3-6-flash を一次情報として採用。
+      { order: 11, company: 'Google', model: 'Gemini 3.6 Flash', cond: 'high（reasoning版）', intel: 50, coding: '未確認', inPrice: 1.50, outPrice: 7.50, priceNote: 'Web調査', blend: 2.70, value: 18.52, context: '1M', feature: '2026-07-21登場。3.1 Proを知能指数で上回りつつ3.5 Flashより低価格。271 token/s前後の高速出力' },
     ];
 
     const INTEL_MAX = 60; // バーメーターの满尺（資料内の最高値）
