@@ -573,7 +573,7 @@
       ELO = Artificial Analysis Video Arena（ブラインドユーザー投票による品質評価）
     </p>
     <div class="header-meta">
-      コスト出典: <a href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank" style="color:var(--accent); text-decoration:underline;">docs.comfy.org/ja/tutorials/partner-nodes/pricing</a> (2026-07-17 更新)
+      コスト出典: <a href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank" style="color:var(--accent); text-decoration:underline;">docs.comfy.org/ja/tutorials/partner-nodes/pricing</a> ＋ Comfy MCP 実クレジット見積 (2026-08-08 更新)
       &nbsp;|&nbsp; ELO出典: <a href="https://artificialanalysis.ai/video/leaderboard/text-to-video" target="_blank" style="color:var(--accent); text-decoration:underline;">artificialanalysis.ai/video/leaderboard/text-to-video</a>
       &nbsp;|&nbsp; <strong>211 credits = $1.00</strong>
     </div>
@@ -632,10 +632,19 @@
 
   <footer>
     <div class="fnote">
+      <span style="color:var(--accent);font-weight:700">【2026-08-08 更新】前回（7-17）以降にComfyUIで新しく使えるようになったモデル</span><br>
+      ★ <strong>Gemini Omni Flash</strong>：前回「ComfyUIパートナーノード未提供」と書いた最上位モデルが<strong>提供開始</strong>（t2v / i2v / 動画編集の3テンプレ）。Arena <strong>T2V 1位（ELO 1244）</strong>。課金はトークン制（出力 5.28cr/1Kトークン）で、MCPの実見積は<strong>約21cr/秒</strong>＝5秒105cr相当。<strong>品質1位でこの単価は現時点で最強のコスパ</strong>。ただしトークン課金のため実測でブレる。<br>
+      ★ <strong>MiniMax H3</strong>（新登場・Arena <strong>T2V 2位 ELO 1240</strong>）：768P 5秒＝<strong>136cr（27.2cr/秒）</strong>／2K 5秒＝196cr（39.22cr/秒）。<strong>480Pの設定は無く最低が768P</strong>。音声（ステレオ）ネイティブ生成込み。t2v / i2v / r2v / FLF2V の4テンプレ。<strong>Seedance 2.0 720P（228.1cr）の6割の値段で同等品質帯</strong>という位置づけ。<br>
+      ★ <strong>FLUX 3 Video</strong>（BFL・新登場）：720P 5秒 音声OFF＝<strong>256cr（51.2cr/秒）</strong>／1080P 5秒 音声ON＝438cr。解像度は720P・1080Pのみで<strong>480Pなし</strong>。Arena未掲載のため品質は未検証。<strong>現状は割高</strong>。<br>
+      ★ <strong>Seedance 2.5</strong>（新登場）：t2v / r2v / FLF2V / 動画編集のテンプレあり。Comfy側は<strong>トークン課金でクレジット額が事前確定しない</strong>（MCP見積が「unknown」を返す）。表の値は外部API実測レポート（480P $0.09/秒・720P $0.21/秒）を211cr/$で換算した<strong>参考値</strong>。実運用前に少量で実機計測すること。<br>
+      ★ <strong>動画編集（V2V）系が一気に増えた</strong>：Kling O3 編集（27cr/秒）、Runway Aleph2（84.48cr/秒）、Gemini Omni Flash 編集、Wan2.7 編集、Luma Ray 3.2 編集、Beeble SwitchX、HappyHorse、Capybara、Bernini-R（リライティング）。<strong>「生成し直す」から「撮った動画を直す」へ選択肢が広がった</strong>のが今回いちばん大きい変化。<br>
+      ★ <strong>ローカル実行（クレジット消費なし）で増えたもの</strong>：LTX-2.3 系（t2v / i2v / FLF2V / IC-LoRA / ID-LoRA、ウォーターマーク・字幕・オブジェクト除去、アウトペイント）、Wan Animate 2（ポーズ抽出なしのモーション転送）、SCAIL-2（キャラ差し替え）、Hunyuan Video 1.5 720P、Wan Dancer（音楽→ダンス）、VOID（動画インペイント）、SeedVR2（アップスケール）。<strong>ローカルGPUで回せる範囲がここに集中的に増えている</strong>。<br>
+      ★ <strong>ELO再調整後リーダーボードも更新</strong>（2026-08-08時点）。上位は 1位 Gemini Omni Flash 1244 / 2位 MiniMax H3 1240 / 3位 Seedance 2.0 1224 / 4位 Wan2.7スナップショット 1161 / 5位 HappyHorse 1.1 1148。SkyReels V4（1107・9位）は<strong>ComfyUIパートナーノード未提供</strong>のため本表に未掲載。<br>
+      <span style="color:var(--text-dim)">──────────</span><br>
       ★ <strong>5秒CR</strong> = クレジット/秒 × 5（固定実行の場合はそのままの価格を掲載）<br>
       ★ <strong>ELO</strong> = Artificial Analysis Video Arena によるブラインドユーザー投票スコア。T2V（テキスト→動画）の音声なし版を基準。<br>
-      ★ <strong>【重要】ELO Arenaは2026年7月に再調整（リセット）</strong>されました。旧スコア（1100〜1290帯）と新スコア（900〜1240帯）に互換性はありません。旧版から順位が大きく変動しています。現1位は <strong>Gemini Omni Flash</strong>（ELO 1240）ですが、ComfyUIパートナーノード未提供のため本表には未掲載。<br>
-      ★ <strong>Seedance 2.0</strong> が再調整後の<strong>T2V 2位</strong>（ELO 1224、Dreamina Seedance 2.0名義）。<strong>HappyHorse</strong> は1.1が4位（1151）・1.0が5位（1126）に後退し、順位も1.1＞1.0に逆転。3位は <strong>Wan2.7-260612</strong> スナップショット版（1158）。<br>
+      ★ <strong>【重要】ELO Arenaは2026年7月に再調整（リセット）</strong>されました。旧スコア（1100〜1290帯）と新スコア（900〜1244帯）に互換性はありません。旧版から順位が大きく変動しています。<span style="color:var(--accent)">1位の <strong>Gemini Omni Flash</strong>（ELO 1244）は 8-08時点でパートナーノード提供済み・本表に掲載</span>。<br>
+      ★ <strong>Seedance 2.0</strong> は<strong>T2V 3位</strong>（ELO 1224、Dreamina Seedance 2.0名義）へ後退。2位は新登場の <strong>MiniMax H3</strong>（1240）。<strong>HappyHorse</strong> は1.1が5位（1148）・1.0が6位（1127）。4位は <strong>Wan2.7-260612</strong> スナップショット版（1161）。<br>
       ★ <strong>Kling Video O1</strong>（新・2026-07-17追加）は動画生成＋編集の統合モデル。音声生成オプションなし。V2V編集は720P 26.59cr/秒・1080P 35.45cr/秒（表の値は生成時）。ELO Arena未掲載。<br>
       ★ <strong>grok-imagine-video</strong>（新）はbeta版が正式版に移行（旧beta 38.19cr/秒の行を置き換え）。さらに上位版 <strong>grok-imagine-video-1.5</strong>（新・高価格帯）が追加。正式版はELO 1067（T2V 17位）、1.5はArena未掲載。<br>
       ★ <strong>Veo 3.1 / 3.1 Fast</strong>（新・価格正式掲載）は<strong>4K対応</strong>。Veo 3.1は720Pと1080Pが同額。Veo 3.1 Liteは軽量高速版（480P非対応）。旧Veo 3.0系はArena掲載終了。<br>
@@ -668,36 +677,36 @@
       { company: 'Luma', model: 'Ray 3.2 720P', res: '720P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: null, eloNote: 'Ray2後継/6-19追加' },
       { company: 'Luma', model: 'Ray 3.2 1080P', res: '1080P', audio: false, crSec: 50.64, cr5: 253.2, tier: 'red', elo: null, eloNote: 'Ray2後継/6-19追加' },
       // LTX-2 Lightricks
-      { company: 'LTX-2 (Lightricks)', model: 'ltx-2-fast 1080P', res: '1080P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 948, eloNote: 'T2V 23位' },
-      { company: 'LTX-2 (Lightricks)', model: 'ltx-2-pro 1080P', res: '1080P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 920, eloNote: 'T2V 25位' },
-      { company: 'LTX-2 (Lightricks)', model: 'ltx-2.3-fast 1080P', res: '1080P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 974, eloNote: 'T2V 21位' },
-      { company: 'LTX-2 (Lightricks)', model: 'ltx-2.3-pro 1080P', res: '1080P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 962, eloNote: 'T2V 22位' },
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2-fast 1080P', res: '1080P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 944, eloNote: 'T2V 25位' },
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2-pro 1080P', res: '1080P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 922, eloNote: 'T2V 26位' },
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2.3-fast 1080P', res: '1080P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 980, eloNote: 'T2V 22位' },
+      { company: 'LTX-2 (Lightricks)', model: 'ltx-2.3-pro 1080P', res: '1080P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 962, eloNote: 'T2V 23位' },
       // Runway
       { company: 'Runway', model: 'Gen-4 Turbo', res: '—', audio: false, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: null, eloNote: '掲載終了(旧1223)' },
       { company: 'Runway', model: 'Gen-3a Turbo', res: '—', audio: false, crSec: 15.09, cr5: 75.45, tier: 'blue', elo: null, eloNote: '旧世代' },
       // Kling
-      { company: 'Kling', model: 'v2-6 Pro 音声OFF', res: '—', audio: false, crSec: 14.77, cr5: 73.85, tier: 'green', elo: 990, eloNote: 'T2V 20位' },
-      { company: 'Kling', model: 'v2-6 Pro 音声ON', res: '—', audio: true, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 990, eloNote: 'T2V 20位' },
+      { company: 'Kling', model: 'v2-6 Pro 音声OFF', res: '—', audio: false, crSec: 14.77, cr5: 73.85, tier: 'green', elo: 989, eloNote: 'T2V 21位' },
+      { company: 'Kling', model: 'v2-6 Pro 音声ON', res: '—', audio: true, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 989, eloNote: 'T2V 21位' },
       { company: 'Kling', model: 'v2-5 Turbo Pro', res: '—', audio: false, crSec: null, cr5: 73.85, tier: 'blue', elo: null, eloNote: '掲載終了(旧1212)' },
       { company: 'Kling', model: 'v2-1 std (5sec)', res: '—', audio: false, crSec: null, cr5: 59.08, tier: 'blue', elo: null, eloNote: '旧世代' },
       { company: 'Kling', model: 'v2-1 Pro (5sec)', res: '—', audio: false, crSec: null, cr5: 103.39, tier: 'amber', elo: null, eloNote: '旧世代' },
       { company: 'Kling', model: 'v2-master (5sec)', res: '—', audio: false, crSec: null, cr5: 295.4, tier: 'red', elo: null, eloNote: '旧世代' },
-      { company: 'Kling', model: 'v3.0 1080P Pro 音声OFF', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1110, eloNote: 'T2V 6位' },
-      { company: 'Kling', model: 'v3.0 1080P Pro 音声ON', res: '1080P', audio: true, crSec: 35.44, cr5: 177.2, tier: 'amber', elo: 1110, eloNote: 'T2V 6位' },
-      { company: 'Kling', model: 'Omni v3.0 1080P Pro 音声OFF', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1095, eloNote: 'T2V 10位' },
-      { company: 'Kling', model: 'Omni v3.0 1080P Pro 音声ON', res: '1080P', audio: true, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 1095, eloNote: 'T2V 10位' },
-      { company: 'Kling', model: 'Omni v3.0 720P Pro 音声OFF', res: '720P', audio: false, crSec: 17.72, cr5: 88.6, tier: 'blue', elo: 1093, eloNote: 'T2V 12位(Std版)' },
-      { company: 'Kling', model: 'Omni v3.0 720P Pro 音声ON', res: '720P', audio: true, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1093, eloNote: 'T2V 12位(Std版)' },
-      { company: 'Kling', model: 'v3.0/Omni 4K Pro', res: '4K', audio: false, crSec: null, cr5: 443.1, tier: 'red', elo: 1110, eloNote: 'v3.0参照/計算値' },
+      { company: 'Kling', model: 'v3.0 1080P Pro 音声OFF', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1111, eloNote: 'T2V 7位' },
+      { company: 'Kling', model: 'v3.0 1080P Pro 音声ON', res: '1080P', audio: true, crSec: 35.44, cr5: 177.2, tier: 'amber', elo: 1111, eloNote: 'T2V 7位' },
+      { company: 'Kling', model: 'Omni v3.0 1080P Pro 音声OFF', res: '1080P', audio: false, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1091, eloNote: 'T2V 12位' },
+      { company: 'Kling', model: 'Omni v3.0 1080P Pro 音声ON', res: '1080P', audio: true, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 1091, eloNote: 'T2V 12位' },
+      { company: 'Kling', model: 'Omni v3.0 720P Pro 音声OFF', res: '720P', audio: false, crSec: 17.72, cr5: 88.6, tier: 'blue', elo: 1091, eloNote: 'T2V 14位(Std版)' },
+      { company: 'Kling', model: 'Omni v3.0 720P Pro 音声ON', res: '720P', audio: true, crSec: 23.64, cr5: 118.2, tier: 'amber', elo: 1091, eloNote: 'T2V 14位(Std版)' },
+      { company: 'Kling', model: 'v3.0/Omni 4K Pro', res: '4K', audio: false, crSec: null, cr5: 443.1, tier: 'red', elo: 1111, eloNote: 'v3.0参照/計算値' },
       { company: 'Kling', model: 'Video O1 720P（新）', res: '720P', audio: false, crSec: 17.72, cr5: 88.6, tier: 'blue', elo: null, eloNote: '未掲載/7-17追加' },
       { company: 'Kling', model: 'Video O1 1080P（新）', res: '1080P', audio: false, crSec: 23.63, cr5: 118.15, tier: 'amber', elo: null, eloNote: '未掲載/7-17追加' },
       // Vidu
-      { company: 'Vidu', model: 'Q3 Turbo 540P', res: '540P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 1083, eloNote: 'Q3 Pro参照' },
-      { company: 'Vidu', model: 'Q3 Turbo 720P', res: '720P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 1083, eloNote: 'Q3 Pro参照' },
-      { company: 'Vidu', model: 'Q3 Turbo 1080P', res: '1080P', audio: false, crSec: 16.88, cr5: 84.4, tier: 'blue', elo: 1083, eloNote: 'Q3 Pro参照' },
-      { company: 'Vidu', model: 'Q3 Pro 720P', res: '720P', audio: false, crSec: 31.65, cr5: 158.25, tier: 'amber', elo: 1083, eloNote: 'T2V 15位' },
-      { company: 'Vidu', model: 'Q3 Pro 1080P', res: '1080P', audio: false, crSec: 33.76, cr5: 168.8, tier: 'amber', elo: 1083, eloNote: 'T2V 15位' },
-      { company: 'Vidu', model: 'Q3 Pro 2K（新）', res: '2K', audio: false, crSec: 42.2, cr5: 211, tier: 'red', elo: 1083, eloNote: 'T2V 15位/7-17追加' },
+      { company: 'Vidu', model: 'Q3 Turbo 540P', res: '540P', audio: false, crSec: 8.44, cr5: 42.2, tier: 'green', elo: 1079, eloNote: 'Q3 Pro参照' },
+      { company: 'Vidu', model: 'Q3 Turbo 720P', res: '720P', audio: false, crSec: 12.66, cr5: 63.3, tier: 'blue', elo: 1079, eloNote: 'Q3 Pro参照' },
+      { company: 'Vidu', model: 'Q3 Turbo 1080P', res: '1080P', audio: false, crSec: 16.88, cr5: 84.4, tier: 'blue', elo: 1079, eloNote: 'Q3 Pro参照' },
+      { company: 'Vidu', model: 'Q3 Pro 720P', res: '720P', audio: false, crSec: 31.65, cr5: 158.25, tier: 'amber', elo: 1079, eloNote: 'T2V 16位' },
+      { company: 'Vidu', model: 'Q3 Pro 1080P', res: '1080P', audio: false, crSec: 33.76, cr5: 168.8, tier: 'amber', elo: 1079, eloNote: 'T2V 16位' },
+      { company: 'Vidu', model: 'Q3 Pro 2K（新）', res: '2K', audio: false, crSec: 42.2, cr5: 211, tier: 'red', elo: 1079, eloNote: 'T2V 16位/7-17追加' },
       { company: 'Vidu', model: 'Q2', res: '—', audio: false, crSec: null, cr5: null, tier: 'blue', elo: null, eloNote: '掲載終了(旧1168)' },
       { company: 'Vidu', model: '2.0 img2video 720P 4s', res: '720P', audio: false, crSec: null, cr5: 42.2, tier: 'green', elo: null, eloNote: '旧世代' },
       // Minimax Hailuo
@@ -706,19 +715,19 @@
       { company: 'Minimax', model: 'Hailuo 2.3', res: '—', audio: false, crSec: null, cr5: null, tier: 'blue', elo: null, eloNote: '掲載終了(旧1183)' },
       { company: 'Minimax', model: 'i2v-01 / t2v-01', res: '—', audio: false, crSec: null, cr5: 75.6, tier: 'blue', elo: null, eloNote: '旧世代' },
       // Pixverse
-      { company: 'Pixverse', model: 'v3.5 Normal 540P 5s', res: '540P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: 'v3.5は掲載外(V6=1070)' },
-      { company: 'Pixverse', model: 'v3.5 Normal 720P 5s', res: '720P', audio: false, crSec: null, cr5: 126.6, tier: 'amber', elo: null, eloNote: 'v3.5は掲載外(V6=1070)' },
-      { company: 'Pixverse', model: 'v3.5 Normal 360P 5s', res: '360P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: 'v3.5は掲載外(V6=1070)' },
+      { company: 'Pixverse', model: 'v3.5 Normal 540P 5s', res: '540P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: 'v3.5は掲載外(V6=1078)' },
+      { company: 'Pixverse', model: 'v3.5 Normal 720P 5s', res: '720P', audio: false, crSec: null, cr5: 126.6, tier: 'amber', elo: null, eloNote: 'v3.5は掲載外(V6=1078)' },
+      { company: 'Pixverse', model: 'v3.5 Normal 360P 5s', res: '360P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: 'v3.5は掲載外(V6=1078)' },
       // Pika
       { company: 'Pika', model: '2.2 t2v 720P 5s', res: '720P', audio: false, crSec: null, cr5: 42.2, tier: 'green', elo: null, eloNote: '未掲載' },
       { company: 'Pika', model: '2.2 i2v 720P 5s', res: '720P', audio: false, crSec: null, cr5: 42.2, tier: 'green', elo: null, eloNote: '未掲載' },
       { company: 'Pika', model: '2.2 t2v 1080P 5s', res: '1080P', audio: false, crSec: null, cr5: 94.95, tier: 'blue', elo: null, eloNote: '未掲載' },
       // Wan
-      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 480P', res: '480P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'green', elo: 1104, eloNote: '2.7本体参照' },
-      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 720P', res: '720P', audio: false, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1104, eloNote: 'T2V 8位' },
-      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 1080P', res: '1080P', audio: false, crSec: 31.65, cr5: 158.25, tier: 'amber', elo: 1104, eloNote: 'T2V 8位' },
-      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声OFF', res: '720P', audio: false, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1224, eloNote: 'T2V 2位' },
-      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声ON', res: '720P', audio: true, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1224, eloNote: 'T2V 2位' },
+      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 480P', res: '480P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'green', elo: 1111, eloNote: '2.7本体参照' },
+      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 720P', res: '720P', audio: false, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1111, eloNote: 'T2V 8位' },
+      { company: 'Wan (Alibaba)', model: '2.7 t2v/i2v 1080P', res: '1080P', audio: false, crSec: 31.65, cr5: 158.25, tier: 'amber', elo: 1111, eloNote: 'T2V 8位' },
+      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声OFF', res: '720P', audio: false, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1224, eloNote: 'T2V 3位' },
+      { company: 'ByteDance', model: 'Seedance 2.0 720P 音声ON', res: '720P', audio: true, crSec: 45.62, cr5: 228.1, tier: 'red', elo: 1224, eloNote: 'T2V 3位' },
       { company: 'ByteDance', model: 'Seedance 2.0 480P 音声OFF', res: '480P', audio: false, crSec: 21.22, cr5: 106.1, tier: 'blue', elo: 1224, eloNote: '720P参照' },
       { company: 'ByteDance', model: 'Seedance 2.0 480P 音声ON', res: '480P', audio: true, crSec: 21.22, cr5: 106.1, tier: 'blue', elo: 1224, eloNote: '720P参照' },
       { company: 'ByteDance', model: 'Seedance 2.0 4K 音声OFF', res: '4K', audio: false, crSec: null, cr5: null, tier: 'purple', elo: 1224, eloNote: '4K対応/トークン課金' },
@@ -727,41 +736,57 @@
       { company: 'ByteDance', model: 'Seedance 2.0 Mini 480P', res: '480P', audio: false, crSec: 10.15, cr5: 50.8, tier: 'green', elo: 1224, eloNote: 'Mini/計算値・6/25追加' },
       { company: 'ByteDance', model: 'Seedance 2.0 Mini 720P', res: '720P', audio: false, crSec: 22.81, cr5: 114.1, tier: 'blue', elo: 1224, eloNote: 'Mini/計算値・6/25追加' },
       // HappyHorse (Alibaba ATH)
-      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.0 720P', res: '720P', audio: false, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 1126, eloNote: 'T2V 5位' },
-      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.0 1080P', res: '1080P', audio: false, crSec: 50.64, cr5: 253.2, tier: 'red', elo: 1126, eloNote: 'T2V 5位' },
-      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.1 720P', res: '720P', audio: false, crSec: 42.24, cr5: 211.2, tier: 'red', elo: 1151, eloNote: 'T2V 4位' },
-      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.1 1080P', res: '1080P', audio: false, crSec: 54.31, cr5: 271.55, tier: 'red', elo: 1151, eloNote: 'T2V 4位' },
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.0 720P', res: '720P', audio: false, crSec: 29.54, cr5: 147.7, tier: 'amber', elo: 1127, eloNote: 'T2V 6位' },
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.0 1080P', res: '1080P', audio: false, crSec: 50.64, cr5: 253.2, tier: 'red', elo: 1127, eloNote: 'T2V 6位' },
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.1 720P', res: '720P', audio: false, crSec: 42.24, cr5: 211.2, tier: 'red', elo: 1148, eloNote: 'T2V 5位' },
+      { company: 'HappyHorse (Alibaba)', model: 'HappyHorse 1.1 1080P', res: '1080P', audio: false, crSec: 54.31, cr5: 271.55, tier: 'red', elo: 1148, eloNote: 'T2V 5位' },
       // Google
       { company: 'Google', model: 'Veo 3.0 Fast 音声OFF', res: '—', audio: false, crSec: null, cr5: 168.8, tier: 'amber', elo: null, eloNote: '掲載終了(旧1219)' },
       { company: 'Google', model: 'Veo 3.0 Fast 音声ON', res: '—', audio: true, crSec: null, cr5: 253.2, tier: 'red', elo: null, eloNote: '掲載終了(旧1219)' },
       { company: 'Google', model: 'Veo 3.0 音声OFF', res: '—', audio: false, crSec: null, cr5: 337.6, tier: 'red', elo: null, eloNote: '掲載終了(旧1219)' },
       { company: 'Google', model: 'Veo 3.0 音声ON', res: '—', audio: true, crSec: null, cr5: 675.2, tier: 'red', elo: null, eloNote: '掲載終了(旧1219)' },
-      { company: 'Google', model: 'Veo 3.1 Fast 720P 音声OFF（新）', res: '720P', audio: false, crSec: 16.88, cr5: 84.4, tier: 'blue', elo: 1089, eloNote: 'T2V 14位' },
-      { company: 'Google', model: 'Veo 3.1 Fast 720P 音声ON（新）', res: '720P', audio: true, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1089, eloNote: 'T2V 14位' },
-      { company: 'Google', model: 'Veo 3.1 Fast 1080P 音声OFF（新）', res: '1080P', audio: false, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1089, eloNote: 'T2V 14位' },
-      { company: 'Google', model: 'Veo 3.1 Fast 1080P 音声ON（新）', res: '1080P', audio: true, crSec: 25.32, cr5: 126.6, tier: 'amber', elo: 1089, eloNote: 'T2V 14位' },
-      { company: 'Google', model: 'Veo 3.1 Fast 4K 音声OFF（新）', res: '4K', audio: false, crSec: 52.75, cr5: 263.75, tier: 'red', elo: 1089, eloNote: '4K新対応' },
-      { company: 'Google', model: 'Veo 3.1 Fast 4K 音声ON（新）', res: '4K', audio: true, crSec: 63.3, cr5: 316.5, tier: 'red', elo: 1089, eloNote: '4K新対応' },
+      { company: 'Google', model: 'Veo 3.1 Fast 720P 音声OFF（新）', res: '720P', audio: false, crSec: 16.88, cr5: 84.4, tier: 'blue', elo: 1091, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 720P 音声ON（新）', res: '720P', audio: true, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1091, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 1080P 音声OFF（新）', res: '1080P', audio: false, crSec: 21.1, cr5: 105.5, tier: 'blue', elo: 1091, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 1080P 音声ON（新）', res: '1080P', audio: true, crSec: 25.32, cr5: 126.6, tier: 'amber', elo: 1091, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Fast 4K 音声OFF（新）', res: '4K', audio: false, crSec: 52.75, cr5: 263.75, tier: 'red', elo: 1091, eloNote: '4K新対応' },
+      { company: 'Google', model: 'Veo 3.1 Fast 4K 音声ON（新）', res: '4K', audio: true, crSec: 63.3, cr5: 316.5, tier: 'red', elo: 1091, eloNote: '4K新対応' },
       { company: 'Google', model: 'Veo 3.1 720P/1080P 音声OFF（新）', res: '720P/1080P', audio: false, crSec: 42.2, cr5: 211, tier: 'red', elo: 1093, eloNote: 'T2V 11位' },
       { company: 'Google', model: 'Veo 3.1 720P/1080P 音声ON（新）', res: '720P/1080P', audio: true, crSec: 84.4, cr5: 422, tier: 'red', elo: 1093, eloNote: 'T2V 11位' },
       { company: 'Google', model: 'Veo 3.1 4K 音声OFF（新）', res: '4K', audio: false, crSec: 84.4, cr5: 422, tier: 'red', elo: 1093, eloNote: '4K新対応' },
       { company: 'Google', model: 'Veo 3.1 4K 音声ON（新）', res: '4K', audio: true, crSec: 126.6, cr5: 633, tier: 'red', elo: 1093, eloNote: '4K新対応' },
-      { company: 'Google', model: 'Veo 3.1 Lite 720P 音声OFF', res: '720P', audio: false, crSec: 6.33, cr5: 31.65, tier: 'green', elo: 1090, eloNote: 'T2V 13位' },
-      { company: 'Google', model: 'Veo 3.1 Lite 720P 音声ON', res: '720P', audio: true, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: 1090, eloNote: 'T2V 13位' },
-      { company: 'Google', model: 'Veo 3.1 Lite 1080P 音声OFF', res: '1080P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: 1090, eloNote: 'T2V 13位' },
-      { company: 'Google', model: 'Veo 3.1 Lite 1080P 音声ON', res: '1080P', audio: true, crSec: 16.88, cr5: 84.4, tier: 'amber', elo: 1090, eloNote: 'T2V 13位' },
+      { company: 'Google', model: 'Veo 3.1 Lite 720P 音声OFF', res: '720P', audio: false, crSec: 6.33, cr5: 31.65, tier: 'green', elo: 1089, eloNote: 'T2V 15位' },
+      { company: 'Google', model: 'Veo 3.1 Lite 720P 音声ON', res: '720P', audio: true, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: 1089, eloNote: 'T2V 15位' },
+      { company: 'Google', model: 'Veo 3.1 Lite 1080P 音声OFF', res: '1080P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'blue', elo: 1089, eloNote: 'T2V 15位' },
+      { company: 'Google', model: 'Veo 3.1 Lite 1080P 音声ON', res: '1080P', audio: true, crSec: 16.88, cr5: 84.4, tier: 'amber', elo: 1089, eloNote: 'T2V 15位' },
       { company: 'Google', model: 'Veo 2', res: '—', audio: false, crSec: null, cr5: 105.5, tier: 'blue', elo: null, eloNote: '掲載終了(旧1122)' },
       // OpenAI Sora
       { company: 'OpenAI', model: 'Sora-2 720P', res: '720P', audio: false, crSec: 21.10, cr5: 105.5, tier: 'amber', elo: null, eloNote: '掲載終了(旧1172)' },
       { company: 'OpenAI', model: 'Sora-2-Pro 720P', res: '720P', audio: false, crSec: 63.30, cr5: 316.5, tier: 'red', elo: null, eloNote: '掲載終了(旧1196)' },
       // xAI Grok
-      { company: 'xAI (Grok)', model: 'grok-imagine-video 480P（新）', res: '480P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'green', elo: 1067, eloNote: 'T2V 17位' },
-      { company: 'xAI (Grok)', model: 'grok-imagine-video 720P（新）', res: '720P', audio: false, crSec: 14.77, cr5: 73.85, tier: 'blue', elo: 1067, eloNote: 'T2V 17位' },
+      { company: 'xAI (Grok)', model: 'grok-imagine-video 480P（新）', res: '480P', audio: false, crSec: 10.55, cr5: 52.75, tier: 'green', elo: 1066, eloNote: 'T2V 18位' },
+      { company: 'xAI (Grok)', model: 'grok-imagine-video 720P（新）', res: '720P', audio: false, crSec: 14.77, cr5: 73.85, tier: 'blue', elo: 1066, eloNote: 'T2V 18位' },
       { company: 'xAI (Grok)', model: 'grok-imagine-video-1.5 480P（新）', res: '480P', audio: false, crSec: 24.14, cr5: 120.7, tier: 'amber', elo: null, eloNote: '未掲載/7-17追加' },
       { company: 'xAI (Grok)', model: 'grok-imagine-video-1.5 720P（新）', res: '720P', audio: false, crSec: 42.24, cr5: 211.2, tier: 'red', elo: null, eloNote: '未掲載/7-17追加' },
       { company: 'xAI (Grok)', model: 'grok-imagine-video-1.5 1080P（新）', res: '1080P', audio: false, crSec: 75.43, cr5: 377.15, tier: 'red', elo: null, eloNote: '未掲載/7-17追加' },
       // Moonvalley
       { company: 'Moonvalley', model: 'T2V/I2V 5秒', res: '—', audio: false, crSec: null, cr5: 316.5, tier: 'red', elo: null, eloNote: '未掲載' },
+
+      // ===== 2026-08-08 追加分（7-17以降にComfyUIで使えるようになった新モデル）=====
+      // Google Gemini Omni Flash（前回は「パートナーノード未提供」→ 提供開始・Arena 1位）
+      { company: 'Google', model: 'Gemini Omni Flash（新）', res: '指定なし', audio: true, crSec: 21.0, cr5: 105.0, tier: 'blue', elo: 1244, eloNote: 'T2V 1位/8-08追加・概算' },
+      // MiniMax H3（新登場・Arena 2位）
+      { company: 'Minimax', model: 'H3 768P（新）', res: '768P', audio: true, crSec: 27.2, cr5: 136, tier: 'amber', elo: 1240, eloNote: 'T2V 2位/8-08追加' },
+      { company: 'Minimax', model: 'H3 2K（新）', res: '2K', audio: true, crSec: 39.22, cr5: 196, tier: 'amber', elo: 1240, eloNote: 'T2V 2位/8-08追加' },
+      // BFL FLUX 3 Video（新登場・Arena未掲載）
+      { company: 'BFL (FLUX)', model: 'FLUX 3 Video 720P 音声OFF（新）', res: '720P', audio: false, crSec: 51.2, cr5: 256, tier: 'red', elo: null, eloNote: '未掲載/8-08追加' },
+      { company: 'BFL (FLUX)', model: 'FLUX 3 Video 1080P 音声ON（新）', res: '1080P', audio: true, crSec: 87.6, cr5: 438, tier: 'red', elo: null, eloNote: '未掲載/8-08追加' },
+      // ByteDance Seedance 2.5（新登場・Comfy側はトークン課金のため参考値）
+      { company: 'ByteDance', model: 'Seedance 2.5 480P（新・参考値）', res: '480P', audio: true, crSec: 19.0, cr5: 95.0, tier: 'blue', elo: null, eloNote: '未掲載/要実機計測' },
+      { company: 'ByteDance', model: 'Seedance 2.5 720P（新・参考値）', res: '720P', audio: true, crSec: 44.3, cr5: 221.5, tier: 'red', elo: null, eloNote: '未掲載/要実機計測' },
+      // 動画編集（V2V）系の新顔
+      { company: 'Kling', model: 'Kling O3 動画編集（新）', res: '—', audio: true, crSec: 27.0, cr5: 135, tier: 'amber', elo: null, eloNote: '編集専用/8-08追加' },
+      { company: 'Runway', model: 'Aleph2 動画編集（新）', res: '—', audio: false, crSec: 84.48, cr5: 422.4, tier: 'red', elo: null, eloNote: '編集専用/8-08追加' },
     ];
 
     const TIER_LABEL = { green: '安い', blue: '中間', amber: 'やや高', red: '高い' };
