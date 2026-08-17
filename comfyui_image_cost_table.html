@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComfyUI 画像API クレジット価格表 2026</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%96%BC%EF%B8%8F</text></svg>">
+
+  <!-- OGP Tags -->
+  <meta property="og:title" content="ComfyUI 画像API クレジット価格表 2026">
+  <meta property="og:description" content="ComfyUI公式パートナーノードの画像生成モデルを1枚あたりのクレジット単価で比較。持っているクレジットで何枚作れるかを即座に計算。">
+  <meta property="og:image" content="https://comfyui-cost-table.vercel.app/og-image.png">
+  <meta property="og:url" content="https://comfyui-cost-table.vercel.app/comfyui_image_cost_table.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: rgba(255, 255, 255, 0.07);
+      --border-hover: rgba(255, 255, 255, 0.15);
+      --text: #e8e8f0;
+      --text-muted: #6b6b80;
+      --text-dim: #3a3a50;
+      --accent: #7c6dfa;
+      --green: #4ade80;
+      --green-dim: rgba(74, 222, 128, 0.12);
+      --amber: #fbbf24;
+      --amber-dim: rgba(251, 191, 36, 0.1);
+      --red: #f87171;
+      --red-dim: rgba(248, 113, 113, 0.1);
+      --blue: #60a5fa;
+      --blue-dim: rgba(96, 165, 250, 0.1);
+      --purple: #c084fc;
+      --purple-dim: rgba(192, 132, 252, 0.12);
+      --gray-dim: rgba(107, 114, 128, 0.1);
+      --mono: 'DM Mono', monospace;
+      --display: 'Syne', sans-serif;
+      --body: 'Noto Sans JP', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== 共通ナビゲーション ===== */
+    .site-nav {
+      display: flex;
+      gap: 8px;
+      padding: 12px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .site-nav-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .site-nav a {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+      background: var(--surface2);
+    }
+
+    .site-nav a[aria-current="page"] {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    header {
+      padding: 48px 40px 28px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -40px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 109, 250, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: 80px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(20px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .header-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.7;
+    }
+
+    .header-meta {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .header-meta strong {
+      color: var(--text);
+    }
+
+    /* BALANCE BAR */
+    .balance-bar {
+      padding: 16px 40px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .balance-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .balance-bar input {
+      background: var(--surface2);
+      border: 1px solid var(--border-hover);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 7px 12px;
+      border-radius: 6px;
+      width: 120px;
+      text-align: right;
+    }
+
+    .balance-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .balance-note {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+
+    .balance-note strong {
+      color: var(--green);
+    }
+
+    /* LEGEND */
+    .legend-bar {
+      padding: 14px 40px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .legend-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* CONTROLS */
+    .controls {
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .controls-label {
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .sort-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .sort-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .sort-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .count-label {
+      margin-left: auto;
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-dim);
+    }
+
+    /* TABLE */
+    .table-wrap {
+      padding: 0 40px 20px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    thead th {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 10px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    thead th.clickable {
+      cursor: pointer;
+    }
+
+    thead th.clickable:hover {
+      color: var(--text);
+    }
+
+    thead th.r {
+      text-align: right;
+    }
+
+    thead th.active-col {
+      color: var(--accent);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+      animation: rowIn 0.25s ease both;
+    }
+
+    tbody tr:hover {
+      background: var(--surface2);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes rowIn {
+      from {
+        opacity: 0;
+        transform: translateY(3px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    tbody td {
+      padding: 11px 10px;
+      vertical-align: middle;
+    }
+
+    td.r {
+      text-align: right;
+    }
+
+    .rank {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .rank.top3 {
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .co-name {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .model-id {
+      font-size: 13.5px;
+      color: var(--text);
+      font-weight: 500;
+      margin-top: 1px;
+    }
+
+    .cond {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .mono-val {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cost-green {
+      color: var(--green);
+    }
+
+    .cost-blue {
+      color: var(--blue);
+    }
+
+    .cost-amber {
+      color: var(--amber);
+    }
+
+    .cost-red {
+      color: var(--red);
+    }
+
+    .cost-muted {
+      color: var(--text-dim);
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .bg {
+      background: var(--green-dim);
+      color: var(--green);
+    }
+
+    .bb {
+      background: var(--blue-dim);
+      color: var(--blue);
+    }
+
+    .ba {
+      background: var(--amber-dim);
+      color: var(--amber);
+    }
+
+    .br {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+
+    .bx {
+      background: var(--gray-dim);
+      color: var(--text-muted);
+    }
+
+    .bp {
+      background: var(--purple-dim);
+      color: var(--purple);
+    }
+
+    .sheets {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sheets small {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-left: 2px;
+    }
+
+    .bar-bg {
+      height: 4px;
+      background: var(--surface2);
+      border-radius: 2px;
+      overflow: hidden;
+      min-width: 60px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    .bar-green {
+      background: var(--green);
+    }
+
+    .bar-blue {
+      background: var(--blue);
+    }
+
+    .bar-amber {
+      background: var(--amber);
+    }
+
+    .bar-red {
+      background: var(--red);
+    }
+
+    /* SECTION */
+    .section-head {
+      padding: 32px 40px 0;
+    }
+
+    .section-head h2 {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-head p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.7;
+      max-width: 900px;
+    }
+
+    .warn {
+      margin: 14px 40px 0;
+      padding: 14px 16px;
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      background: var(--amber-dim);
+      border-radius: 8px;
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--text);
+      max-width: 1000px;
+    }
+
+    .warn strong {
+      color: var(--amber);
+    }
+
+    footer {
+      padding: 28px 40px 60px;
+      border-top: 1px solid var(--border);
+      margin-top: 30px;
+    }
+
+    .fnote {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.9;
+      max-width: 1000px;
+    }
+
+    .fnote strong {
+      color: var(--text);
+    }
+
+    .src-link {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .src-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 720px) {
+
+      .site-nav,
+      header,
+      .legend-bar,
+      .controls,
+      .balance-bar,
+      .section-head,
+      footer {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .table-wrap {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .warn {
+        margin-left: 18px;
+        margin-right: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="site-nav" aria-label="サイト内比較ページ">
+    <span class="site-nav-label">Compare:</span>
+    <a href="comfyui_video_cost_table.html">🎦 動画API比較</a>
+    <a href="comfyui_image_cost_table.html" aria-current="page">🖼️ 画像API価格</a>
+    <a href="ai_model_comparison_lab.html">🧪 AIモデル比較ラボ</a>
+  </nav>
+
+  <header>
+    <div class="eyebrow">ComfyUI Partner Nodes — Image Generation</div>
+    <h1>画像API <span>クレジット</span> 価格表</h1>
+    <p class="header-sub">
+      ComfyUI公式パートナーノードの画像生成モデルを<strong>1枚あたりのクレジット単価</strong>で一覧化<br>
+      手持ちのクレジットを入れると、<strong>そのモデルで何枚作れるか</strong>がその場で出ます
+    </p>
+    <div class="header-meta">
+      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-08-17</strong> ・ 掲載 <strong><span
+          id="meta-count">—</span> 行</strong>
+    </div>
+  </header>
+
+  <div class="balance-bar">
+    <span class="balance-label">手持ちクレジット</span>
+    <input type="number" id="balance" value="1000" min="1" step="1" aria-label="手持ちクレジット数">
+    <span class="balance-note">≒ <strong id="balance-usd">—</strong> ／ <strong id="balance-jpy">—</strong>
+      <span style="color:var(--text-dim)">（211cr = 1 USD ・ 1 USD = 150円 換算）</span>
+    </span>
+  </div>
+
+  <div class="legend-bar">
+    <span class="legend-label">コスト感</span>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>〜6cr 格安</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>6〜12cr 標準</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>12〜25cr 高め</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span>25cr〜 高価格</div>
+    <div class="legend-item" style="margin-left:4px;"><span style="font-size:10px;color:var(--text-dim)">※ベクター出力・編集系を含む</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <span class="controls-label">並び替え：</span>
+    <button class="sort-btn active" id="btn-cost" onclick="setSort('cost')">安い順 ↑</button>
+    <button class="sort-btn" id="btn-costDesc" onclick="setSort('costDesc')">高い順 ↓</button>
+    <button class="sort-btn" id="btn-name" onclick="setSort('name')">会社順 ↕</button>
+    <span class="count-label" id="count-label"></span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:28px">#</th>
+          <th class="clickable" onclick="setSort('name')" id="h-name">会社 / モデル</th>
+          <th>条件</th>
+          <th class="r clickable" onclick="setSort('cost')" id="h-cost">CR / 枚</th>
+          <th class="r">USD / 枚</th>
+          <th class="r">円 / 枚</th>
+          <th class="r" style="min-width:96px">手持ちで</th>
+          <th>コスト感</th>
+          <th style="width:90px" class="r">相対</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-head">
+    <h2>トークン課金のモデル（gpt-image / Nano Banana）</h2>
+    <p>
+      OpenAI の <strong>gpt-image</strong> 系と Google の <strong>Nano Banana</strong> 系は、<strong>1枚いくら</strong>ではなく<strong>出力トークン1,000個あたりいくら</strong>で課金されます。
+      ComfyUI公式ドキュメントも「<strong>quality（low / medium / high）による概算バッジ。実費は下のトークン数に従う</strong>」と明記しています。
+      つまり<strong>同じモデルでも品質設定で単価が15倍以上変わる</strong>ため、上の表と同じ土俵には並べられません。
+      ここでは<strong>1枚に何トークン使うかを掛け合わせて、枚数単価へ換算</strong>しています。
+    </p>
+  </div>
+
+  <div class="warn">
+    <strong>⚠ この表は「クレジット単価（ComfyUI公式）× 1枚あたりトークン数（各社の公式値）」の掛け算です。</strong>
+    トークン数の確からしさは行ごとに違うので、<strong>バッジで区別</strong>しています。<br>
+    <span class="badge bb">公式表</span> OpenAI公式が公表しているトークン表の値。<strong>gpt-image-1 / 1.5 はこれ</strong>。<br>
+    <span class="badge bp">推定</span> Google が公表する「画像1枚 = 1,290トークン」を全Nano Banana系に当てはめた値。<strong>上位モデルで実際のトークン数が違う可能性があります</strong>。<br>
+    <span class="badge ba">未公表</span> <strong>gpt-image-2 だけは OpenAI がトークン表を公開しておらず</strong>、計算機での見積りに誘導されています。掲載値は第三者が報告している1枚あたり単価からの逆算で、<strong>もっとも確度が低い行</strong>です。実運用の前に少量で実測してください。
+  </div>
+
+  <div class="table-wrap">
+    <table style="min-width:900px">
+      <thead>
+        <tr>
+          <th style="width:28px">#</th>
+          <th>会社 / モデル</th>
+          <th>品質</th>
+          <th>サイズ</th>
+          <th class="r">出力トークン</th>
+          <th class="r">出力 CR/1K</th>
+          <th class="r">CR / 枚</th>
+          <th class="r">円 / 枚</th>
+          <th class="r">手持ちで</th>
+          <th>確度</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-token"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div class="fnote">
+      ★ <strong>クレジット→ドルの換算（211cr = 1 USD）は公式の明示ではなく、各社の公開API価格からの逆算</strong>です。
+      Flux.1 Kontext [pro] 8.44cr ÷ $0.04、Kontext [max] 16.88cr ÷ $0.08、Flux.1 Fill 10.55cr ÷ $0.05、DALL·E 3 標準 8.44cr ÷
+      $0.04、DALL·E 2 3.38cr ÷ $0.016 ——<strong>5行すべてで211に一致</strong>したため、この係数を採用しています。
+      公式ドキュメントは「価格はすべてクレジット表記」としか書いておらず、レートの記載はありません。<br>
+      ★ <strong>円換算は 1 USD = 150円</strong>の概算です。実際の請求はComfyUIのクレジット購入時のレートに従います。<br>
+      ★ <strong>「+ 追加MPあたり」表記のモデル</strong>（Flux.2 [pro]/[max]、Flux Erase、Flux Virtual Try-On）は、<strong>基本料金のみを表に載せています</strong>。
+      大きい画像を作るほど加算されるため、実額は表の数字より高くなります。条件欄に加算額を書いてあります。<br>
+      ★ <strong>Recraft の Text to Vector</strong> は SVG 出力です。ラスタ画像より単価が高く設定されています。<br>
+      ★ <strong>Qwen Image の Edit</strong> は入力画像ぶん <strong>+0.91cr</strong> が別途かかります。<br>
+      ★ <strong>Krea</strong> は Style Reference / Moodboard を付けると単価が上がります。3段階すべてを別行として掲載しています。<br>
+      ★ <strong>Seedream 5.0 Pro Layer Separation (2K)</strong> のみ公式表記が <strong>6.75〜13.50</strong> の幅で、表には上限値を載せています。<br>
+      ★ <strong>grok-imagine の edit タスク</strong>は入力ぶん（0.422〜2.11cr）が別途加算されます。表は generate（生成）の値です。<br>
+      ★ <strong>gpt-image 系の「品質」は単価を15倍以上変えます。</strong> 同じ gpt-image-1.5 でも 1024×1024 の low は 1.84cr、high は 28.09cr。
+      <strong>ここを既定のまま回すのが、画像APIでいちばん静かにクレジットが溶ける場所</strong>です。用途が下書きなら low で足ります。<br>
+      ★ <strong>gpt-image-2 だけ確度が落ちます。</strong> OpenAI公式のトークン表は「gpt-image-2 より前のモデル向け」と明記されており、
+      gpt-image-2 は計算機での見積りに誘導されています（「サイズと品質が上がるほどトークンが増える」とだけ記載）。
+      表の3行は第三者が報告している1枚単価からの逆算で、<strong>他の行と同じ精度では扱えません</strong>。<br>
+      ★ <strong>Nano Banana系の「1枚 = 1,290トークン」は gemini-2.5-flash-image の公表値</strong>で、上位のPro・2系も同じと仮定しています。
+      実際のトークン数が違えば単価もそのぶんズレます。<br>
+      ★ <strong>ローカル実行（Stable Diffusion / Flux dev / Qwen Image ローカル版など）はクレジットを消費しません。</strong>
+      この表はすべて<strong>API経由</strong>の価格です。<br>
+      ★ 価格は予告なく変わります。<strong>取得日は2026-08-17</strong>。判断の前に出典を直接確認してください。
+    </div>
+    <a class="src-link" href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank">→
+      docs.comfy.org/ja/tutorials/partner-nodes/pricing</a>
+    &nbsp;&nbsp;
+    <a class="src-link" href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank">→
+      developers.openai.com/api/docs/guides/image-generation（トークン表）</a>
+  </footer>
+
+  <script>
+    // 出典: docs.comfy.org/tutorials/partner-nodes/pricing （2026-08-17 取得・原文の表から転記）
+    // cr = 1枚（1 run）あたりのクレジット。extra = 追加課金の注記のみ（crには含めない）
+    const DATA = [
+      // ---- Luma Photon ----
+      { co: 'Luma', model: 'photon-flash-1', cond: '—', cr: 0.57 },
+      { co: 'Luma', model: 'photon-1', cond: '—', cr: 2.19 },
+
+      // ---- Ideogram ----
+      { co: 'Ideogram', model: 'P-Image', cond: 'VERY_LOW / 1K', cr: 0.91 },
+      { co: 'Ideogram', model: 'P-Image', cond: 'VERY_LOW / 2K', cr: 1.81 },
+      { co: 'Ideogram', model: 'P-Image', cond: 'LOW / 1K', cr: 2.26 },
+      { co: 'Ideogram', model: 'P-Image', cond: 'LOW / 2K', cr: 4.53 },
+      { co: 'Ideogram', model: 'P-Image', cond: 'MEDIUM / 1K', cr: 3.02 },
+      { co: 'Ideogram', model: 'P-Image', cond: 'MEDIUM / 2K', cr: 6.03 },
+      { co: 'Ideogram', model: 'P-Image', cond: 'HIGH / 1K', cr: 4.53 },
+      { co: 'Ideogram', model: 'P-Image', cond: 'HIGH / 2K', cr: 9.05 },
+      { co: 'Ideogram', model: 'Ideogram V1', cond: 'turbo ON', cr: 6.03 },
+      { co: 'Ideogram', model: 'Ideogram V1', cond: 'turbo OFF', cr: 18.10 },
+      { co: 'Ideogram', model: 'Ideogram V2', cond: 'turbo ON', cr: 15.09 },
+      { co: 'Ideogram', model: 'Ideogram V2', cond: 'turbo OFF', cr: 24.14 },
+      { co: 'Ideogram', model: 'Ideogram V4', cond: 'TURBO', cr: 9.05 },
+      { co: 'Ideogram', model: 'Ideogram V4', cond: 'DEFAULT', cr: 18.10 },
+      { co: 'Ideogram', model: 'Ideogram V4', cond: 'QUALITY', cr: 30.17 },
+
+      // ---- Kling ----
+      { co: 'Kling', model: 'kling-v2', cond: '画像入力あり/なし', cr: 2.95 },
+      { co: 'Kling', model: 'kling-v3', cond: '画像入力なし', cr: 5.91 },
+      { co: 'Kling', model: 'kling-image-o1', cond: '1K / 2K', cr: 5.91 },
+      { co: 'Kling', model: 'kling-image-o1', cond: '4K', cr: 11.82 },
+
+      // ---- Krea ----
+      { co: 'Krea', model: 'Krea 2 Medium Turbo', cond: 'スタイル参照なし', cr: 3.17 },
+      { co: 'Krea', model: 'Krea 2 Medium Turbo', cond: 'スタイル参照あり', cr: 3.69 },
+      { co: 'Krea', model: 'Krea 2 Medium Turbo', cond: 'ムードボードあり', cr: 4.22 },
+      { co: 'Krea', model: 'Krea 2 Medium', cond: 'スタイル参照なし', cr: 6.33 },
+      { co: 'Krea', model: 'Krea 2 Medium', cond: 'スタイル参照あり', cr: 7.39 },
+      { co: 'Krea', model: 'Krea 2 Medium', cond: 'ムードボードあり', cr: 8.44 },
+      { co: 'Krea', model: 'Krea 2 Large', cond: 'スタイル参照なし', cr: 12.66 },
+      { co: 'Krea', model: 'Krea 2 Large', cond: 'スタイル参照あり', cr: 13.72 },
+      { co: 'Krea', model: 'Krea 2 Large', cond: 'ムードボードあり', cr: 14.77 },
+
+      // ---- OpenAI DALL·E ----
+      { co: 'OpenAI', model: 'DALL·E 2', cond: '256×256', cr: 3.38 },
+      { co: 'OpenAI', model: 'DALL·E 2', cond: '512×512', cr: 3.80 },
+      { co: 'OpenAI', model: 'DALL·E 2', cond: '1024×1024', cr: 4.22 },
+      { co: 'OpenAI', model: 'DALL·E 3', cond: 'standard / 1024×1024', cr: 8.44 },
+      { co: 'OpenAI', model: 'DALL·E 3', cond: 'standard / 縦横長', cr: 16.88 },
+      { co: 'OpenAI', model: 'DALL·E 3', cond: 'hd / 1024×1024', cr: 16.88 },
+      { co: 'OpenAI', model: 'DALL·E 3', cond: 'hd / 縦横長', cr: 25.32 },
+
+      // ---- xAI grok-imagine ----
+      { co: 'xAI', model: 'grok-imagine-image', cond: 'generate', cr: 4.22 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '1K / low', cr: 8.44 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '1K / medium', cr: 12.66 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '2K / low', cr: 12.66 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '2K / medium', cr: 16.88 },
+      { co: 'xAI', model: 'grok-imagine-image-quality', cond: '1K', cr: 10.55 },
+      { co: 'xAI', model: 'grok-imagine-image-quality', cond: '2K', cr: 14.77 },
+      { co: 'xAI', model: 'grok-imagine-image-pro', cond: '—', cr: 14.77 },
+
+      // ---- ByteDance Seedream ----
+      { co: 'ByteDance', model: 'seedream-3-0-t2i-250415', cond: '—', cr: 6.33 },
+      { co: 'ByteDance', model: 'seedream-4-0-250828', cond: '—', cr: 6.33 },
+      { co: 'ByteDance', model: 'seedream-4-5-251128', cond: '—', cr: 8.44 },
+      { co: 'ByteDance', model: 'seedream 5.0 lite', cond: '—', cr: 7.39 },
+      { co: 'ByteDance', model: 'seedream 5.0 pro', cond: '1K', cr: 9.50 },
+      { co: 'ByteDance', model: 'seedream 5.0 pro', cond: '2K', cr: 18.99 },
+      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', cond: '1K / 1.5K', cr: 6.75 },
+      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', cond: '2K（6.75〜13.50）', cr: 13.50 },
+
+      // ---- BFL Flux ----
+      { co: 'BFL', model: 'Flux.2 [pro]', cond: '+3.17 / 追加MP', cr: 6.33 },
+      { co: 'BFL', model: 'Flux Erase Image', cond: '+0.84 / 追加MP', cr: 6.33 },
+      { co: 'BFL', model: 'Flux Virtual Try-On', cond: '+1.06 / 追加MP', cr: 7.91 },
+      { co: 'BFL', model: 'Flux.1 Kontext [pro]', cond: '—', cr: 8.44 },
+      { co: 'BFL', model: 'Flux.1 Expand Image', cond: '—', cr: 10.55 },
+      { co: 'BFL', model: 'Flux.1 Fill Image', cond: '—', cr: 10.55 },
+      { co: 'BFL', model: 'Flux 1.1 [pro] Ultra', cond: '—', cr: 12.66 },
+      { co: 'BFL', model: 'Flux.2 [max]', cond: '+6.33 / 追加MP', cr: 14.77 },
+      { co: 'BFL', model: 'Flux.1 Kontext [max]', cond: '—', cr: 16.88 },
+
+      // ---- Qwen ----
+      { co: 'Qwen', model: 'qwen-image-3.0', cond: 'T2I / 1K・2K', cr: 9.05 },
+      { co: 'Qwen', model: 'qwen-image-3.0', cond: 'Edit / 1K・2K（+0.91 入力）', cr: 9.05 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'T2I / 1K', cr: 12.07 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'Edit / 1K（+0.91 入力）', cr: 12.07 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'T2I / 2K', cr: 22.63 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'Edit / 2K（+0.91 入力）', cr: 22.63 },
+
+      // ---- Recraft ----
+      { co: 'Recraft', model: 'recraftv4_1', cond: 'V4 Text to Image', cr: 7.39 },
+      { co: 'Recraft', model: 'recraftv4_1_utility', cond: 'V4 Text to Image', cr: 7.39 },
+      { co: 'Recraft', model: 'recraftv4', cond: 'V4 Text to Image', cr: 8.44 },
+      { co: 'Recraft', model: 'recraftv3', cond: 'T2I / I2I / インペイント', cr: 8.44 },
+      { co: 'Recraft', model: 'recraftv4', cond: 'V4 Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv4_1_vector', cond: 'V4 Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_vector', cond: 'V4 Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv3', cond: 'Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv4_1_pro', cond: 'V4 Text to Image', cr: 44.31 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_pro', cond: 'V4 Text to Image', cr: 44.31 },
+      { co: 'Recraft', model: 'recraftv4_pro', cond: 'V4 Text to Image', cr: 52.75 },
+      { co: 'Recraft', model: 'recraftv4_pro', cond: 'V4 Text to Vector', cr: 63.30 },
+      { co: 'Recraft', model: 'recraftv4_1_pro_vector', cond: 'V4 Text to Vector', cr: 63.30 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_pro_vector', cond: 'V4 Text to Vector', cr: 63.30 },
+    ];
+
+    // ==== トークン課金組 ====
+    // 出力CR/1K は ComfyUI公式（docs.comfy.org）。トークン数の出どころは conf で区別する:
+    //   'doc'  = OpenAI公式のトークン表（gpt-image-2 より前のモデルに適用）
+    //            Low 272/408/400・Medium 1056/1584/1568・High 4160/6240/6208（1024²/1024×1536/1536×1024）
+    //   'est'  = Google公表の「画像1枚 = 1,290トークン」を Nano Banana 系へ適用
+    //   'weak' = gpt-image-2。OpenAIがトークン表を公開しておらず、第三者報告の1枚単価からの逆算
+    const TOKEN_DATA = [
+      // --- Google Nano Banana（品質段階の設定なし） ---
+      { co: 'Google', model: 'Nano Banana', sub: 'gemini-2.5-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 6.33, conf: 'est' },
+      { co: 'Google', model: 'Nano Banana 2 Lite', sub: 'gemini-3.1-flash-lite-image', q: '—', size: '1024px相当', tok: 1290, outCr: 7.60, conf: 'est' },
+      { co: 'Google', model: 'Nano Banana 2', sub: 'gemini-3.1-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 15.19, conf: 'est' },
+      { co: 'Google', model: 'Nano Banana Pro', sub: 'gemini-3-pro-image', q: '—', size: '1024px相当', tok: 1290, outCr: 30.38, conf: 'est' },
+
+      // --- OpenAI gpt-image-1（出力 8,440 cr / 1M） ---
+      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 8.44, conf: 'doc' },
+
+      // --- OpenAI gpt-image-1.5（出力 6,752 cr / 1M） ---
+      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 6.752, conf: 'doc' },
+
+      // --- OpenAI gpt-image-2（出力 7,600 cr / 1M・公式トークン表なし） ---
+      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 7,600 cr/1M・公式表なし', q: 'low', size: '1024×1024', tok: 200, outCr: 7.60, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 7,600 cr/1M・公式表なし', q: 'medium', size: '1024×1024', tok: 1767, outCr: 7.60, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 7,600 cr/1M・公式表なし', q: 'high', size: '1024×1024', tok: 7033, outCr: 7.60, conf: 'weak' },
+    ];
+    const CONF_BADGE = { doc: ['bb', '公式表'], est: ['bp', '推定'], weak: ['ba', '未公表'] };
+
+    const CR_PER_USD = 211;   // 各社の公開API価格からの逆算（公式の明示ではない）
+    const JPY_PER_USD = 150;
+    const COST_MAX = Math.max(...DATA.map(d => d.cr));
+
+    let currentSort = 'cost';
+    let balance = 1000;
+
+    const usd = cr => '$' + (cr / CR_PER_USD).toFixed(3);
+    const jpy = cr => '¥' + (cr / CR_PER_USD * JPY_PER_USD).toFixed(1);
+
+    function tierOf(cr) {
+      if (cr < 6) return 'green';
+      if (cr < 12) return 'blue';
+      if (cr < 25) return 'amber';
+      return 'red';
+    }
+    const TIER_LABEL = { green: '格安', blue: '標準', amber: '高め', red: '高価格' };
+    const TIER_BADGE = { green: 'bg', blue: 'bb', amber: 'ba', red: 'br' };
+
+    function setSort(s) {
+      currentSort = s;
+      ['name', 'cost', 'costDesc'].forEach(k => {
+        const b = document.getElementById('btn-' + k);
+        if (b) b.classList.toggle('active', k === s);
+      });
+      document.getElementById('h-name').classList.toggle('active-col', s === 'name');
+      document.getElementById('h-cost').classList.toggle('active-col', s === 'cost' || s === 'costDesc');
+      render();
+    }
+
+    function renderBalanceBar() {
+      document.getElementById('balance-usd').textContent = '$' + (balance / CR_PER_USD).toFixed(2);
+      document.getElementById('balance-jpy').textContent =
+        '約' + Math.round(balance / CR_PER_USD * JPY_PER_USD).toLocaleString() + '円';
+    }
+
+    function render() {
+      let rows = [...DATA];
+      if (currentSort === 'name') rows.sort((a, b) => a.co.localeCompare(b.co, 'ja') || a.cr - b.cr);
+      else if (currentSort === 'cost') rows.sort((a, b) => a.cr - b.cr);
+      else if (currentSort === 'costDesc') rows.sort((a, b) => b.cr - a.cr);
+
+      const tbody = document.getElementById('tbody');
+      tbody.innerHTML = '';
+      rows.forEach((d, i) => {
+        const tier = tierOf(d.cr);
+        const sheets = Math.floor(balance / d.cr);
+        const isTop3 = currentSort === 'cost' && i < 3;
+        const tr = document.createElement('tr');
+        tr.style.animationDelay = Math.min(i * 10, 400) + 'ms';
+        tr.innerHTML = `
+      <td><span class="${isTop3 ? 'rank top3' : 'rank'}">${currentSort === 'name' ? '' : i + 1}</span></td>
+      <td>
+        <div class="co-name">${d.co}</div>
+        <div class="model-id">${d.model}</div>
+      </td>
+      <td><span class="cond">${d.cond}</span></td>
+      <td class="r"><span class="mono-val cost-${tier}">${d.cr.toFixed(2)}</span></td>
+      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${usd(d.cr)}</span></td>
+      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${jpy(d.cr)}</span></td>
+      <td class="r"><span class="sheets">${sheets.toLocaleString()}<small>枚</small></span></td>
+      <td><span class="badge ${TIER_BADGE[tier]}">${TIER_LABEL[tier]}</span></td>
+      <td><div class="bar-bg"><div class="bar-fill bar-${tier}" style="width:${Math.max(2, Math.round(d.cr / COST_MAX * 100))}%"></div></div></td>
+    `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('count-label').textContent = rows.length + ' rows';
+      document.getElementById('meta-count').textContent = DATA.length + TOKEN_DATA.length;
+      renderTokenTable();
+      renderBalanceBar();
+    }
+
+    const Q_COLOR = { low: 'var(--green)', medium: 'var(--blue)', high: 'var(--red)' };
+
+    function renderTokenTable() {
+      const tb = document.getElementById('tbody-token');
+      tb.innerHTML = '';
+      TOKEN_DATA.forEach((d, i) => {
+        const cr = d.outCr * d.tok / 1000;
+        const tier = tierOf(cr);
+        const [bcls, blabel] = CONF_BADGE[d.conf];
+        const qMk = d.q === '—'
+          ? `<span style="color:var(--text-dim);font-family:var(--mono);font-size:11px">—</span>`
+          : `<span class="mono-val" style="color:${Q_COLOR[d.q]};font-size:12px">${d.q}</span>`;
+        const tr = document.createElement('tr');
+        tr.style.animationDelay = Math.min(i * 12, 300) + 'ms';
+        tr.innerHTML = `
+      <td><span class="rank">${i + 1}</span></td>
+      <td>
+        <div class="co-name">${d.co}</div>
+        <div class="model-id">${d.model}</div>
+        <div class="cond">${d.sub}</div>
+      </td>
+      <td>${qMk}</td>
+      <td><span class="cond">${d.size}</span></td>
+      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${d.tok.toLocaleString()}</span></td>
+      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${d.outCr}</span></td>
+      <td class="r"><span class="mono-val cost-${tier}">${cr.toFixed(2)}</span></td>
+      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${jpy(cr)}</span></td>
+      <td class="r"><span class="sheets">${Math.floor(balance / cr).toLocaleString()}<small>枚</small></span></td>
+      <td><span class="badge ${bcls}">${blabel}</span></td>
+    `;
+        tb.appendChild(tr);
+      });
+    }
+
+    document.getElementById('balance').addEventListener('input', e => {
+      const v = parseFloat(e.target.value);
+      balance = (isFinite(v) && v > 0) ? v : 0;
+      render();
+    });
+
+    setSort('cost');
+  </script>
+</body>
+
+</html>
