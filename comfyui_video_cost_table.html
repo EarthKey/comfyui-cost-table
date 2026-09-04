@@ -640,7 +640,13 @@
       ★ <strong>「ComfyUI追加日」列を新設しました。</strong>これは<strong>ComfyUI本体にパートナーノードとして実装された日</strong>で、ベンダーの公式発表日ではありません。出典は ComfyUI 本体リポジトリ（<a href="https://github.com/Comfy-Org/ComfyUI/commits/master/comfy_api_nodes" target="_blank" style="color:var(--accent)">Comfy-Org/ComfyUI の comfy_api_nodes</a>）のコミット履歴で、<strong>該当PRがマージされた日</strong>を採っています。<strong>「頃」が付いた日付</strong>は、モデル単位のPRを特定できず<strong>ノードファイルの初回導入日で代用した概算</strong>です（例：2025-05-06 の <code>More API Nodes #7956</code> でLuma・Kling・Pixverse・Minimaxが一括導入）。<strong>「不明」</strong>はノードが既に削除され追跡できないものです。<br>
       <span style="color:var(--text-dim)">──────────</span><br>
       ★ 🔥 <strong>Wan 3.0</strong>（8-24追加 / Prime は 8-26）が最大の新顔。Arena <strong>T2V 2位・ELO 1238</strong> で <strong>480P が 15.09cr/秒（5秒 75.5cr）</strong>。<strong>音声ネイティブ生成つきでこの価格帯は現時点で最強のコスパ</strong>。720Pでも 30.17cr/秒で、Seedance 2.0 720P（45.62）より安く品質は上。<strong>Prime は約1.4倍の価格だがArena未評価</strong>なので、まず無印から試すのが妥当。<br>
-      ★ 🔥 <strong>MiniMax H3 Max</strong>（<strong>9-02追加・ごく最近</strong>）が Arena <strong>T2V 3位・ELO 1235</strong>。<strong>ただし docs.comfy.org の価格表にまだ載っていない</strong>ため、本表では価格を「—」としています。<strong>使う前に必ずノードの価格バッジで実額を確認してください。</strong><br>
+      ★ 🔥 <strong>MiniMax H3 Max</strong>（<strong>9-02追加・ごく最近</strong>）が Arena <strong>T2V 3位・ELO 1235</strong>。docs.comfy.org には未掲載なので、<strong>ComfyUIのノード価格バッジを実機で読んだ値</strong>を掲載しています。5秒で <strong>480P 75.4cr・768P 120.7cr</strong>で、<strong>T2V・I2V・FLF（最初・最後フレーム）はすべて同額</strong>——つまり<strong>価格はモードではなく解像度で決まります</strong>。<br>
+      　　→ 🔴 <strong>例外は R2V（参照からビデオ生成）だけ。</strong>ここだけバッジが幅を持ち、<strong>480P 75.4〜112.5cr／768P 120.7〜157.8cr</strong>。<strong>増分はどちらも +37.1cr で一定</strong>で、image_2 / video_1 / audio_1 の追加入力分と見られます（本表には<strong>下限と上限の両方を行として立ててあります</strong>）。参照を盛るほど高くなるので、<strong>見積もりは上限側で立てる</strong>のが安全です。<br>
+      　　→ <strong>ここが今回一番の発見です</strong>——① 通常のH3に無い <strong>480P が選べる</strong>（通常H3の最低は768P） ② <strong>768P が 24.14cr/秒で、通常のH3 768P（27.16）より安い</strong>のに ELO は 1235 &gt; 1227 で上。<strong>H3を使うなら Max を選ばない理由が現時点で見当たらない</strong>。<span style="color:var(--text-dim)">（2K の実額は未取得）</span><br>
+      ★ <strong>MiniMax H3 Context IR（Prompt Enhancer）</strong>は別課金で <strong>約12.7〜23.2cr/Run</strong>（実測）。<strong>本表の生成コストには含まれません</strong>ので、使うならその分を上乗せして見積もってください。<br>
+      ★ <strong>【ComfyUIと fal の差】H3 には fal（別のホスティング先）だと <strong>Turbo</strong> がありますが、<strong>ComfyUI のノードにはありません</strong>。ソースを見ると選べるのは <code>MiniMax H3</code> と <code>MiniMax H3 Max</code> の2つだけで、<strong>Turbo のモデルID は存在しません</strong>（2026-09-04時点）。<strong>高速化を狙うなら ComfyUI では現状手がありません</strong>。<br>
+      　　→ なお <strong>ComfyUI の H3 Max 自体が fal 経由のプロキシ</strong>です（エンドポイントは <code>/proxy/fal/minimax/h3-max</code>）。Arena で <em>Minimax H3 Max (post-trained by fal)</em> と表記されているものと<strong>同じ実体</strong>なので、<strong>ELO 1235 はそのままこのノードの実力として読めます</strong>。<br>
+      　　→ H3 Max の細かい制約（ソース由来）: <strong>R2V の参照は合計最大 12 ファイル</strong>。<strong>ウォーターマークの設定は通常の H3 専用</strong>で、Max では使えません。<br>
       ★ 🔥 <strong>Gemini Omni 1.1</strong>（8-27追加）。前回「約21cr/秒（概算）」と1行で載せていた <strong>Gemini Omni Flash は誤りでした</strong>。公式に解像度別の正価が掲載され、<strong>360P 10.19 / 720P 30.57 / 1080P 45.87 / 4K 91.76 cr/秒</strong>と判明。<strong>720Pの実額は概算の約1.5倍</strong>です。本表は4解像度に分割し、1.1 と Flash の両方を掲載しました。<strong>360Pなら5秒50.95crでArena1位品質</strong>という点は変わりません。<br>
       ★ <strong>PixVerse V6</strong>（8-25追加・ELO 1074）は<strong>360P〜1080P × 音声ON/OFF の8区分</strong>。360P音声OFF 15.09cr/秒が最安。<br>
       ★ <strong>LTX-2.5</strong>（8-11追加）は Pro 1061 / Fast 1060 で<strong>LTX-2世代（921〜941）から大幅に改善</strong>。Fast は<strong>4K（90.52cr/秒）まで対応</strong>。<br>
@@ -728,7 +734,10 @@
       { company: 'Vidu', model: 'Vidu Video (初代)', res: '720P', audio: false, crSec: null, cr5: 42.2, tier: 'green', elo: null, eloNote: '旧世代', date: '2025-08-19' },
 
       // ============ MiniMax ============
-      { company: 'Minimax', model: 'H3 Max 🆕🔥', res: '—', audio: true, crSec: null, cr5: null, tier: 'blue', elo: 1235, eloNote: 'T2V 3位/価格未掲載', date: '2026-09-02' },
+      { company: 'Minimax', model: 'H3 Max 480P 🆕🔥', res: '480P', audio: true, crSec: 15.08, cr5: 75.4, tier: 'blue', elo: 1235, eloNote: 'T2V/I2V/FLF実測', date: '2026-09-02' },
+      { company: 'Minimax', model: 'H3 Max 768P 🆕🔥', res: '768P', audio: true, crSec: 24.14, cr5: 120.7, tier: 'amber', elo: 1235, eloNote: 'T2V/I2V実測', date: '2026-09-02' },
+      { company: 'Minimax', model: 'H3 Max R2V 480P（参照最大）🆕', res: '480P', audio: true, crSec: 22.50, cr5: 112.5, tier: 'blue', elo: 1235, eloNote: 'R2V上限/実測', date: '2026-09-02' },
+      { company: 'Minimax', model: 'H3 Max R2V 768P（参照最大）🆕', res: '768P', audio: true, crSec: 31.56, cr5: 157.8, tier: 'amber', elo: 1235, eloNote: 'R2V上限/実測', date: '2026-09-02' },
       { company: 'Minimax', model: 'H3 768P', res: '768P', audio: true, crSec: 27.16, cr5: 135.8, tier: 'amber', elo: 1227, eloNote: 'T2V 4位', date: '2026-08-02' },
       { company: 'Minimax', model: 'H3 2K', res: '2K', audio: true, crSec: 39.22, cr5: 196.1, tier: 'amber', elo: 1227, eloNote: 'T2V 4位', date: '2026-07-31' },
       { company: 'Minimax', model: 'H3 Regenerate → 2K 🆕', res: '2K', audio: true, crSec: 15.09, cr5: 75.45, tier: 'blue', elo: 1227, eloNote: '再生成専用・格安', date: '2026-08-13' },
