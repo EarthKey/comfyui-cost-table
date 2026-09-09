@@ -668,6 +668,8 @@
     <button class="sort-btn active" id="btn-cost" onclick="setSort('cost')">安い順 ↑</button>
     <button class="sort-btn" id="btn-costDesc" onclick="setSort('costDesc')">高い順 ↓</button>
     <button class="sort-btn" id="btn-name" onclick="setSort('name')">会社順 ↕</button>
+    <button class="sort-btn" id="btn-dateDesc" onclick="setSort('dateDesc')">追加が新しい順 🆕</button>
+    <button class="sort-btn" id="btn-date" onclick="setSort('date')">追加が古い順 ⏳</button>
     <span class="count-label" id="count-label"></span>
   </div>
 
@@ -678,6 +680,7 @@
           <th style="width:28px">#</th>
           <th class="clickable" onclick="setSort('name')" id="h-name">会社 / モデル</th>
           <th>条件</th>
+          <th style="width:96px" class="clickable" onclick="setSort('dateDesc')" id="h-dateDesc">ComfyUI追加日 🆕</th>
           <th class="r clickable" onclick="setSort('cost')" id="h-cost">CR / 枚</th>
           <th class="r">USD / 枚</th>
           <th class="r">円 / 枚</th>
@@ -736,6 +739,12 @@
 
   <footer>
     <div class="fnote">
+      ★ 🆕【2026-09-09追加】<strong>「ComfyUI追加日」列を新設しました。</strong>動画コスト表と同じ方式で、
+      出典は <a href="https://github.com/Comfy-Org/ComfyUI/commits/master/comfy_api_nodes" target="_blank" style="color:var(--accent)">Comfy-Org/ComfyUI の comfy_api_nodes</a>
+      のコミット履歴・該当PRです。55モデル中<strong>42件はPRまたはコミット日を特定</strong>、<strong>「頃」が付いた日付</strong>はノードファイル単位の導入日や、
+      Recraft・BFL・Kling等の細分バリエーション（同一PRに複数モデルがまとめて含まれる場合）で個別の行まで断定できず代表PRの日付を充てた推定です。
+      <strong>「不明」</strong>は追加PRを特定できなかったもの（DALL·E 2/3、grok-imagine-image-pro、Flux.2 [max]、recraftv4_pro、seedream-3-0-t2i / seedream-4-5-251128、gpt-image-1）です。
+      🔴 <strong>この列はAI要約によるPR説明文の解釈に依拠しており、コード差分の1行1行を目視確認したものではありません。</strong> 判断材料としては動画コスト表の追加日列より確度が一段落ちる前提で扱ってください。<br>
       ★ <strong>クレジット→ドルの換算（211cr = 1 USD）は公式の明示ではなく、各社の公開API価格からの逆算</strong>です。
       Flux.1 Kontext [pro] 8.44cr ÷ $0.04、Kontext [max] 16.88cr ÷ $0.08、Flux.1 Fill 10.55cr ÷ $0.05、DALL·E 3 標準 8.44cr ÷
       $0.04、DALL·E 2 3.38cr ÷ $0.016 ——<strong>5行すべてで211に一致</strong>したため、この係数を採用しています。
@@ -775,106 +784,106 @@
     // cr = 1枚（1 run）あたりのクレジット。extra = 追加課金の注記のみ（crには含めない）
     const DATA = [
       // ---- Luma Photon ----
-      { co: 'Luma', model: 'photon-flash-1', cond: '—', cr: 0.57 },
-      { co: 'Luma', model: 'photon-1', cond: '—', cr: 2.19 },
+      { co: 'Luma', model: 'photon-flash-1', date: '2025-05-06', approx: true, cond: '—', cr: 0.57 },
+      { co: 'Luma', model: 'photon-1', date: '2025-05-06', approx: true, cond: '—', cr: 2.19 },
 
       // ---- Ideogram ----
-      { co: 'Ideogram', model: 'P-Image', cond: 'VERY_LOW / 1K', cr: 0.91 },
-      { co: 'Ideogram', model: 'P-Image', cond: 'VERY_LOW / 2K', cr: 1.81 },
-      { co: 'Ideogram', model: 'P-Image', cond: 'LOW / 1K', cr: 2.26 },
-      { co: 'Ideogram', model: 'P-Image', cond: 'LOW / 2K', cr: 4.53 },
-      { co: 'Ideogram', model: 'P-Image', cond: 'MEDIUM / 1K', cr: 3.02 },
-      { co: 'Ideogram', model: 'P-Image', cond: 'MEDIUM / 2K', cr: 6.03 },
-      { co: 'Ideogram', model: 'P-Image', cond: 'HIGH / 1K', cr: 4.53 },
-      { co: 'Ideogram', model: 'P-Image', cond: 'HIGH / 2K', cr: 9.05 },
-      { co: 'Ideogram', model: 'Ideogram V1', cond: 'turbo ON', cr: 6.03 },
-      { co: 'Ideogram', model: 'Ideogram V1', cond: 'turbo OFF', cr: 18.10 },
-      { co: 'Ideogram', model: 'Ideogram V2', cond: 'turbo ON', cr: 15.09 },
-      { co: 'Ideogram', model: 'Ideogram V2', cond: 'turbo OFF', cr: 24.14 },
-      { co: 'Ideogram', model: 'Ideogram V4', cond: 'TURBO', cr: 9.05 },
-      { co: 'Ideogram', model: 'Ideogram V4', cond: 'DEFAULT', cr: 18.10 },
-      { co: 'Ideogram', model: 'Ideogram V4', cond: 'QUALITY', cr: 30.17 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'VERY_LOW / 1K', cr: 0.91 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'VERY_LOW / 2K', cr: 1.81 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'LOW / 1K', cr: 2.26 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'LOW / 2K', cr: 4.53 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'MEDIUM / 1K', cr: 3.02 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'MEDIUM / 2K', cr: 6.03 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'HIGH / 1K', cr: 4.53 },
+      { co: 'Ideogram', model: 'P-Image', date: '2026-07-31', cond: 'HIGH / 2K', cr: 9.05 },
+      { co: 'Ideogram', model: 'Ideogram V1', date: '2025-05-06', approx: true, cond: 'turbo ON', cr: 6.03 },
+      { co: 'Ideogram', model: 'Ideogram V1', date: '2025-05-06', approx: true, cond: 'turbo OFF', cr: 18.10 },
+      { co: 'Ideogram', model: 'Ideogram V2', date: '2025-05-06', approx: true, cond: 'turbo ON', cr: 15.09 },
+      { co: 'Ideogram', model: 'Ideogram V2', date: '2025-05-06', approx: true, cond: 'turbo OFF', cr: 24.14 },
+      { co: 'Ideogram', model: 'Ideogram V4', date: '2026-06-03', cond: 'TURBO', cr: 9.05 },
+      { co: 'Ideogram', model: 'Ideogram V4', date: '2026-06-03', cond: 'DEFAULT', cr: 18.10 },
+      { co: 'Ideogram', model: 'Ideogram V4', date: '2026-06-03', cond: 'QUALITY', cr: 30.17 },
 
       // ---- Kling ----
-      { co: 'Kling', model: 'kling-v2', cond: '画像入力あり/なし', cr: 2.95 },
-      { co: 'Kling', model: 'kling-v3', cond: '画像入力なし', cr: 5.91 },
-      { co: 'Kling', model: 'kling-image-o1', cond: '1K / 2K', cr: 5.91 },
-      { co: 'Kling', model: 'kling-image-o1', cond: '4K', cr: 11.82 },
+      { co: 'Kling', model: 'kling-v2', date: '2025-05-06', approx: true, cond: '画像入力あり/なし', cr: 2.95 },
+      { co: 'Kling', model: 'kling-v3', date: '2026-02-10', cond: '画像入力なし', cr: 5.91 },
+      { co: 'Kling', model: 'kling-image-o1', date: '2025-12-11', cond: '1K / 2K', cr: 5.91 },
+      { co: 'Kling', model: 'kling-image-o1', date: '2025-12-11', cond: '4K', cr: 11.82 },
 
       // ---- Krea ----
-      { co: 'Krea', model: 'Krea 2 Medium Turbo', cond: 'スタイル参照なし', cr: 3.17 },
-      { co: 'Krea', model: 'Krea 2 Medium Turbo', cond: 'スタイル参照あり', cr: 3.69 },
-      { co: 'Krea', model: 'Krea 2 Medium Turbo', cond: 'ムードボードあり', cr: 4.22 },
-      { co: 'Krea', model: 'Krea 2 Medium', cond: 'スタイル参照なし', cr: 6.33 },
-      { co: 'Krea', model: 'Krea 2 Medium', cond: 'スタイル参照あり', cr: 7.39 },
-      { co: 'Krea', model: 'Krea 2 Medium', cond: 'ムードボードあり', cr: 8.44 },
-      { co: 'Krea', model: 'Krea 2 Large', cond: 'スタイル参照なし', cr: 12.66 },
-      { co: 'Krea', model: 'Krea 2 Large', cond: 'スタイル参照あり', cr: 13.72 },
-      { co: 'Krea', model: 'Krea 2 Large', cond: 'ムードボードあり', cr: 14.77 },
+      { co: 'Krea', model: 'Krea 2 Medium Turbo', date: '2026-06-04', cond: 'スタイル参照なし', cr: 3.17 },
+      { co: 'Krea', model: 'Krea 2 Medium Turbo', date: '2026-06-04', cond: 'スタイル参照あり', cr: 3.69 },
+      { co: 'Krea', model: 'Krea 2 Medium Turbo', date: '2026-06-04', cond: 'ムードボードあり', cr: 4.22 },
+      { co: 'Krea', model: 'Krea 2 Medium', date: '2026-05-27', cond: 'スタイル参照なし', cr: 6.33 },
+      { co: 'Krea', model: 'Krea 2 Medium', date: '2026-05-27', cond: 'スタイル参照あり', cr: 7.39 },
+      { co: 'Krea', model: 'Krea 2 Medium', date: '2026-05-27', cond: 'ムードボードあり', cr: 8.44 },
+      { co: 'Krea', model: 'Krea 2 Large', date: '2026-05-27', approx: true, cond: 'スタイル参照なし', cr: 12.66 },
+      { co: 'Krea', model: 'Krea 2 Large', date: '2026-05-27', approx: true, cond: 'スタイル参照あり', cr: 13.72 },
+      { co: 'Krea', model: 'Krea 2 Large', date: '2026-05-27', approx: true, cond: 'ムードボードあり', cr: 14.77 },
 
       // ---- OpenAI DALL·E ----
-      { co: 'OpenAI', model: 'DALL·E 2', cond: '256×256', cr: 3.38 },
-      { co: 'OpenAI', model: 'DALL·E 2', cond: '512×512', cr: 3.80 },
-      { co: 'OpenAI', model: 'DALL·E 2', cond: '1024×1024', cr: 4.22 },
-      { co: 'OpenAI', model: 'DALL·E 3', cond: 'standard / 1024×1024', cr: 8.44 },
-      { co: 'OpenAI', model: 'DALL·E 3', cond: 'standard / 縦横長', cr: 16.88 },
-      { co: 'OpenAI', model: 'DALL·E 3', cond: 'hd / 1024×1024', cr: 16.88 },
-      { co: 'OpenAI', model: 'DALL·E 3', cond: 'hd / 縦横長', cr: 25.32 },
+      { co: 'OpenAI', model: 'DALL·E 2', date: null, cond: '256×256', cr: 3.38 },
+      { co: 'OpenAI', model: 'DALL·E 2', date: null, cond: '512×512', cr: 3.80 },
+      { co: 'OpenAI', model: 'DALL·E 2', date: null, cond: '1024×1024', cr: 4.22 },
+      { co: 'OpenAI', model: 'DALL·E 3', date: null, cond: 'standard / 1024×1024', cr: 8.44 },
+      { co: 'OpenAI', model: 'DALL·E 3', date: null, cond: 'standard / 縦横長', cr: 16.88 },
+      { co: 'OpenAI', model: 'DALL·E 3', date: null, cond: 'hd / 1024×1024', cr: 16.88 },
+      { co: 'OpenAI', model: 'DALL·E 3', date: null, cond: 'hd / 縦横長', cr: 25.32 },
 
       // ---- xAI grok-imagine ----
-      { co: 'xAI', model: 'grok-imagine-image', cond: 'generate', cr: 4.22 },
-      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '1K / low', cr: 8.44 },
-      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '1K / medium', cr: 12.66 },
-      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '2K / low', cr: 12.66 },
-      { co: 'xAI', model: 'grok-imagine-image-2.0', cond: '2K / medium', cr: 16.88 },
-      { co: 'xAI', model: 'grok-imagine-image-quality', cond: '1K', cr: 10.55 },
-      { co: 'xAI', model: 'grok-imagine-image-quality', cond: '2K', cr: 14.77 },
-      { co: 'xAI', model: 'grok-imagine-image-pro', cond: '—', cr: 14.77 },
+      { co: 'xAI', model: 'grok-imagine-image', date: '2026-01-28', cond: 'generate', cr: 4.22 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', date: '2026-08-11', cond: '1K / low', cr: 8.44 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', date: '2026-08-11', cond: '1K / medium', cr: 12.66 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', date: '2026-08-11', cond: '2K / low', cr: 12.66 },
+      { co: 'xAI', model: 'grok-imagine-image-2.0', date: '2026-08-11', cond: '2K / medium', cr: 16.88 },
+      { co: 'xAI', model: 'grok-imagine-image-quality', date: '2026-05-07', cond: '1K', cr: 10.55 },
+      { co: 'xAI', model: 'grok-imagine-image-quality', date: '2026-05-07', cond: '2K', cr: 14.77 },
+      { co: 'xAI', model: 'grok-imagine-image-pro', date: null, cond: '—', cr: 14.77 },
 
       // ---- ByteDance Seedream ----
-      { co: 'ByteDance', model: 'seedream-3-0-t2i-250415', cond: '—', cr: 6.33 },
-      { co: 'ByteDance', model: 'seedream-4-0-250828', cond: '—', cr: 6.33 },
-      { co: 'ByteDance', model: 'seedream-4-5-251128', cond: '—', cr: 8.44 },
-      { co: 'ByteDance', model: 'seedream 5.0 lite', cond: '—', cr: 7.39 },
-      { co: 'ByteDance', model: 'seedream 5.0 pro', cond: '1K', cr: 9.50 },
-      { co: 'ByteDance', model: 'seedream 5.0 pro', cond: '2K', cr: 18.99 },
-      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', cond: '1K / 1.5K', cr: 6.75 },
-      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', cond: '2K（6.75〜13.50）', cr: 13.50 },
+      { co: 'ByteDance', model: 'seedream-3-0-t2i-250415', date: null, cond: '—', cr: 6.33 },
+      { co: 'ByteDance', model: 'seedream-4-0-250828', date: '2025-09-10', approx: true, cond: '—', cr: 6.33 },
+      { co: 'ByteDance', model: 'seedream-4-5-251128', date: null, cond: '—', cr: 8.44 },
+      { co: 'ByteDance', model: 'seedream 5.0 lite', date: '2026-02-24', approx: true, cond: '—', cr: 7.39 },
+      { co: 'ByteDance', model: 'seedream 5.0 pro', date: '2026-07-09', approx: true, cond: '1K', cr: 9.50 },
+      { co: 'ByteDance', model: 'seedream 5.0 pro', date: '2026-07-09', approx: true, cond: '2K', cr: 18.99 },
+      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', date: '2026-08-07', cond: '1K / 1.5K', cr: 6.75 },
+      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', date: '2026-08-07', cond: '2K（6.75〜13.50）', cr: 13.50 },
 
       // ---- BFL Flux ----
-      { co: 'BFL', model: 'Flux.2 [pro]', cond: '+3.17 / 追加MP', cr: 6.33 },
-      { co: 'BFL', model: 'Flux Erase Image', cond: '+0.84 / 追加MP', cr: 6.33 },
-      { co: 'BFL', model: 'Flux Virtual Try-On', cond: '+1.06 / 追加MP', cr: 7.91 },
-      { co: 'BFL', model: 'Flux.1 Kontext [pro]', cond: '—', cr: 8.44 },
-      { co: 'BFL', model: 'Flux.1 Expand Image', cond: '—', cr: 10.55 },
-      { co: 'BFL', model: 'Flux.1 Fill Image', cond: '—', cr: 10.55 },
-      { co: 'BFL', model: 'Flux 1.1 [pro] Ultra', cond: '—', cr: 12.66 },
-      { co: 'BFL', model: 'Flux.2 [max]', cond: '+6.33 / 追加MP', cr: 14.77 },
-      { co: 'BFL', model: 'Flux.1 Kontext [max]', cond: '—', cr: 16.88 },
+      { co: 'BFL', model: 'Flux.2 [pro]', date: '2025-11-25', cond: '+3.17 / 追加MP', cr: 6.33 },
+      { co: 'BFL', model: 'Flux Erase Image', date: '2026-06-01', cond: '+0.84 / 追加MP', cr: 6.33 },
+      { co: 'BFL', model: 'Flux Virtual Try-On', date: '2026-06-01', cond: '+1.06 / 追加MP', cr: 7.91 },
+      { co: 'BFL', model: 'Flux.1 Kontext [pro]', date: '2025-05-29', cond: '—', cr: 8.44 },
+      { co: 'BFL', model: 'Flux.1 Expand Image', date: '2025-05-06', approx: true, cond: '—', cr: 10.55 },
+      { co: 'BFL', model: 'Flux.1 Fill Image', date: '2025-05-06', approx: true, cond: '—', cr: 10.55 },
+      { co: 'BFL', model: 'Flux 1.1 [pro] Ultra', date: '2025-05-06', approx: true, cond: '—', cr: 12.66 },
+      { co: 'BFL', model: 'Flux.2 [max]', date: null, cond: '+6.33 / 追加MP', cr: 14.77 },
+      { co: 'BFL', model: 'Flux.1 Kontext [max]', date: '2025-05-29', cond: '—', cr: 16.88 },
 
       // ---- Qwen ----
-      { co: 'Qwen', model: 'qwen-image-3.0', cond: 'T2I / 1K・2K', cr: 9.05 },
-      { co: 'Qwen', model: 'qwen-image-3.0', cond: 'Edit / 1K・2K（+0.91 入力）', cr: 9.05 },
-      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'T2I / 1K', cr: 12.07 },
-      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'Edit / 1K（+0.91 入力）', cr: 12.07 },
-      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'T2I / 2K', cr: 22.63 },
-      { co: 'Qwen', model: 'qwen-image-3.0-pro', cond: 'Edit / 2K（+0.91 入力）', cr: 22.63 },
+      { co: 'Qwen', model: 'qwen-image-3.0', date: '2026-08-10', cond: 'T2I / 1K・2K', cr: 9.05 },
+      { co: 'Qwen', model: 'qwen-image-3.0', date: '2026-08-10', cond: 'Edit / 1K・2K（+0.91 入力）', cr: 9.05 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', date: '2026-08-10', approx: true, cond: 'T2I / 1K', cr: 12.07 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', date: '2026-08-10', approx: true, cond: 'Edit / 1K（+0.91 入力）', cr: 12.07 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', date: '2026-08-10', approx: true, cond: 'T2I / 2K', cr: 22.63 },
+      { co: 'Qwen', model: 'qwen-image-3.0-pro', date: '2026-08-10', approx: true, cond: 'Edit / 2K（+0.91 入力）', cr: 22.63 },
 
       // ---- Recraft ----
-      { co: 'Recraft', model: 'recraftv4_1', cond: 'V4 Text to Image', cr: 7.39 },
-      { co: 'Recraft', model: 'recraftv4_1_utility', cond: 'V4 Text to Image', cr: 7.39 },
-      { co: 'Recraft', model: 'recraftv4', cond: 'V4 Text to Image', cr: 8.44 },
-      { co: 'Recraft', model: 'recraftv3', cond: 'T2I / I2I / インペイント', cr: 8.44 },
-      { co: 'Recraft', model: 'recraftv4', cond: 'V4 Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv4_1_vector', cond: 'V4 Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv4_1_utility_vector', cond: 'V4 Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv3', cond: 'Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv4_1_pro', cond: 'V4 Text to Image', cr: 44.31 },
-      { co: 'Recraft', model: 'recraftv4_1_utility_pro', cond: 'V4 Text to Image', cr: 44.31 },
-      { co: 'Recraft', model: 'recraftv4_pro', cond: 'V4 Text to Image', cr: 52.75 },
-      { co: 'Recraft', model: 'recraftv4_pro', cond: 'V4 Text to Vector', cr: 63.30 },
-      { co: 'Recraft', model: 'recraftv4_1_pro_vector', cond: 'V4 Text to Vector', cr: 63.30 },
-      { co: 'Recraft', model: 'recraftv4_1_utility_pro_vector', cond: 'V4 Text to Vector', cr: 63.30 },
+      { co: 'Recraft', model: 'recraftv4_1', date: '2026-07-28', cond: 'V4 Text to Image', cr: 7.39 },
+      { co: 'Recraft', model: 'recraftv4_1_utility', date: '2026-07-28', approx: true, cond: 'V4 Text to Image', cr: 7.39 },
+      { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Image', cr: 8.44 },
+      { co: 'Recraft', model: 'recraftv3', date: '2025-05-06', approx: true, cond: 'T2I / I2I / インペイント', cr: 8.44 },
+      { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv4_1_vector', date: '2026-07-28', approx: true, cond: 'V4 Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_vector', date: '2026-07-28', approx: true, cond: 'V4 Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv3', date: '2025-05-06', approx: true, cond: 'Text to Vector', cr: 16.88 },
+      { co: 'Recraft', model: 'recraftv4_1_pro', date: '2026-09-04', approx: true, cond: 'V4 Text to Image', cr: 44.31 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_pro', date: '2026-09-04', approx: true, cond: 'V4 Text to Image', cr: 44.31 },
+      { co: 'Recraft', model: 'recraftv4_pro', date: null, cond: 'V4 Text to Image', cr: 52.75 },
+      { co: 'Recraft', model: 'recraftv4_pro', date: null, cond: 'V4 Text to Vector', cr: 63.30 },
+      { co: 'Recraft', model: 'recraftv4_1_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 63.30 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 63.30 },
     ];
 
     // ==== トークン課金組 ====
@@ -892,39 +901,39 @@
     //   xhigh・max（2.5で新設された上位品質2段）は信頼できる価格情報が無いため掲載を見送り。
     const TOKEN_DATA = [
       // --- Google Nano Banana（品質段階の設定なし） ---
-      { co: 'Google', model: 'Nano Banana', sub: 'gemini-2.5-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 6.33, conf: 'est' },
-      { co: 'Google', model: 'Nano Banana 2 Lite', sub: 'gemini-3.1-flash-lite-image', q: '—', size: '1024px相当', tok: 1290, outCr: 7.60, conf: 'est' },
-      { co: 'Google', model: 'Nano Banana 2', sub: 'gemini-3.1-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 15.19, conf: 'est' },
-      { co: 'Google', model: 'Nano Banana Pro', sub: 'gemini-3-pro-image', q: '—', size: '1024px相当', tok: 1290, outCr: 30.38, conf: 'est' },
+      { co: 'Google', model: 'Nano Banana', date: '2025-08-27', approx: true, sub: 'gemini-2.5-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 6.33, conf: 'est' },
+      { co: 'Google', model: 'Nano Banana 2 Lite', date: '2026-06-30', sub: 'gemini-3.1-flash-lite-image', q: '—', size: '1024px相当', tok: 1290, outCr: 7.60, conf: 'est' },
+      { co: 'Google', model: 'Nano Banana 2', date: '2026-02-26', sub: 'gemini-3.1-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 15.19, conf: 'est' },
+      { co: 'Google', model: 'Nano Banana Pro', date: '2025-11-21', sub: 'gemini-3-pro-image', q: '—', size: '1024px相当', tok: 1290, outCr: 30.38, conf: 'est' },
 
       // --- OpenAI gpt-image-1（出力 8,440 cr / 1M） ---
-      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 8.44, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 8.44, conf: 'doc' },
 
       // --- OpenAI gpt-image-1.5（出力 6,752 cr / 1M） ---
-      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 6.752, conf: 'doc' },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 6.752, conf: 'doc' },
 
       // --- OpenAI gpt-image-2（出力 6,330 cr / 1M・単価は公式確定／tok数は未公表） ---
-      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
 
       // --- OpenAI gpt-image-2.5 Flare/Sunburst 🆕（2026-09-08公開・出力単価はgpt-image-2と同額） ---
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', sub: '高精細編集向け・単価はFlareと同額', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', sub: '高精細編集向け・単価はFlareと同額', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', sub: '高精細編集向け・単価はFlareと同額', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', sub: '高精細編集向け・単価はFlareと同額', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', sub: '高精細編集向け・単価はFlareと同額', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', sub: '高精細編集向け・単価はFlareと同額', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
     ];
     const CONF_BADGE = { doc: ['bb', '公式表'], est: ['bp', '推定'], weak: ['ba', '未公表'] };
 
@@ -949,13 +958,24 @@
 
     function setSort(s) {
       currentSort = s;
-      ['name', 'cost', 'costDesc'].forEach(k => {
+      ['name', 'cost', 'costDesc', 'dateDesc', 'date'].forEach(k => {
         const b = document.getElementById('btn-' + k);
         if (b) b.classList.toggle('active', k === s);
       });
       document.getElementById('h-name').classList.toggle('active-col', s === 'name');
       document.getElementById('h-cost').classList.toggle('active-col', s === 'cost' || s === 'costDesc');
+      document.getElementById('h-dateDesc').classList.toggle('active-col', s === 'dateDesc' || s === 'date');
       render();
+    }
+
+    // 追加日セル: 実測値はそのまま / approx は「頃」/ 不明は「不明」（動画コスト表と同じ表示規則）
+    function dateCell(d) {
+      if (!d.date) return '<span style="color:var(--text-dim);font-size:10px;font-family:var(--mono)">不明</span>';
+      const isNew = d.date >= '2026-08-08';
+      const col = isNew ? 'var(--accent)' : 'var(--text-muted)';
+      const w = isNew ? '700' : '400';
+      const suffix = d.approx ? '<span style="color:var(--text-dim);font-size:9px">頃</span>' : '';
+      return `<span class="mono-val" style="color:${col};font-size:10.5px;font-weight:${w}">${d.date}</span>${suffix}`;
     }
 
     function renderBalanceBar() {
@@ -969,6 +989,8 @@
       if (currentSort === 'name') rows.sort((a, b) => a.co.localeCompare(b.co, 'ja') || a.cr - b.cr);
       else if (currentSort === 'cost') rows.sort((a, b) => a.cr - b.cr);
       else if (currentSort === 'costDesc') rows.sort((a, b) => b.cr - a.cr);
+      else if (currentSort === 'dateDesc') rows.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || a.co.localeCompare(b.co, 'ja'));
+      else if (currentSort === 'date') rows.sort((a, b) => (a.date ?? '9999').localeCompare(b.date ?? '9999') || a.co.localeCompare(b.co, 'ja'));
 
       const tbody = document.getElementById('tbody');
       tbody.innerHTML = '';
@@ -985,6 +1007,7 @@
         <div class="model-id">${d.model}</div>
       </td>
       <td><span class="cond">${d.cond}</span></td>
+      <td>${dateCell(d)}</td>
       <td class="r"><span class="mono-val cost-${tier}">${d.cr.toFixed(2)}</span></td>
       <td class="r"><span class="mono-val" style="color:var(--text-muted)">${usd(d.cr)}</span></td>
       <td class="r"><span class="mono-val" style="color:var(--text-muted)">${jpy(d.cr)}</span></td>
