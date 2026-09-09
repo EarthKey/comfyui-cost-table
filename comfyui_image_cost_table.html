@@ -11,7 +11,7 @@
   <!-- OGP Tags -->
   <meta property="og:title" content="ComfyUI 画像API クレジット価格表 2026">
   <meta property="og:description" content="ComfyUI公式パートナーノードの画像生成モデルを1枚あたりのクレジット単価で比較。持っているクレジットで何枚作れるかを即座に計算。">
-  <meta property="og:image" content="https://comfyui-cost-table.vercel.app/og-image.png">
+  <meta property="og:image" content="https://comfyui-cost-table.vercel.app/og-image.webp">
   <meta property="og:url" content="https://comfyui-cost-table.vercel.app/comfyui_image_cost_table.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -640,7 +640,7 @@
       手持ちのクレジットを入れると、<strong>そのモデルで何枚作れるか</strong>がその場で出ます
     </p>
     <div class="header-meta">
-      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-08-17</strong> ・ 掲載 <strong><span
+      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-08-17</strong>（gpt-image-2.5追加・gpt-image-2訂正: <strong>2026-09-09</strong>） ・ 掲載 <strong><span
           id="meta-count">—</span> 行</strong>
     </div>
   </header>
@@ -705,7 +705,13 @@
     トークン数の確からしさは行ごとに違うので、<strong>バッジで区別</strong>しています。<br>
     <span class="badge bb">公式表</span> OpenAI公式が公表しているトークン表の値。<strong>gpt-image-1 / 1.5 はこれ</strong>。<br>
     <span class="badge bp">推定</span> Google が公表する「画像1枚 = 1,290トークン」を全Nano Banana系に当てはめた値。<strong>上位モデルで実際のトークン数が違う可能性があります</strong>。<br>
-    <span class="badge ba">未公表</span> <strong>gpt-image-2 だけは OpenAI がトークン表を公開しておらず</strong>、計算機での見積りに誘導されています。掲載値は第三者が報告している1枚あたり単価からの逆算で、<strong>もっとも確度が低い行</strong>です。実運用の前に少量で実測してください。
+    <span class="badge ba">未公表</span> <strong>gpt-image-2 / gpt-image-2.5 は OpenAI がトークン表を公開しておらず</strong>、計算機での見積りに誘導されています。掲載値は第三者が報告している1枚あたり単価からの逆算で、<strong>もっとも確度が低い行</strong>です。実運用の前に少量で実測してください。
+  </div>
+
+  <div class="warn" style="border-color:var(--accent)">
+    <strong>🆕 2026-09-09更新: gpt-image-2 の出力単価を訂正 ＋ gpt-image-2.5 を新規追加</strong><br>
+    ① <strong>gpt-image-2 の出力単価が誤っていました。</strong> 旧掲載は 7.60cr/1K（第三者推定からの逆算）でしたが、2026-09-09時点でOpenAI公式ページに <strong>$30.00/1M（=6.33cr/1K）が確定値として掲載</strong>されています。表の3行を訂正しました。<br>
+    ② <strong>gpt-image-2.5（Flare / Sunburst）を追加しました。</strong> 2026-09-08公開・ComfyUI Partner Nodesで提供中（要ComfyUI 0.35.0以降）。出力単価は <strong>gpt-image-2と同額（$30.00/1M・公式確定）</strong>ですが、1枚あたりのトークン数は公式表が無く、第三者報告の1枚単価からgpt-image-2と同一という推定で掲載しています。<strong>2.5で新設された上位品質「xhigh」「max」は信頼できる価格情報が無いため未掲載</strong>です。
   </div>
 
   <div class="table-wrap">
@@ -744,20 +750,24 @@
       ★ <strong>grok-imagine の edit タスク</strong>は入力ぶん（0.422〜2.11cr）が別途加算されます。表は generate（生成）の値です。<br>
       ★ <strong>gpt-image 系の「品質」は単価を15倍以上変えます。</strong> 同じ gpt-image-1.5 でも 1024×1024 の low は 1.84cr、high は 28.09cr。
       <strong>ここを既定のまま回すのが、画像APIでいちばん静かにクレジットが溶ける場所</strong>です。用途が下書きなら low で足ります。<br>
-      ★ <strong>gpt-image-2 だけ確度が落ちます。</strong> OpenAI公式のトークン表は「gpt-image-2 より前のモデル向け」と明記されており、
-      gpt-image-2 は計算機での見積りに誘導されています（「サイズと品質が上がるほどトークンが増える」とだけ記載）。
-      表の3行は第三者が報告している1枚単価からの逆算で、<strong>他の行と同じ精度では扱えません</strong>。<br>
+      ★ <strong>gpt-image-2 / gpt-image-2.5 は確度が落ちます。</strong> OpenAI公式のトークン表は「gpt-image-2 より前のモデル向け」と明記されており、
+      gpt-image-2・2.5 は計算機での見積りに誘導されています（「サイズと品質が上がるほどトークンが増える」とだけ記載）。
+      表の各行は第三者が報告している1枚単価からの逆算で、<strong>他の行と同じ精度では扱えません</strong>。<br>
+      ★ <strong>gpt-image-2.5 は Flare / Sunburst の2種</strong>（2026-09-08公開）。<strong>単価は同額</strong>で、Flareが高速・Sunburstが高精細編集向けという用途の違いです。<strong>xhigh・max</strong>という2.5で新設された上位品質は、信頼できる単価情報が無いため本表に載せていません。<br>
       ★ <strong>Nano Banana系の「1枚 = 1,290トークン」は gemini-2.5-flash-image の公表値</strong>で、上位のPro・2系も同じと仮定しています。
       実際のトークン数が違えば単価もそのぶんズレます。<br>
       ★ <strong>ローカル実行（Stable Diffusion / Flux dev / Qwen Image ローカル版など）はクレジットを消費しません。</strong>
       この表はすべて<strong>API経由</strong>の価格です。<br>
-      ★ 価格は予告なく変わります。<strong>取得日は2026-08-17</strong>。判断の前に出典を直接確認してください。
+      ★ 価格は予告なく変わります。<strong>取得日は2026-08-17（gpt-image-2訂正・gpt-image-2.5追加は2026-09-09）</strong>。判断の前に出典を直接確認してください。
     </div>
     <a class="src-link" href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank">→
       docs.comfy.org/ja/tutorials/partner-nodes/pricing</a>
     &nbsp;&nbsp;
     <a class="src-link" href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank">→
       developers.openai.com/api/docs/guides/image-generation（トークン表）</a>
+    &nbsp;&nbsp;
+    <a class="src-link" href="https://developers.openai.com/api/docs/pricing" target="_blank">→
+      developers.openai.com/api/docs/pricing（gpt-image-2 / 2.5 単価）</a>
   </footer>
 
   <script>
@@ -872,7 +882,14 @@
     //   'doc'  = OpenAI公式のトークン表（gpt-image-2 より前のモデルに適用）
     //            Low 272/408/400・Medium 1056/1584/1568・High 4160/6240/6208（1024²/1024×1536/1536×1024）
     //   'est'  = Google公表の「画像1枚 = 1,290トークン」を Nano Banana 系へ適用
-    //   'weak' = gpt-image-2。OpenAIがトークン表を公開しておらず、第三者報告の1枚単価からの逆算
+    //   'weak' = gpt-image-2 / gpt-image-2.5。OpenAIが1枚あたりトークン数の公式表を公開しておらず、第三者報告の1枚単価からの逆算
+    // 【2026-09-09更新】① gpt-image-2 の出力単価を訂正: 旧 7.60cr/1K（第三者推定）→ 6.33cr/1K（OpenAI公式 $30/1M・確定）。
+    //   訂正の出典: developers.openai.com/api/docs/pricing（2026-09-09取得）。tok数（200/1767/7033）は公式表が無いため据え置き。
+    // ② gpt-image-2.5（Flare/Sunburst）を新規追加。2026-09-08公開・ComfyUI Partner Nodesで提供開始
+    //   （docs.comfy.org/tutorials/partner-nodes/openai/gpt-image-2-5）。出力単価はgpt-image-2と同額（OpenAI公式）。
+    //   1枚あたりtok数は公式表が無いため、第三者の1枚単価報告（low $0.006 / medium ≈$0.053 / high ≈$0.211）から逆算し、
+    //   gpt-image-2と同じtok数（200/1767/7033）に一致することを確認して採用。
+    //   xhigh・max（2.5で新設された上位品質2段）は信頼できる価格情報が無いため掲載を見送り。
     const TOKEN_DATA = [
       // --- Google Nano Banana（品質段階の設定なし） ---
       { co: 'Google', model: 'Nano Banana', sub: 'gemini-2.5-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 6.33, conf: 'est' },
@@ -896,10 +913,18 @@
       { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 6.752, conf: 'doc' },
       { co: 'OpenAI', model: 'gpt-image-1.5', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 6.752, conf: 'doc' },
 
-      // --- OpenAI gpt-image-2（出力 7,600 cr / 1M・公式トークン表なし） ---
-      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 7,600 cr/1M・公式表なし', q: 'low', size: '1024×1024', tok: 200, outCr: 7.60, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 7,600 cr/1M・公式表なし', q: 'medium', size: '1024×1024', tok: 1767, outCr: 7.60, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 7,600 cr/1M・公式表なし', q: 'high', size: '1024×1024', tok: 7033, outCr: 7.60, conf: 'weak' },
+      // --- OpenAI gpt-image-2（出力 6,330 cr / 1M・単価は公式確定／tok数は未公表） ---
+      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
+
+      // --- OpenAI gpt-image-2.5 Flare/Sunburst 🆕（2026-09-08公開・出力単価はgpt-image-2と同額） ---
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', sub: '高精細編集向け・単価はFlareと同額', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', sub: '高精細編集向け・単価はFlareと同額', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', sub: '高精細編集向け・単価はFlareと同額', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
     ];
     const CONF_BADGE = { doc: ['bb', '公式表'], est: ['bp', '推定'], weak: ['ba', '未公表'] };
 

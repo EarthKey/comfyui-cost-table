@@ -10,7 +10,7 @@
   <!-- OGP Tags -->
   <meta property="og:title" content="ComfyUI 動画API コスパ＆ベンチマーク比較表 2026">
   <meta property="og:description" content="ComfyUI公式パートナーノードの動画生成モデル128件を、5秒あたりのコスト・ELOスコア・ComfyUI追加日で比較。Wan 3.0 / MiniMax H3 / Gemini Omni まで2026-09-04時点で更新。">
-  <meta property="og:image" content="https://comfyui-cost-table.vercel.app/og-image.png">
+  <meta property="og:image" content="https://comfyui-cost-table.vercel.app/og-image.webp">
   <meta property="og:url" content="https://comfyui-cost-table.vercel.app">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -644,9 +644,11 @@
       　　→ 🔴 <strong>例外は R2V（参照からビデオ生成）だけ。</strong>ここだけバッジが幅を持ち、<strong>480P 75.4〜112.5cr／768P 120.7〜157.8cr</strong>。<strong>増分はどちらも +37.1cr で一定</strong>で、image_2 / video_1 / audio_1 の追加入力分と見られます（本表には<strong>下限と上限の両方を行として立ててあります</strong>）。参照を盛るほど高くなるので、<strong>見積もりは上限側で立てる</strong>のが安全です。<br>
       　　→ <strong>ここが今回一番の発見です</strong>——① 通常のH3に無い <strong>480P が選べる</strong>（通常H3の最低は768P） ② <strong>768P が 24.14cr/秒で、通常のH3 768P（27.16）より安い</strong>のに ELO は 1235 &gt; 1227 で上。<strong>H3を使うなら Max を選ばない理由が現時点で見当たらない</strong>。<span style="color:var(--text-dim)">（2K の実額は未取得）</span><br>
       ★ <strong>MiniMax H3 Context IR（Prompt Enhancer）</strong>は別課金で <strong>約12.7〜23.2cr/Run</strong>（実測）。<strong>本表の生成コストには含まれません</strong>ので、使うならその分を上乗せして見積もってください。<br>
-      ★ <strong>【ComfyUIと fal の差】H3 には fal（別のホスティング先）だと <strong>Turbo</strong> がありますが、<strong>ComfyUI のノードにはありません</strong>。ソースを見ると選べるのは <code>MiniMax H3</code> と <code>MiniMax H3 Max</code> の2つだけで、<strong>Turbo のモデルID は存在しません</strong>（2026-09-04時点）。<strong>高速化を狙うなら ComfyUI では現状手がありません</strong>。<br>
       　　→ なお <strong>ComfyUI の H3 Max 自体が fal 経由のプロキシ</strong>です（エンドポイントは <code>/proxy/fal/minimax/h3-max</code>）。Arena で <em>Minimax H3 Max (post-trained by fal)</em> と表記されているものと<strong>同じ実体</strong>なので、<strong>ELO 1235 はそのままこのノードの実力として読めます</strong>。<br>
       　　→ H3 Max の細かい制約（ソース由来）: <strong>R2V の参照は合計最大 12 ファイル</strong>。<strong>ウォーターマークの設定は通常の H3 専用</strong>で、Max では使えません。<br>
+      ★ 🔴🆕【2026-09-09訂正】<strong>「ComfyUIにH3 Turboは無い」は誤りでした（8/04時点の情報が古くなっていました）。</strong> <strong>MiniMax H3 Turbo</strong> と <strong>MiniMax H3 Max Turbo</strong> が<strong>ComfyUI 0.34.4でパートナーノードのテンプレートとして追加</strong>され、2026年9月上旬にプレビュー公開されています。<strong>H3 Max Turbo は本人が実機のノード価格バッジを読んで確定</strong>——<strong>480P 7.54cr/秒（5秒37.7cr）・768P 12.06cr/秒（5秒60.3cr）</strong>で、無印H3 Maxのちょうど半額でした。本表に行を追加しています。<br>
+      　　→ 🔥 <strong>ただし fal（H3 Maxの実体ホスト元）で直接使う方が今も今後も安いです。</strong> fal公式の H3 Max Turbo は <strong>480P $0.025/秒・768P $0.04/秒・1080P $0.08/秒</strong>（cr換算 5.28 / 8.44 / 16.88cr/秒）が通常価格で、<strong>ComfyUI経由はこれよりおよそ1.43倍高い</strong>（ComfyUIのH3 Max自体がfal経由のプロキシのため、上乗せがある構造と符合）。さらに<strong>2026-09-14までは75%オフのプロモ価格</strong>（480P $0.00625・768P $0.01・1080P $0.02/秒＝cr換算 1.32 / 2.11 / 4.22cr/秒）中で、<strong>この期間はComfyUI経由の約5.7倍安い</strong>。まとまった量を作るなら、期間中はfal直接のほうが明確に有利。<br>
+      　　→ 混同注意: <strong>fal直販が独自に出しているTurbo</strong>と<strong>ComfyUIパートナーノードのTurbo</strong>は名称が同じでも提供経路が別（今回はどちらも実在・実額を確認済み）。また<strong>コミュニティ配布のLoRAでローカル生成を高速化する手段</strong>（RunComfy「ComfyUI-MiniMax-H3-Turbo」等・クレジット不要・GPU電気代のみ）も別途存在し、こちらは上記いずれのAPIノードとも無関係。<br>
       ★ 🔥 <strong>Gemini Omni 1.1</strong>（8-27追加）。前回「約21cr/秒（概算）」と1行で載せていた <strong>Gemini Omni Flash は誤りでした</strong>。公式に解像度別の正価が掲載され、<strong>360P 10.19 / 720P 30.57 / 1080P 45.87 / 4K 91.76 cr/秒</strong>と判明。<strong>720Pの実額は概算の約1.5倍</strong>です。本表は4解像度に分割し、1.1 と Flash の両方を掲載しました。<strong>360Pなら5秒50.95crでArena1位品質</strong>という点は変わりません。<br>
       ★ <strong>PixVerse V6</strong>（8-25追加・ELO 1074）は<strong>360P〜1080P × 音声ON/OFF の8区分</strong>。360P音声OFF 15.09cr/秒が最安。<br>
       ★ <strong>LTX-2.5</strong>（8-11追加）は Pro 1061 / Fast 1060 で<strong>LTX-2世代（921〜941）から大幅に改善</strong>。Fast は<strong>4K（90.52cr/秒）まで対応</strong>。<br>
@@ -736,6 +738,8 @@
       // ============ MiniMax ============
       { company: 'Minimax', model: 'H3 Max 480P 🆕🔥', res: '480P', audio: true, crSec: 15.08, cr5: 75.4, tier: 'blue', elo: 1235, eloNote: 'T2V/I2V/FLF実測', date: '2026-09-02' },
       { company: 'Minimax', model: 'H3 Max 768P 🆕🔥', res: '768P', audio: true, crSec: 24.14, cr5: 120.7, tier: 'amber', elo: 1235, eloNote: 'T2V/I2V実測', date: '2026-09-02' },
+      { company: 'Minimax', model: 'H3 Max Turbo 480P 🆕🔥', res: '480P', audio: true, crSec: 7.54, cr5: 37.7, tier: 'green', elo: null, eloNote: '本人実測(FLF2V)・Arena未掲載', date: '2026-09-09' },
+      { company: 'Minimax', model: 'H3 Max Turbo 768P 🆕🔥', res: '768P', audio: true, crSec: 12.06, cr5: 60.3, tier: 'blue', elo: null, eloNote: '本人実測(FLF2V)・Arena未掲載', date: '2026-09-09' },
       { company: 'Minimax', model: 'H3 Max R2V 480P（参照最大）🆕', res: '480P', audio: true, crSec: 22.50, cr5: 112.5, tier: 'blue', elo: 1235, eloNote: 'R2V上限/実測', date: '2026-09-02' },
       { company: 'Minimax', model: 'H3 Max R2V 768P（参照最大）🆕', res: '768P', audio: true, crSec: 31.56, cr5: 157.8, tier: 'amber', elo: 1235, eloNote: 'R2V上限/実測', date: '2026-09-02' },
       { company: 'Minimax', model: 'H3 768P', res: '768P', audio: true, crSec: 27.16, cr5: 135.8, tier: 'amber', elo: 1227, eloNote: 'T2V 4位', date: '2026-08-02' },
