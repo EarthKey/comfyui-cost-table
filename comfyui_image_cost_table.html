@@ -640,7 +640,7 @@
       手持ちのクレジットを入れると、<strong>そのモデルで何枚作れるか</strong>がその場で出ます
     </p>
     <div class="header-meta">
-      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-08-17</strong>（gpt-image-2.5追加・gpt-image-2訂正: <strong>2026-09-09</strong>） ・ 掲載 <strong><span
+      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-08-17</strong>（gpt-image-2.5追加・gpt-image-2訂正: 2026-09-09／表を1本へ統合: <strong>2026-09-10</strong>） ・ 掲載 <strong><span
           id="meta-count">—</span> 行</strong>
     </div>
   </header>
@@ -693,48 +693,12 @@
     </table>
   </div>
 
-  <div class="section-head">
-    <h2>トークン課金のモデル（gpt-image / Nano Banana）</h2>
-    <p>
-      OpenAI の <strong>gpt-image</strong> 系と Google の <strong>Nano Banana</strong> 系は、<strong>1枚いくら</strong>ではなく<strong>出力トークン1,000個あたりいくら</strong>で課金されます。
-      ComfyUI公式ドキュメントも「<strong>quality（low / medium / high）による概算バッジ。実費は下のトークン数に従う</strong>」と明記しています。
-      つまり<strong>同じモデルでも品質設定で単価が15倍以上変わる</strong>ため、上の表と同じ土俵には並べられません。
-      ここでは<strong>1枚に何トークン使うかを掛け合わせて、枚数単価へ換算</strong>しています。
-    </p>
-  </div>
-
-  <div class="warn">
-    <strong>⚠ この表は「クレジット単価（ComfyUI公式）× 1枚あたりトークン数（各社の公式値）」の掛け算です。</strong>
-    トークン数の確からしさは行ごとに違うので、<strong>バッジで区別</strong>しています。<br>
-    <span class="badge bb">公式表</span> OpenAI公式が公表しているトークン表の値。<strong>gpt-image-1 / 1.5 はこれ</strong>。<br>
-    <span class="badge bp">推定</span> Google が公表する「画像1枚 = 1,290トークン」を全Nano Banana系に当てはめた値。<strong>上位モデルで実際のトークン数が違う可能性があります</strong>。<br>
-    <span class="badge ba">未公表</span> <strong>gpt-image-2 / gpt-image-2.5 は OpenAI がトークン表を公開しておらず</strong>、計算機での見積りに誘導されています。掲載値は第三者が報告している1枚あたり単価からの逆算で、<strong>もっとも確度が低い行</strong>です。実運用の前に少量で実測してください。
-  </div>
-
   <div class="warn" style="border-color:var(--accent)">
-    <strong>🆕 2026-09-09更新: gpt-image-2 の出力単価を訂正 ＋ gpt-image-2.5 を新規追加</strong><br>
-    ① <strong>gpt-image-2 の出力単価が誤っていました。</strong> 旧掲載は 7.60cr/1K（第三者推定からの逆算）でしたが、2026-09-09時点でOpenAI公式ページに <strong>$30.00/1M（=6.33cr/1K）が確定値として掲載</strong>されています。表の3行を訂正しました。<br>
-    ② <strong>gpt-image-2.5（Flare / Sunburst）を追加しました。</strong> 2026-09-08公開・ComfyUI Partner Nodesで提供中（要ComfyUI 0.35.0以降）。出力単価は <strong>gpt-image-2と同額（$30.00/1M・公式確定）</strong>ですが、1枚あたりのトークン数は公式表が無く、第三者報告の1枚単価からgpt-image-2と同一という推定で掲載しています。<strong>2.5で新設された上位品質「xhigh」「max」は信頼できる価格情報が無いため未掲載</strong>です。
-  </div>
-
-  <div class="table-wrap">
-    <table style="min-width:900px">
-      <thead>
-        <tr>
-          <th style="width:28px">#</th>
-          <th>会社 / モデル</th>
-          <th>品質</th>
-          <th>サイズ</th>
-          <th class="r">出力トークン</th>
-          <th class="r">出力 CR/1K</th>
-          <th class="r">CR / 枚</th>
-          <th class="r">円 / 枚</th>
-          <th class="r">手持ちで</th>
-          <th>確度</th>
-        </tr>
-      </thead>
-      <tbody id="tbody-token"></tbody>
-    </table>
+    <strong>🆕 2026-09-10更新: 「トークン課金モデル」表を上の表へ統合しました。</strong>
+    以前は gpt-image / Nano Banana 系だけ別表（探しにくいとの指摘あり）になっていましたが、
+    出力CR/1K×1枚あたりトークン数を掛け算した確定値を <strong>CR/枚</strong> 列へ格納し、1つの表に統一しました。
+    <strong>gpt-image-2 / gpt-image-2.5 / Nano Banana系は、条件欄末尾に「※推定」「※未公表・第三者推定」の注記があるものはトークン数が非公式です。</strong>
+    実運用の前に少量で実測してください。
   </div>
 
   <footer>
@@ -884,58 +848,46 @@
       { co: 'Recraft', model: 'recraftv4_pro', date: null, cond: 'V4 Text to Vector', cr: 63.30 },
       { co: 'Recraft', model: 'recraftv4_1_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 63.30 },
       { co: 'Recraft', model: 'recraftv4_1_utility_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 63.30 },
+
+      // ==== 【2026-09-10 統一】トークン課金モデル（gpt-image / Nano Banana）====
+      // 2026-09-09まで別の表（トークン課金組）に分けていたが、探しにくいとの指摘で本表へ統合。
+      // 元の出力CR/1K（ComfyUI公式）× 1枚あたりトークン数（各社公表値・出典は下記）を掛け算し、cr列へ確定値として格納。
+      // 確からしさは cond 末尾の注記で区別（doc=公式トークン表／est=Google公表値からの推定／weak=未公表・第三者推定）。
+      // --- Google Nano Banana（1290tok/枚 = gemini-2.5-flash-image の公表値をNano Banana系全体へ適用・推定） ---
+      { co: 'Google', model: 'Nano Banana', date: '2025-08-27', approx: true, cond: 'gemini-2.5-flash-image（1290tok/枚）※推定(Google公表値)', cr: 8.17 },
+      { co: 'Google', model: 'Nano Banana 2 Lite', date: '2026-06-30', cond: 'gemini-3.1-flash-lite-image（1290tok/枚）※推定(Google公表値)', cr: 9.80 },
+      { co: 'Google', model: 'Nano Banana 2', date: '2026-02-26', cond: 'gemini-3.1-flash-image（1290tok/枚）※推定(Google公表値)', cr: 19.60 },
+      { co: 'Google', model: 'Nano Banana Pro', date: '2025-11-21', cond: 'gemini-3-pro-image（1290tok/枚）※推定(Google公表値)', cr: 39.19 },
+
+      // --- OpenAI gpt-image-1（出力8,440cr/1M・OpenAI公式トークン表） ---
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, cond: 'low / 1024×1024', cr: 2.30 },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, cond: 'low / 1024×1536（縦）', cr: 3.44 },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, cond: 'medium / 1024×1024', cr: 8.91 },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, cond: 'medium / 1024×1536（縦）', cr: 13.37 },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, cond: 'high / 1024×1024', cr: 35.11 },
+      { co: 'OpenAI', model: 'gpt-image-1', date: null, cond: 'high / 1024×1536（縦）', cr: 52.67 },
+
+      // --- OpenAI gpt-image-1.5（出力6,752cr/1M・OpenAI公式トークン表） ---
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'low / 1024×1024', cr: 1.84 },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'low / 1024×1536（縦）', cr: 2.75 },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'medium / 1024×1024', cr: 7.13 },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'medium / 1024×1536（縦）', cr: 10.69 },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'high / 1024×1024', cr: 28.09 },
+      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'high / 1024×1536（縦）', cr: 42.13 },
+
+      // --- OpenAI gpt-image-2（出力6,330cr/1M=$30/1M公式確定／tok数は未公表・第三者推定） ---
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'low / 1024×1024 ※未公表・第三者推定', cr: 1.27 },
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'medium / 1024×1024 ※未公表・第三者推定', cr: 11.19 },
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'high / 1024×1024 ※未公表・第三者推定', cr: 44.52 },
+
+      // --- OpenAI gpt-image-2.5 Flare/Sunburst 🆕（2026-09-08公開・出力単価はgpt-image-2と同額／tok数は未公表・第三者推定） ---
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', cond: 'low / 1024×1024 ※未公表・第三者推定', cr: 1.27 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', cond: 'medium / 1024×1024 ※未公表・第三者推定', cr: 11.19 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', cond: 'high / 1024×1024 ※未公表・第三者推定', cr: 44.52 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', cond: '高精細編集向け・low / 1024×1024 ※未公表・第三者推定', cr: 1.27 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', cond: '高精細編集向け・medium / 1024×1024 ※未公表・第三者推定', cr: 11.19 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', cond: '高精細編集向け・high / 1024×1024 ※未公表・第三者推定', cr: 44.52 },
     ];
-
-    // ==== トークン課金組 ====
-    // 出力CR/1K は ComfyUI公式（docs.comfy.org）。トークン数の出どころは conf で区別する:
-    //   'doc'  = OpenAI公式のトークン表（gpt-image-2 より前のモデルに適用）
-    //            Low 272/408/400・Medium 1056/1584/1568・High 4160/6240/6208（1024²/1024×1536/1536×1024）
-    //   'est'  = Google公表の「画像1枚 = 1,290トークン」を Nano Banana 系へ適用
-    //   'weak' = gpt-image-2 / gpt-image-2.5。OpenAIが1枚あたりトークン数の公式表を公開しておらず、第三者報告の1枚単価からの逆算
-    // 【2026-09-09更新】① gpt-image-2 の出力単価を訂正: 旧 7.60cr/1K（第三者推定）→ 6.33cr/1K（OpenAI公式 $30/1M・確定）。
-    //   訂正の出典: developers.openai.com/api/docs/pricing（2026-09-09取得）。tok数（200/1767/7033）は公式表が無いため据え置き。
-    // ② gpt-image-2.5（Flare/Sunburst）を新規追加。2026-09-08公開・ComfyUI Partner Nodesで提供開始
-    //   （docs.comfy.org/tutorials/partner-nodes/openai/gpt-image-2-5）。出力単価はgpt-image-2と同額（OpenAI公式）。
-    //   1枚あたりtok数は公式表が無いため、第三者の1枚単価報告（low $0.006 / medium ≈$0.053 / high ≈$0.211）から逆算し、
-    //   gpt-image-2と同じtok数（200/1767/7033）に一致することを確認して採用。
-    //   xhigh・max（2.5で新設された上位品質2段）は信頼できる価格情報が無いため掲載を見送り。
-    const TOKEN_DATA = [
-      // --- Google Nano Banana（品質段階の設定なし） ---
-      { co: 'Google', model: 'Nano Banana', date: '2025-08-27', approx: true, sub: 'gemini-2.5-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 6.33, conf: 'est' },
-      { co: 'Google', model: 'Nano Banana 2 Lite', date: '2026-06-30', sub: 'gemini-3.1-flash-lite-image', q: '—', size: '1024px相当', tok: 1290, outCr: 7.60, conf: 'est' },
-      { co: 'Google', model: 'Nano Banana 2', date: '2026-02-26', sub: 'gemini-3.1-flash-image', q: '—', size: '1024px相当', tok: 1290, outCr: 15.19, conf: 'est' },
-      { co: 'Google', model: 'Nano Banana Pro', date: '2025-11-21', sub: 'gemini-3-pro-image', q: '—', size: '1024px相当', tok: 1290, outCr: 30.38, conf: 'est' },
-
-      // --- OpenAI gpt-image-1（出力 8,440 cr / 1M） ---
-      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 8.44, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1', date: null, sub: '出力 8,440 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 8.44, conf: 'doc' },
-
-      // --- OpenAI gpt-image-1.5（出力 6,752 cr / 1M） ---
-      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1024', tok: 272, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'low', size: '1024×1536（縦）', tok: 408, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1024', tok: 1056, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'medium', size: '1024×1536（縦）', tok: 1584, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1024', tok: 4160, outCr: 6.752, conf: 'doc' },
-      { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', sub: '出力 6,752 cr/1M', q: 'high', size: '1024×1536（縦）', tok: 6240, outCr: 6.752, conf: 'doc' },
-
-      // --- OpenAI gpt-image-2（出力 6,330 cr / 1M・単価は公式確定／tok数は未公表） ---
-      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
-
-      // --- OpenAI gpt-image-2.5 Flare/Sunburst 🆕（2026-09-08公開・出力単価はgpt-image-2と同額） ---
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', sub: '出力 6,330 cr/1M(公式)・tok数は第三者推定', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', sub: '高精細編集向け・単価はFlareと同額', q: 'low', size: '1024×1024', tok: 200, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', sub: '高精細編集向け・単価はFlareと同額', q: 'medium', size: '1024×1024', tok: 1767, outCr: 6.33, conf: 'weak' },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', sub: '高精細編集向け・単価はFlareと同額', q: 'high', size: '1024×1024', tok: 7033, outCr: 6.33, conf: 'weak' },
-    ];
-    const CONF_BADGE = { doc: ['bb', '公式表'], est: ['bp', '推定'], weak: ['ba', '未公表'] };
 
     const CR_PER_USD = 211;   // 各社の公開API価格からの逆算（公式の明示ではない）
     const JPY_PER_USD = 150;
@@ -1018,43 +970,8 @@
         tbody.appendChild(tr);
       });
       document.getElementById('count-label').textContent = rows.length + ' rows';
-      document.getElementById('meta-count').textContent = DATA.length + TOKEN_DATA.length;
-      renderTokenTable();
+      document.getElementById('meta-count').textContent = DATA.length;
       renderBalanceBar();
-    }
-
-    const Q_COLOR = { low: 'var(--green)', medium: 'var(--blue)', high: 'var(--red)' };
-
-    function renderTokenTable() {
-      const tb = document.getElementById('tbody-token');
-      tb.innerHTML = '';
-      TOKEN_DATA.forEach((d, i) => {
-        const cr = d.outCr * d.tok / 1000;
-        const tier = tierOf(cr);
-        const [bcls, blabel] = CONF_BADGE[d.conf];
-        const qMk = d.q === '—'
-          ? `<span style="color:var(--text-dim);font-family:var(--mono);font-size:11px">—</span>`
-          : `<span class="mono-val" style="color:${Q_COLOR[d.q]};font-size:12px">${d.q}</span>`;
-        const tr = document.createElement('tr');
-        tr.style.animationDelay = Math.min(i * 12, 300) + 'ms';
-        tr.innerHTML = `
-      <td><span class="rank">${i + 1}</span></td>
-      <td>
-        <div class="co-name">${d.co}</div>
-        <div class="model-id">${d.model}</div>
-        <div class="cond">${d.sub}</div>
-      </td>
-      <td>${qMk}</td>
-      <td><span class="cond">${d.size}</span></td>
-      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${d.tok.toLocaleString()}</span></td>
-      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${d.outCr}</span></td>
-      <td class="r"><span class="mono-val cost-${tier}">${cr.toFixed(2)}</span></td>
-      <td class="r"><span class="mono-val" style="color:var(--text-muted)">${jpy(cr)}</span></td>
-      <td class="r"><span class="sheets">${Math.floor(balance / cr).toLocaleString()}<small>枚</small></span></td>
-      <td><span class="badge ${bcls}">${blabel}</span></td>
-    `;
-        tb.appendChild(tr);
-      });
     }
 
     document.getElementById('balance').addEventListener('input', e => {
