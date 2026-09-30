@@ -580,11 +580,11 @@
       モデル選定の判断材料を透明に示すことが目的であり、特定モデルの断定的な推奨はしません。
     </p>
     <div class="header-meta">
-      参照データ更新日: <strong>2026-09-09</strong>（Intelligence Index を v4.1 → <strong>v4.3</strong> へ全面更新）
+      参照データ更新日: <strong>2026-09-30</strong>（Claude Opus 5.5 / Sonnet 5.5・GPT-6.1 Sol / GPT-6 Sol / Luna・Grok 4.7・Gemini 3.8 Flash を追加）
       &nbsp;<a href="https://artificialanalysis.ai/" target="_blank" rel="noopener"
         style="color:var(--accent);text-decoration:underline;">artificialanalysis.ai</a>
       <span class="ref-badge">数値はすべて参考値</span><br>
-      指数出典: Artificial Analysis（Intelligence Index v4.3）&nbsp;|&nbsp; 価格出典: 各社公式ページ・artificialanalysis.ai個別モデルページ
+      指数出典: Artificial Analysis（Intelligence Index v4.3.2）&nbsp;|&nbsp; 価格出典: 各社公式ページ・artificialanalysis.ai個別モデルページ
     </div>
   </header>
 
@@ -632,7 +632,7 @@
     <div class="note-card">
       <h2>指標の定義</h2>
       <ul>
-        <li><strong>総合知能指数</strong> = Artificial Analysis Intelligence Index v4.3。AA-Briefcase、GDPval-AA
+        <li><strong>総合知能指数</strong> = Artificial Analysis Intelligence Index v4.3.2（v4.3の改訂版）。AA-Briefcase、GDPval-AA
           v2、AutomationBench-AA、Terminal-Bench v4.0、SciCode、Humanity's Last Exam、GDP.pdf、CritPt、AA-Omniscience、AA-LCR
           v1.1 の10評価の合成値。高いほど総合的な推論・知識・科学・コーディング能力が高い。<strong>v4.1とはスケールが異なり単純比較不可</strong>。</li>
         <li><strong>Coding Agent Index</strong> = DeepSWE、Terminal-Bench v2、SWE-Atlas-QnA で構成されるコーディングエージェント評価。</li>
@@ -663,6 +663,11 @@
 
   <footer>
     <div class="fnote">
+      ★ <strong>【2026-09-30 追加更新】</strong>9-09以降に登場した7モデルを追加しました（12→19モデル）：Claude Opus 5.5（9-22）／Claude Sonnet 5.5（9-28）／GPT-6.1 Sol（9-29）／GPT-6 Sol・GPT-6 Luna（9-22）／Grok 4.7（9-21）／Gemini 3.8 Flash（9-02・前回の掲載漏れ）。
+      値はすべて artificialanalysis.ai の各モデル個別ページを直接取得した一次値（Intelligence Index v4.3.2）です。<br>
+      ★ <strong>既存12行の指数は9-09時点のまま据え置きです。</strong>指数のバージョンが v4.3 → v4.3.2 に上がっているため、上位（Astra・Fable 5.1＝53）以外は再測定値と微差がある可能性があります（未再確認）。<br>
+      ★ <strong>未掲載:</strong> GPT-6 Terra（指数・価格を一次ページで確認できず）、Meta Muse Spark 1.3（48）・Xiaomi MiMo-V2.6-Pro（46）（本表の対象4社外）。<br>
+      ★ 旧モデルの行（GPT-5.6系・Sonnet 5・Grok 4.5・Gemini 3.6 Flash など）は比較用に残しています。<br>
       ★ 参照データ更新日: <strong>2026-07-17</strong>（初版。OpenAI、Anthropic、Google、SpaceXAIの主要モデルを統合）<br>
       ★ 同日、Claude Opus 4.8 / GPT-5.5 / Gemini 3.1 Pro の3モデルを <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener" style="color:var(--accent2)">artificialanalysis.ai</a> の個別モデルページを一次情報として追加。あわせて既存7モデルを同サイトと突き合わせ、GPT-5.6 Solの総合知能指数を59→<strong>58</strong>へ補正（価格は変更なし。ベンチマーク再評価による変動と見られる）。<br>
       ★ <strong>2026-07-23</strong>、2026-07-21登場の <strong>Gemini 3.6 Flash</strong>（high・reasoning版）を追加。知能指数50で自社の3.1 Pro(46)を上回りつつ、3.5 Flashより低価格($1.50/$7.50)。artificialanalysis.aiの個別モデルページを一次情報として採用。<br>
@@ -713,9 +718,17 @@
       { order: 10, company: 'OpenAI', model: 'GPT-5.5', cond: 'xhigh・Codex参考', intel: 39, coding: '未確認', inPrice: 5.00, outPrice: 30.00, priceNote: '', blend: 10.00, value: 3.90, context: '922k', feature: '旧世代最上位' },
       { order: 11, company: 'Google', model: 'Gemini 3.1 Pro', cond: 'Preview', intel: 30, coding: '未確認', inPrice: 2.00, outPrice: 12.00, priceNote: '', blend: 4.00, value: 7.50, context: '1M', feature: '推論強化・テキスト/画像/音声/動画入力対応' },
       { order: 12, company: 'Google', model: 'Gemini 3.6 Flash', cond: 'high（reasoning版）', intel: 34, coding: '未確認', inPrice: 0.75, outPrice: 3.75, priceNote: '', blend: 1.35, value: 25.19, context: '1M', feature: '大幅値下げ（旧$1.50/$7.50→現$0.75/$3.75）。簡易コスパが表内2位' },
+      // 【2026-09-30 追加】9-09以降に登場したモデル＋掲載漏れ。指数は v4.3.2（artificialanalysis.ai 各モデル個別ページの一次値）。
+      { order: 13, company: 'Anthropic', model: 'Claude Opus 5.5', cond: 'max（Adaptive Reasoning・fallbackあり）', intel: 58, coding: '未確認', inPrice: 4.00, outPrice: 20.00, priceNote: '', blend: 7.20, value: 8.06, context: '1M', feature: '2026-09-22公開。表内の総合知能指数トップ。Opus 4.8（$5/$25）より安く、指数は16点上' },
+      { order: 14, company: 'Anthropic', model: 'Claude Sonnet 5.5', cond: 'max（Adaptive Reasoning・fallbackあり）', intel: 56, coding: '未確認', inPrice: 2.00, outPrice: 10.00, priceNote: '', blend: 3.60, value: 15.56, context: '1M', feature: '2026-09-28公開。Sonnet 5と同価格で指数38→56。評価中の出力は410Mトークンで「very verbose」と表記' },
+      { order: 15, company: 'OpenAI', model: 'GPT-6.1 Sol', cond: 'max', intel: 52, coding: '未確認', inPrice: 2.00, outPrice: 10.00, priceNote: '', blend: 3.60, value: 14.44, context: '1M', feature: '2026-09-29公開。GPT-6 Astra（$10/$50）に1点差で、単価は5分の1' },
+      { order: 16, company: 'OpenAI', model: 'GPT-6 Sol', cond: 'max', intel: 48, coding: '未確認', inPrice: 2.00, outPrice: 10.00, priceNote: '', blend: 3.60, value: 13.33, context: '872k', feature: '2026-09-22公開。同価格でGPT-6.1 Solのほうが指数が高い（Contextも1M）' },
+      { order: 17, company: 'OpenAI', model: 'GPT-6 Luna', cond: 'max', intel: 37, coding: '未確認', inPrice: 0.10, outPrice: 0.50, priceNote: '', blend: 0.18, value: 205.56, context: '1M', feature: '2026-09-22公開。GPT-5.6 Luna（$0.20/$1.20）から値下げ。簡易コスパは表内最高' },
+      { order: 18, company: 'SpaceXAI', model: 'Grok 4.7', cond: 'xhigh', intel: 46, coding: '未確認', inPrice: 2.00, outPrice: 6.00, priceNote: '', blend: 2.80, value: 16.43, context: '500k', feature: '2026-09-21公開。Grok 4.5から指数39→46、単価は据え置き' },
+      { order: 19, company: 'Google', model: 'Gemini 3.8 Flash', cond: 'high', intel: 41, coding: '未確認', inPrice: 0.75, outPrice: 3.75, priceNote: '', blend: 1.35, value: 30.37, context: '1M', feature: '2026-09-02公開（前回9-09の更新時に掲載漏れ）。Gemini 3.6 Flashと同価格で指数34→41' },
     ];
 
-    const INTEL_MAX = 53; // バーメーターの满尺（資料内の最高値・v4.3ではAstra/Fable 5.1が同点首位）
+    const INTEL_MAX = 58; // バーメーターの满尺（資料内の最高値・v4.3.2ではClaude Opus 5.5が首位）
 
     // =====================================================================
     // 並び替え
