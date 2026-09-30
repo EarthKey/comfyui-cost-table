@@ -640,7 +640,7 @@
       手持ちのクレジットを入れると、<strong>そのモデルで何枚作れるか</strong>がその場で出ます
     </p>
     <div class="header-meta">
-      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-08-17</strong>（gpt-image-2.5追加・gpt-image-2訂正: 2026-09-09／表を1本へ統合: <strong>2026-09-10</strong>） ・ 掲載 <strong><span
+      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-09-30</strong>（新規3モデル追加・Recraft価格を公式へ更新／前回: gpt-image-2.5追加 2026-09-09・表を1本へ統合 2026-09-10） ・ 掲載 <strong><span
           id="meta-count">—</span> 行</strong>
     </div>
   </header>
@@ -731,7 +731,14 @@
       実際のトークン数が違えば単価もそのぶんズレます。<br>
       ★ <strong>ローカル実行（Stable Diffusion / Flux dev / Qwen Image ローカル版など）はクレジットを消費しません。</strong>
       この表はすべて<strong>API経由</strong>の価格です。<br>
-      ★ 価格は予告なく変わります。<strong>取得日は2026-08-17（gpt-image-2訂正・gpt-image-2.5追加は2026-09-09）</strong>。判断の前に出典を直接確認してください。
+      ★ 🆕【2026-09-30 更新】<strong>新規3モデルを追加</strong>：Recraft V4.1 Flash（9-23・2.11cr/枚）／Tencent HY Image 3.5 Preview（9-22・7.24cr、4Kは9.66cr）／Meta Muse Image（9-05頃・3.017cr）。
+      追加日は Comfy-Org/ComfyUI のPRマージ日。Muse Imageだけ二次情報（PR #16078）で「頃」扱いです。<br>
+      ★ 🔴 <strong>Recraft の価格を全14行、公式の現行値へ更新しました。</strong>従来の表は8-17取得の値で、公式の現行価格は<strong>一律およそ1.43倍</strong>に上がっていました
+      （例: recraftv4_1 7.39→10.56／recraftv4 8.44→12.07／Text to Vector 16.88→24.14／recraftv4_pro 52.75→75.43）。この値上がりの時期は特定できていません。
+      あわせて Seedream 5.0 Pro レイヤー分離を 6.75〜13.50 → <strong>6.79〜13.58</strong> に更新しました。<br>
+      ★ <strong>載せていないもの</strong>：Seedream 5.0 Flash（PR上は9-24に追加されたが公式価格表に価格の記載なし）／Quiver Arrow（SVG生成）／Topaz・Bria（高画質化・編集ノード）／Microsoft mai-image（トークン課金）。
+      DALL·E 2/3 は公式表で「ノード削除済み」と明記されていますが、比較用に行は残しています。<br>
+      ★ 価格は予告なく変わります。<strong>取得日は2026-09-30</strong>（トークン課金の gpt-image・Nano Banana 系は計算値のため前回のまま）。判断の前に出典を直接確認してください。
     </div>
     <a class="src-link" href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank">→
       docs.comfy.org/ja/tutorials/partner-nodes/pricing</a>
@@ -811,8 +818,8 @@
       { co: 'ByteDance', model: 'seedream 5.0 lite', date: '2026-02-24', approx: true, cond: '—', cr: 7.39 },
       { co: 'ByteDance', model: 'seedream 5.0 pro', date: '2026-07-09', approx: true, cond: '1K', cr: 9.50 },
       { co: 'ByteDance', model: 'seedream 5.0 pro', date: '2026-07-09', approx: true, cond: '2K', cr: 18.99 },
-      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', date: '2026-08-07', cond: '1K / 1.5K', cr: 6.75 },
-      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', date: '2026-08-07', cond: '2K（6.75〜13.50）', cr: 13.50 },
+      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', date: '2026-08-07', cond: '1K / 1.5K', cr: 6.79 },
+      { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', date: '2026-08-07', cond: '2K（6.79〜13.58）', cr: 13.58 },
 
       // ---- BFL Flux ----
       { co: 'BFL', model: 'Flux.2 [pro]', date: '2025-11-25', cond: '+3.17 / 追加MP', cr: 6.33 },
@@ -834,20 +841,25 @@
       { co: 'Qwen', model: 'qwen-image-3.0-pro', date: '2026-08-10', approx: true, cond: 'Edit / 2K（+0.91 入力）', cr: 22.63 },
 
       // ---- Recraft ----
-      { co: 'Recraft', model: 'recraftv4_1', date: '2026-07-28', cond: 'V4 Text to Image', cr: 7.39 },
-      { co: 'Recraft', model: 'recraftv4_1_utility', date: '2026-07-28', approx: true, cond: 'V4 Text to Image', cr: 7.39 },
-      { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Image', cr: 8.44 },
-      { co: 'Recraft', model: 'recraftv3', date: '2025-05-06', approx: true, cond: 'T2I / I2I / インペイント', cr: 8.44 },
-      { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv4_1_vector', date: '2026-07-28', approx: true, cond: 'V4 Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv4_1_utility_vector', date: '2026-07-28', approx: true, cond: 'V4 Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv3', date: '2025-05-06', approx: true, cond: 'Text to Vector', cr: 16.88 },
-      { co: 'Recraft', model: 'recraftv4_1_pro', date: '2026-09-04', approx: true, cond: 'V4 Text to Image', cr: 44.31 },
-      { co: 'Recraft', model: 'recraftv4_1_utility_pro', date: '2026-09-04', approx: true, cond: 'V4 Text to Image', cr: 44.31 },
-      { co: 'Recraft', model: 'recraftv4_pro', date: null, cond: 'V4 Text to Image', cr: 52.75 },
-      { co: 'Recraft', model: 'recraftv4_pro', date: null, cond: 'V4 Text to Vector', cr: 63.30 },
-      { co: 'Recraft', model: 'recraftv4_1_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 63.30 },
-      { co: 'Recraft', model: 'recraftv4_1_utility_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 63.30 },
+      { co: 'Recraft', model: 'recraftv4_1', date: '2026-07-28', cond: 'V4 Text to Image', cr: 10.56 },
+      { co: 'Recraft', model: 'recraftv4_1_utility', date: '2026-07-28', approx: true, cond: 'V4 Text to Image', cr: 10.56 },
+      { co: 'Recraft', model: 'recraftv4_1_flash 🆕', date: '2026-09-23', cond: 'V4 Text to Image', cr: 2.11 },
+      // ---- 2026-09-30 追加 ----
+      { co: 'Tencent', model: 'HY Image 3.5 Preview 🆕', date: '2026-09-22', cond: 'T2I / Edit・1K・2K・〜4.19MP', cr: 7.24 },
+      { co: 'Tencent', model: 'HY Image 3.5 Preview 🆕', date: '2026-09-22', cond: 'T2I / Edit・4K・4.19MP超', cr: 9.66 },
+      { co: 'Meta', model: 'Muse Image 🆕', date: '2026-09-05', approx: true, cond: 'Text to Image / Edit', cr: 3.017 },
+      { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Image', cr: 12.07 },
+      { co: 'Recraft', model: 'recraftv3', date: '2025-05-06', approx: true, cond: 'T2I / I2I / インペイント', cr: 12.07 },
+      { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Vector', cr: 24.14 },
+      { co: 'Recraft', model: 'recraftv4_1_vector', date: '2026-07-28', approx: true, cond: 'V4 Text to Vector', cr: 24.14 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_vector', date: '2026-07-28', approx: true, cond: 'V4 Text to Vector', cr: 24.14 },
+      { co: 'Recraft', model: 'recraftv3', date: '2025-05-06', approx: true, cond: 'Text to Vector', cr: 24.14 },
+      { co: 'Recraft', model: 'recraftv4_1_pro', date: '2026-09-04', approx: true, cond: 'V4 Text to Image', cr: 63.36 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_pro', date: '2026-09-04', approx: true, cond: 'V4 Text to Image', cr: 63.36 },
+      { co: 'Recraft', model: 'recraftv4_pro', date: null, cond: 'V4 Text to Image', cr: 75.43 },
+      { co: 'Recraft', model: 'recraftv4_pro', date: null, cond: 'V4 Text to Vector', cr: 90.52 },
+      { co: 'Recraft', model: 'recraftv4_1_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 90.52 },
+      { co: 'Recraft', model: 'recraftv4_1_utility_pro_vector', date: '2026-09-04', approx: true, cond: 'V4 Text to Vector', cr: 90.52 },
 
       // ==== 【2026-09-10 統一】トークン課金モデル（gpt-image / Nano Banana）====
       // 2026-09-09まで別の表（トークン課金組）に分けていたが、探しにくいとの指摘で本表へ統合。
