@@ -34,7 +34,31 @@
       "comfy_partner_price_verified": false,
       "input_type": "single",
       "display_price_usd": 0.375,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "PBR付きの静物レンダリング候補",
+        "strength": "複数視点と材質・面数の制御を使いたいとき。",
+        "caution": "単画像の外部評価ではMeshy・Tripoを下回る。複数視点の改善幅は未測定。",
+        "use_cases": [
+          "render"
+        ],
+        "source_ids": [
+          "rap",
+          "hy"
+        ],
+        "evidence_label": "外部評価あり",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": {
+          "name": "Hunyuan3D 3.1 Pro",
+          "overall_score": 1144,
+          "ci95_plus_minus": 17,
+          "overall_rank_in_source": 5,
+          "source_id": "rap",
+          "checked_date": "2026-10-28",
+          "applicability": "同名の単画像モデルを参照。fal基本料金の設定との一致は未確認。"
+        }
+      }
     },
     {
       "name": "Tripo H3.1 Image to 3D",
@@ -59,7 +83,32 @@
       "comfy_partner_price_verified": false,
       "input_type": "single",
       "display_price_usd": 0.3,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "価格と公開品質評価のバランス候補",
+        "strength": "小物・静的ゲーム素材の最初の比較に。四角面も選べる。",
+        "caution": "四角面出力だけで変形が良好になるとは限らない。リグ・軽量化・背面を確認。",
+        "use_cases": [
+          "balanced",
+          "print"
+        ],
+        "source_ids": [
+          "rap",
+          "tripo"
+        ],
+        "evidence_label": "外部評価あり",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": {
+          "name": "Tripo H3.1",
+          "overall_score": 1261,
+          "ci95_plus_minus": 17,
+          "overall_rank_in_source": 4,
+          "source_id": "rap",
+          "checked_date": "2026-10-28",
+          "applicability": "同名の単画像モデルを参照。fal基本料金の設定との一致は未確認。"
+        }
+      }
     },
     {
       "name": "Trellis 2",
@@ -83,7 +132,31 @@
       "comfy_partner_price_verified": false,
       "input_type": "single",
       "display_price_usd": 0.25,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "PBR素材・透明表現の試作候補",
+        "strength": "金属・粗さ・透明度を含むレンダリング用素材。",
+        "caution": "開いた面や非多様体も表せるため、そのまま印刷向きとは限らない。",
+        "use_cases": [
+          "render"
+        ],
+        "source_ids": [
+          "rap",
+          "trellis2"
+        ],
+        "evidence_label": "外部評価あり",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": {
+          "name": "TRELLIS.2",
+          "overall_score": 1005,
+          "ci95_plus_minus": 17,
+          "overall_rank_in_source": 7,
+          "source_id": "rap",
+          "checked_date": "2026-10-28",
+          "applicability": "同名の単画像モデルを参照。fal基本料金の設定との一致は未確認。"
+        }
+      }
     },
     {
       "name": "Trellis",
@@ -104,7 +177,22 @@
       "comfy_partner_price_verified": false,
       "input_type": "single",
       "display_price_usd": 0.02,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "費用を抑えるラフ・形状検討用",
+        "strength": "多数の案を安く作り、構図やシルエットを確認。",
+        "caution": "細部の忠実度を求める完成素材は上位モデルと比較。採用率は未測定。",
+        "use_cases": [
+          "draft"
+        ],
+        "source_ids": [
+          "rap"
+        ],
+        "evidence_label": "順位掲載・スコア未収録",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": null
+      }
     },
     {
       "name": "Hyper3D Rodin V2.5 Image to 3D",
@@ -127,7 +215,32 @@
       "comfy_partner_price_verified": false,
       "input_type": "single_multi",
       "display_price_usd": 0.4,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "形状・材質の設定を詰める追加候補",
+        "strength": "tierやメッシュ・材質設定を調整する制作に。",
+        "caution": "Highの外部総合評価はTRELLIS.2より低い。高価・高ポリ＝高品質とは扱わない。",
+        "use_cases": [
+          "render",
+          "print"
+        ],
+        "source_ids": [
+          "rap",
+          "rodin"
+        ],
+        "evidence_label": "外部評価あり",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": {
+          "name": "Rodin Gen-2.5 High",
+          "overall_score": 956,
+          "ci95_plus_minus": 17,
+          "overall_rank_in_source": 8,
+          "source_id": "rap",
+          "checked_date": "2026-10-28",
+          "applicability": "同名の単画像モデルを参照。fal基本料金の設定との一致は未確認。"
+        }
+      }
     },
     {
       "name": "Tripo H3.1 Multiview to 3D",
@@ -152,7 +265,23 @@
       "comfy_partner_price_verified": false,
       "input_type": "multi",
       "display_price_usd": 0.3,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "背面などの参照画像を渡せる候補",
+        "strength": "同じ対象の複数ビューを用意できる小物や原型。",
+        "caution": "画像間の形状・色を揃える。単画像H3.1のスコアをこのAPIの点数にしない。",
+        "use_cases": [
+          "balanced",
+          "print"
+        ],
+        "source_ids": [
+          "tripo"
+        ],
+        "evidence_label": "同系統の仕様参考",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": null
+      }
     },
     {
       "name": "Meshy 7.1 Image to 3D",
@@ -180,7 +309,33 @@
       "comfy_partner_price_verified": false,
       "input_type": "single",
       "display_price_usd": 1.2,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "見た目重視のキャラ・動きのある素材",
+        "strength": "外部単画像評価と、リグ・アニメーションまでの工程を重視。",
+        "caution": "動作の品質は別検証。顔・特殊骨格は別途DCCで調整し、A/Tポーズと関節を確認。",
+        "use_cases": [
+          "character",
+          "balanced"
+        ],
+        "source_ids": [
+          "rap",
+          "meshy",
+          "falmeshy"
+        ],
+        "evidence_label": "外部評価あり",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": {
+          "name": "Meshy v7.1",
+          "overall_score": 1298,
+          "ci95_plus_minus": 18,
+          "overall_rank_in_source": 2,
+          "source_id": "rap",
+          "checked_date": "2026-10-28",
+          "applicability": "同名の単画像モデルを参照。fal基本料金の設定との一致は未確認。"
+        }
+      }
     },
     {
       "name": "Meshy 7.1 Multi Image to 3D",
@@ -208,7 +363,23 @@
       "comfy_partner_price_verified": false,
       "input_type": "multi",
       "display_price_usd": 1.2,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "複数方向のキャラ参照を使う候補",
+        "strength": "1〜4方向から形状を伝えたい素材。",
+        "caution": "単画像7.1のスコアを転用しない。複数画像版の形状解像度やAPI設定を別途確認。",
+        "use_cases": [
+          "character",
+          "balanced"
+        ],
+        "source_ids": [
+          "meshy"
+        ],
+        "evidence_label": "同系統の仕様参考",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": null
+      }
     },
     {
       "name": "Hunyuan3D V3",
@@ -235,7 +406,22 @@
       "comfy_partner_price_verified": false,
       "input_type": "single",
       "display_price_usd": 0.375,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "形状・材質・LowPolyを選ぶ従来版候補",
+        "strength": "既存V3ワークフローを維持し、設定を調整する場合。",
+        "caution": "3.1 Proの外部スコアはV3に転用不可。新規採用では3.1と同一素材で比較。",
+        "use_cases": [
+          "render"
+        ],
+        "source_ids": [
+          "hy"
+        ],
+        "evidence_label": "同系列参考・直接比較なし",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": null
+      }
     },
     {
       "name": "SAM 3D Objects",
@@ -257,7 +443,181 @@
       "comfy_partner_price_verified": false,
       "input_type": "scene",
       "display_price_usd": null,
-      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。",
+      "quality": {
+        "summary": "実写の背景・遮蔽から対象を取り出す",
+        "strength": "写真内の物体と配置を再構築する用途。",
+        "caution": "キャラ造形や精密な商品CADの代替ではない。背面・寸法・抽出境界を確認。",
+        "use_cases": [
+          "photo"
+        ],
+        "source_ids": [
+          "sam",
+          "rap"
+        ],
+        "evidence_label": "外部評価あり・用途別枠",
+        "assessment_type": "公開資料に基づく編集判断",
+        "own_generation_tested": false,
+        "benchmark": {
+          "name": "SAM 3D Objects",
+          "overall_score": 658,
+          "ci95_plus_minus": 20,
+          "overall_rank_in_source": 12,
+          "source_id": "rap",
+          "checked_date": "2026-10-28",
+          "applicability": "同名の単画像モデルを参照。fal基本料金の設定との一致は未確認。"
+        }
+      }
     }
-  ]
+  ],
+  "quality_research": {
+    "checked_date": "2026-10-28",
+    "sources": [
+      {
+        "id": "rap",
+        "title": "Rapidata / benchmark.ai — Image-to-3D",
+        "kind": "外部・人間選好評価",
+        "url": "https://www.benchmark.ai/image-to-3d",
+        "note": "単画像の形状と見た目を評価。掲載料金の設定と評価設定が一致するとは限りません。"
+      },
+      {
+        "id": "tripo",
+        "title": "Tripo公式 — H Series",
+        "kind": "メーカー仕様・用途説明",
+        "url": "https://www.tripo3d.ai/product-doc/ai-3d-models/h-series-hd-model",
+        "note": "H3.1、四角面、PBR、印刷・レンダリング用途の説明。"
+      },
+      {
+        "id": "meshy",
+        "title": "Meshy公式 — Rigging",
+        "kind": "メーカー機能・制約",
+        "url": "https://docs.meshy.ai/en/webapp/guides/3d-model/rigging",
+        "note": "リグ前のメッシュ整理、A/Tポーズ、顔や特殊骨格の制約。"
+      },
+      {
+        "id": "falmeshy",
+        "title": "fal — Meshy 7.1 API",
+        "kind": "利用経路の機能仕様",
+        "url": "https://fal.ai/models/meshy/v7.1/image-to-3d/api",
+        "note": "単画像の低ポリ・形状解像度・リグなどのAPI設定。"
+      },
+      {
+        "id": "trellis2",
+        "title": "Microsoft Research — TRELLIS.2",
+        "kind": "開発元の研究・作例",
+        "url": "https://microsoft.github.io/TRELLIS.2/",
+        "note": "PBR、透明度、開いた面などの表現仕様。"
+      },
+      {
+        "id": "sam",
+        "title": "Meta — SAM 3D Objects",
+        "kind": "開発元の研究・作例",
+        "url": "https://github.com/facebookresearch/sam-3d-objects",
+        "note": "遮蔽や背景のある実写画像の対象再構築。"
+      },
+      {
+        "id": "rodin",
+        "title": "Hyper3D公式 — Rodin Gen-2.5",
+        "kind": "メーカー機能・制約",
+        "url": "https://docs.hyper3d.ai/en/api-specification/rodin-gen2-5",
+        "note": "tier、面・材質の設定。HighPackは形状精度の増加ではありません。"
+      },
+      {
+        "id": "hy",
+        "title": "Tencent Cloud — SubmitHunyuanTo3DProJob",
+        "kind": "メーカーAPI仕様",
+        "url": "https://intl.cloud.tencent.com/ind/document/product/1284/75540",
+        "note": "3.1の複数視点、PBR、面数・LowPoly制御。"
+      },
+      {
+        "id": "scenario",
+        "title": "Scenario — Image to 3D Benchmark",
+        "kind": "生成サービス運営者の公開比較",
+        "url": "https://www.scenario.com/explorations/image-to-3d-benchmark/",
+        "note": "6素材の実メッシュをTextured / Clay / Wireframeで確認可能。最高設定の比較で、価格表の基本設定とは異なります。"
+      }
+    ],
+    "own_generation_tested": false,
+    "method": "外部評価と開発元の仕様を分けて参照し、用途の推奨は編集判断として示す。Elo/価格はコスパ指標として計算しない。",
+    "benchmark_scope": "単画像のみ。複数画像版・旧版の点数は埋めない。",
+    "benchmark_date_note": "元ページの上部は2026-10-06、末尾の更新表示は変動するため、ここでは確認日2026-10-28のスナップショットとして扱う。",
+    "use_case_recommendations": [
+      {
+        "id": "balanced",
+        "title": "小物・静的ゲーム素材",
+        "pick": "Tripo H3.1",
+        "price": "$0.30 / 標準テクスチャ",
+        "why": "外部の単画像品質評価と、掲載単価の両方を重視する最初の候補。",
+        "setup": "標準テクスチャから試し、必要な素材だけ詳細形状・四角面へ。",
+        "limit": "ゲーム投入前にポリ数、UV、背面、当たり判定を確認。",
+        "refs": [
+          "rap",
+          "tripo"
+        ]
+      },
+      {
+        "id": "character",
+        "title": "キャラの見た目・動き",
+        "pick": "Meshy 7.1",
+        "price": "$1.20 / テクスチャ、$1.52 / リグ＋アニメ",
+        "why": "今回の掲載対象のうち、外部単画像評価で上位。自動リグまでの工程も選べる。",
+        "setup": "A/Tポーズで四肢を離す。複数方向の参照があるならMulti版も比較。",
+        "limit": "顔の表情・特殊骨格や実際の変形は別途調整。Multi版は単画像スコアの対象外。",
+        "refs": [
+          "rap",
+          "meshy",
+          "falmeshy"
+        ]
+      },
+      {
+        "id": "render",
+        "title": "PBR・商品風レンダリング",
+        "pick": "TRELLIS 2",
+        "price": "$0.25〜$0.35 / 解像度別",
+        "why": "金属・粗さ・透明度などのPBR表現を試す候補。複数視点や面数制御はHunyuan 3D Proも比較。",
+        "setup": "照明を変えて材質を確認。ProのPBR有効時は$0.525。",
+        "limit": "正確な商品寸法やロゴの再現を保証しない。推奨は仕様と費用による判断。",
+        "refs": [
+          "trellis2",
+          "hy"
+        ]
+      },
+      {
+        "id": "print",
+        "title": "フィギュア・印刷用の原型",
+        "pick": "Tripo H3.1",
+        "price": "$0.20 / 形状のみ、詳細形状は+$0.20",
+        "why": "高密度形状を作り、プリント用に仕上げる原型候補。揃った複数ビューがあればMultiview版も検討。",
+        "setup": "テクスチャを外して指・薄い部品・背面の形状を見る。",
+        "limit": "厚み、穴、非多様体、実寸と支持をスライサーで点検。印刷成功率は未測定。",
+        "refs": [
+          "tripo"
+        ]
+      },
+      {
+        "id": "photo",
+        "title": "実写写真から対象を再構築",
+        "pick": "SAM 3D Objects",
+        "price": "$0.02 / unit",
+        "why": "背景や遮蔽のある写真の物体・配置を取り出す用途。単体作品の忠実度ランキングだけで選ばない。",
+        "setup": "抽出したい対象を指定し、境界と隠れた面を点検。",
+        "limit": "複数対象時の課金量と、実物の寸法・背面は別途確認。",
+        "refs": [
+          "sam"
+        ]
+      },
+      {
+        "id": "draft",
+        "title": "ラフ・構図を大量に試す",
+        "pick": "TRELLIS",
+        "price": "$0.02 / 生成",
+        "why": "小額で形や配置の候補を作る入口。完成品質を求める素材はTripoやMeshyと比較。",
+        "setup": "シルエット・構図が決まった案を次の工程へ。",
+        "limit": "微細形状・テクスチャの忠実度を優先する場合の第一推奨にはしない。",
+        "refs": [
+          "rap"
+        ]
+      }
+    ]
+  }
 }

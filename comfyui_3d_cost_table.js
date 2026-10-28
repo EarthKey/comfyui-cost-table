@@ -5,10 +5,10 @@
     const response = await fetch('3d-models.json');
     if (!response.ok) throw new Error('価格データを取得できません');
     const data = await response.json();
-    const body = document.querySelector('tbody');
+    const body = document.querySelector('#comparison tbody');
     const rows = Array.from(body.rows);
     if (rows.length !== data.models.length) throw new Error('価格データの件数が一致しません');
-    const controls = Object.fromEntries(['search','input','basis','sort','attempts'].map(id => [id, document.getElementById(id)]));
+    const controls = Object.fromEntries(['search','input','basis','sort','attempts','usecase'].map(id => [id, document.getElementById(id)]));
     const fmt = value => '$' + value.toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
     function price(model) { return controls.basis.value === 'base' ? model.base_usd : model.display_price_usd; }
     function render() {
@@ -17,6 +17,12 @@
       const times = Number(controls.attempts.value);
       const entries = data.models.map((model, index) => ({model, row:rows[index]}));
       entries.sort((a,b) => {
+        if (controls.sort.value === 'quality') {
+          const x=a.model.quality.benchmark?.overall_score, y=b.model.quality.benchmark?.overall_score;
+          if (x == null) return y == null ? 0 : 1;
+          if (y == null) return -1;
+          return y-x;
+        }
         if (controls.sort.value === 'name') return a.model.name.localeCompare(b.model.name);
         const x=price(a.model), y=price(b.model);
         if (x == null) return y == null ? 0 : 1;
@@ -26,7 +32,8 @@
       let count=0;
       for (const {model,row} of entries) {
         const inputMatch = mode === 'all' || model.input_type === mode || (model.input_type === 'single_multi' && ['single','multi'].includes(mode));
-        const matches = inputMatch && (model.name+' '+model.endpoint).toLowerCase().includes(query);
+        const usecaseMatch = controls.usecase.value === 'all' || model.quality.use_cases.includes(controls.usecase.value);
+        const matches = usecaseMatch && inputMatch && (model.name+' '+model.endpoint).toLowerCase().includes(query);
         row.hidden = !matches;
         if (matches) count++;
         const isSam=model.endpoint === 'fal-ai/sam-3/3d-objects';
@@ -38,6 +45,13 @@
       document.getElementById('count').textContent = count+' / '+rows.length+' 件';
       document.getElementById('empty').hidden = count !== 0;
     }
+    const requestedUse = new URLSearchParams(location.search).get('use');
+    if (requestedUse && Array.from(controls.usecase.options).some(option=>option.value===requestedUse)) controls.usecase.value=requestedUse;
+    document.querySelectorAll('[data-usecase]').forEach(link=>link.addEventListener('click',event=>{
+      event.preventDefault(); controls.usecase.value=link.dataset.usecase; controls.input.value='all'; controls.search.value=''; render();
+      document.getElementById('comparison').scrollIntoView({block:'start'});
+      controls.usecase.focus({preventScroll:true});
+    }));
     document.getElementById('filters').addEventListener('submit', event=>event.preventDefault());
     Object.values(controls).forEach(control=>control.addEventListener('input',render));
     render();
