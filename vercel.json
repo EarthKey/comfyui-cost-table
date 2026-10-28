@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "destination": "https://comfyui-cost-table.earthkey.workers.dev/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "destination": "https://comfyui-cost-table.earthkey.workers.dev/:path*",
       "permanent": true
