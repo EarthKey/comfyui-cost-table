@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-10-28",
+  "currency": "USD",
+  "provider": "fal",
+  "quality_tested": false,
+  "notes": [
+    "fal直接利用の掲載料金。ComfyUIパートナーノードのクレジットとは別体系。",
+    "税・為替・元画像制作・修正・再生成の費用は別。",
+    "SAMは単位課金。単一対象の参考額0.02ドルを示し、複数対象を一律1回と数えない。"
+  ],
+  "models": [
+    {
+      "name": "Hunyuan 3D Pro Image to 3D",
+      "endpoint": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.375,
+      "textured_reference_usd": 0.375,
+      "options_usd": {
+        "pbr": 0.15,
+        "multiview": 0.15,
+        "custom_face_count": 0.15
+      },
+      "observed_output_formats": [
+        "GLB",
+        "OBJ"
+      ],
+      "note": "PBR有効時は0.525ドル。",
+      "source": "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "single",
+      "display_price_usd": 0.375,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Tripo H3.1 Image to 3D",
+      "endpoint": "tripo3d/h3.1/image-to-3d",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.2,
+      "textured_reference_usd": 0.3,
+      "options_usd": {
+        "hd_texture_total": 0.4,
+        "detailed_geometry": 0.2,
+        "quad_mesh": 0.05
+      },
+      "observed_output_formats": [
+        "GLB"
+      ],
+      "note": "テクスチャなし0.20、標準0.30、HD0.40ドル。",
+      "source": "https://fal.ai/models/tripo3d/h3.1/image-to-3d",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "single",
+      "display_price_usd": 0.3,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Trellis 2",
+      "endpoint": "fal-ai/trellis-2",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.25,
+      "textured_reference_usd": 0.25,
+      "options_usd": {
+        "resolution_1024_total": 0.3,
+        "resolution_1536_total": 0.35
+      },
+      "observed_output_formats": [
+        "GLB"
+      ],
+      "note": "512設定。価格表の0.05ドル/unitを1生成価格として扱わない。",
+      "source": "https://fal.ai/models/fal-ai/trellis-2",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "single",
+      "display_price_usd": 0.25,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Trellis",
+      "endpoint": "fal-ai/trellis",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.02,
+      "textured_reference_usd": 0.02,
+      "options_usd": {},
+      "observed_output_formats": [
+        "GLB"
+      ],
+      "note": "低コストな試作候補。品質順位は未検証。",
+      "source": "https://fal.ai/models/fal-ai/trellis",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "single",
+      "display_price_usd": 0.02,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Hyper3D Rodin V2.5 Image to 3D",
+      "endpoint": "fal-ai/hyper3d/rodin/v2.5",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.4,
+      "textured_reference_usd": 0.4,
+      "options_usd": {
+        "highpack": 0.8
+      },
+      "observed_output_formats": [
+        "GLB"
+      ],
+      "note": "PlaygroundのGen-2.5-High表示設定。HighPack追加で計1.20ドル。他tierの価格を一律扱いしない。",
+      "source": "https://fal.ai/models/fal-ai/hyper3d/rodin/v2.5",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "single_multi",
+      "display_price_usd": 0.4,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Tripo H3.1 Multiview to 3D",
+      "endpoint": "tripo3d/h3.1/multiview-to-3d",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.2,
+      "textured_reference_usd": 0.3,
+      "options_usd": {
+        "hd_texture_total": 0.4,
+        "detailed_geometry": 0.2,
+        "quad_mesh": 0.05
+      },
+      "observed_output_formats": [
+        "GLB"
+      ],
+      "note": "複数ビューの元画像を用意する費用は別。",
+      "source": "https://fal.ai/models/tripo3d/h3.1/multiview-to-3d",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "multi",
+      "display_price_usd": 0.3,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Meshy 7.1 Image to 3D",
+      "endpoint": "meshy/v7.1/image-to-3d",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.8,
+      "textured_reference_usd": 1.2,
+      "options_usd": {
+        "auto_rig": 0.2,
+        "animation_per_call": 0.12
+      },
+      "observed_output_formats": [
+        "GLB",
+        "FBX",
+        "OBJ",
+        "USDZ",
+        "STL"
+      ],
+      "note": "テクスチャ・リグ・アニメーション込みは1.52ドル。",
+      "source": "https://fal.ai/models/meshy/v7.1/image-to-3d",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "single",
+      "display_price_usd": 1.2,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Meshy 7.1 Multi Image to 3D",
+      "endpoint": "meshy/v7.1/multi-image-to-3d",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.8,
+      "textured_reference_usd": 1.2,
+      "options_usd": {
+        "auto_rig": 0.2,
+        "animation_per_call": 0.12
+      },
+      "observed_output_formats": [
+        "GLB",
+        "FBX",
+        "OBJ",
+        "USDZ",
+        "STL"
+      ],
+      "note": "1〜4ビュー。テクスチャ・リグ・アニメーション込みは1.52ドル。",
+      "source": "https://fal.ai/models/meshy/v7.1/multi-image-to-3d",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "multi",
+      "display_price_usd": 1.2,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "Hunyuan3D V3",
+      "endpoint": "fal-ai/hunyuan3d-v3/image-to-3d",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.225,
+      "textured_reference_usd": 0.375,
+      "options_usd": {
+        "lowpoly_total": 0.45,
+        "pbr": 0.15,
+        "multiview_where_available": 0.15,
+        "custom_face_count_where_available": 0.15
+      },
+      "observed_output_formats": [
+        "GLB",
+        "OBJ"
+      ],
+      "note": "Geometry0.225、Normal0.375、LowPoly0.45ドル。Normal+PBRは0.525ドル。",
+      "source": "https://fal.ai/models/fal-ai/hunyuan3d-v3/image-to-3d",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "single",
+      "display_price_usd": 0.375,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    },
+    {
+      "name": "SAM 3D Objects",
+      "endpoint": "fal-ai/sam-3/3d-objects",
+      "provider": "fal",
+      "scope": "画像掲載",
+      "currency": "USD",
+      "base_usd": 0.02,
+      "textured_reference_usd": null,
+      "options_usd": {},
+      "observed_output_formats": [
+        "GLB",
+        "PLY"
+      ],
+      "note": "料金表示は0.02ドル/unit、本文は0.02ドル/生成。単一対象の目安とし、複数対象時のunit数は実課金で要確認。写真からの対象抽出・再構築向け。",
+      "source": "https://fal.ai/models/fal-ai/sam-3/3d-objects",
+      "checked_date": "2026-10-28",
+      "quality_tested": false,
+      "comfy_partner_price_verified": false,
+      "input_type": "scene",
+      "display_price_usd": null,
+      "commercial_use_status": "fal掲載ページにCommercial use表示。個別規約と素材の権利を確認してください。"
+    }
+  ]
+}

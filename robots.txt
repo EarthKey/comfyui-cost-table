@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://comfyui-cost-table.earthkey.workers.dev/sitemap.xml

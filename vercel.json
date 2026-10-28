@@ -1,0 +1,12 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://comfyui-cost-table.earthkey.workers.dev/:path*",
+      "permanent": true
+    }
+  ],
+  "framework": null,
+  "buildCommand": "node build.mjs",
+  "outputDirectory": "dist"
+}
