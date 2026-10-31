@@ -10,7 +10,7 @@
 
   <!-- OGP Tags -->
   <meta property="og:title" content="ComfyUI 画像API クレジット価格表 2026">
-  <meta property="og:description" content="ComfyUI公式パートナーノードの画像生成モデルを1枚あたりのクレジット単価で比較。持っているクレジットで何枚作れるかを即座に計算。">
+  <meta property="og:description" content="ComfyUI公式パートナーノードの画像生成モデルを1枚あたりのクレジット単価で比較（2026-10-31更新・FLUX 3 Image / Krea 3 / Nano Banana 2.1 まで）。持っているクレジットで何枚作れるかを即座に計算。">
   <meta property="og:image" content="https://comfyui-cost-table.earthkey.workers.dev/og-image.webp">
   <meta property="og:url" content="https://comfyui-cost-table.earthkey.workers.dev/comfyui_image_cost_table.html">
   <meta property="og:type" content="website">
@@ -642,7 +642,7 @@
       手持ちのクレジットを入れると、<strong>そのモデルで何枚作れるか</strong>がその場で出ます
     </p>
     <div class="header-meta">
-      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-09-30</strong>（新規3モデル追加・Recraft価格を公式へ更新／前回: gpt-image-2.5追加 2026-09-09・表を1本へ統合 2026-09-10） ・ 掲載 <strong><span
+      出典 <strong>docs.comfy.org / partner-nodes / pricing</strong> ・ 取得日 <strong>2026-10-31</strong>（新規24行追加・gpt-image-2／2.5の単価を公式へ更新／前回: 新規3モデル・Recraft価格更新 2026-09-30） ・ 掲載 <strong><span
           id="meta-count">—</span> 行</strong>
     </div>
   </header>
@@ -709,7 +709,7 @@
       出典は <a href="https://github.com/Comfy-Org/ComfyUI/commits/master/comfy_api_nodes" target="_blank" style="color:var(--accent)">Comfy-Org/ComfyUI の comfy_api_nodes</a>
       のコミット履歴・該当PRです。55モデル中<strong>42件はPRまたはコミット日を特定</strong>、<strong>「頃」が付いた日付</strong>はノードファイル単位の導入日や、
       Recraft・BFL・Kling等の細分バリエーション（同一PRに複数モデルがまとめて含まれる場合）で個別の行まで断定できず代表PRの日付を充てた推定です。
-      <strong>「不明」</strong>は追加PRを特定できなかったもの（DALL·E 2/3、grok-imagine-image-pro、Flux.2 [max]、recraftv4_pro、seedream-3-0-t2i / seedream-4-5-251128、gpt-image-1）です。
+      <strong>「不明」</strong>は追加PRを特定できなかったもの（DALL·E 2/3、grok-imagine-image-pro、Flux.2 [max]、recraftv4_pro、seedream-3-0-t2i / seedream-4-5-251128、gpt-image-1、kling-v3-omni、Seedream 5.0 Flash レイヤー分離）です。
       🔴 <strong>この列はAI要約によるPR説明文の解釈に依拠しており、コード差分の1行1行を目視確認したものではありません。</strong> 判断材料としては動画コスト表の追加日列より確度が一段落ちる前提で扱ってください。<br>
       ★ <strong>クレジット→ドルの換算（211cr = 1 USD）は公式の明示ではなく、各社の公開API価格からの逆算</strong>です。
       Flux.1 Kontext [pro] 8.44cr ÷ $0.04、Kontext [max] 16.88cr ÷ $0.08、Flux.1 Fill 10.55cr ÷ $0.05、DALL·E 3 標準 8.44cr ÷
@@ -733,16 +733,19 @@
       実際のトークン数が違えば単価もそのぶんズレます。<br>
       ★ <strong>ローカル実行（Stable Diffusion / Flux dev / Qwen Image ローカル版など）はクレジットを消費しません。</strong>
       この表はすべて<strong>API経由</strong>の価格です。<br>
-      ★ 🆕【2026-09-30 更新】<strong>新規3モデルを追加</strong>：Recraft V4.1 Flash（9-23・2.11cr/枚）／Tencent HY Image 3.5 Preview（9-22・7.24cr、4Kは9.66cr）／Meta Muse Image（9-05頃・3.017cr）。
+      ★ 🆕【2026-10-31 更新】<strong>新規24行を追加</strong>：FLUX 3 Image（10-01・0.75K〜4K）／Krea 3（10-15）／Ideogram 4.5（9-30）／Nano Banana 2.1（10-06・約11.67cr/枚・推定）／Luma uni-1・uni-1-max／Recraft V4 Styles 4種／Kling v3-omni／Runway gen4_image／Seedream 5.0 Flash レイヤー分離。uni-1・Recraft Styles・gen4_image は以前からありましたが、表に載せ漏れていました。<br>
+      ★ 🔴 <strong>gpt-image-2 と gpt-image-2.5 の値を直しました。</strong>公式の出力単価が gpt-image-2 は 6,330→<strong>7,600cr/1M</strong>、gpt-image-2.5（Flare／Sunburst）は <strong>9,051.9cr/1M</strong> で、従来の「2.5は2と同額」は誤りでした（例: high 1024×1024 は 2 が 44.52→53.45、2.5 が 63.66）。1枚あたりのトークン数は従来どおり第三者推定です。<br>
+      ★ Seedream 5.0 Flash は公式表に<strong>5.43cr</strong>で載ったため、概算の注記を外しました。kling-v2 は 8-17 に画像ノードから削除されています（比較用に行は残しています）。<br>
+      ★ 【前回 2026-09-30 更新】<strong>新規3モデルを追加</strong>：Recraft V4.1 Flash（9-23・2.11cr/枚）／Tencent HY Image 3.5 Preview（9-22・7.24cr、4Kは9.66cr）／Meta Muse Image（9-05頃・3.017cr）。
       追加日は Comfy-Org/ComfyUI のPRマージ日。Muse Imageだけ二次情報（PR #16078）で「頃」扱いです。<br>
       ★ 🔴 <strong>Recraft の価格を全14行、公式の現行値へ更新しました。</strong>従来の表は8-17取得の値で、公式の現行価格は<strong>一律およそ1.43倍</strong>に上がっていました
       （例: recraftv4_1 7.39→10.56／recraftv4 8.44→12.07／Text to Vector 16.88→24.14／recraftv4_pro 52.75→75.43）。この値上がりの時期は特定できていません。
       あわせて Seedream 5.0 Pro レイヤー分離を 6.75〜13.50 → <strong>6.79〜13.58</strong> に更新しました。<br>
       ★ 🆕 <strong>Seedream 5.0 Flash（9-24追加）は約5.43cr/枚</strong>（ByteDance系で最安）。<strong>公式価格表にはまだ行がなく</strong>、追加PR（#16522）のコードにある価格バッジ（$0.02574・概算表記）を211cr=$1で換算した値です。
-      同じPRの Pro レイヤー分離（$0.032175→6.79cr）が公式表と一致したため換算は妥当ですが、<strong>公式表に載ったら差し替えます</strong>。参照画像を足したときの追加料金がFlashにかかるかは未確認です。<br>
+      同じPRの Pro レイヤー分離（$0.032175→6.79cr）が公式表と一致したため換算は妥当でした。<strong>2026-10-31に公式表へ同じ5.43crで載りました。</strong>参照画像を足したときの追加料金がFlashにかかるかは未確認です。<br>
       ★ <strong>載せていないもの</strong>：Quiver Arrow（SVG生成）／Topaz・Bria（高画質化・編集ノード）／Microsoft mai-image（トークン課金）。
       DALL·E 2/3 は公式表で「ノード削除済み」と明記されていますが、比較用に行は残しています。<br>
-      ★ 価格は予告なく変わります。<strong>取得日は2026-09-30</strong>（トークン課金の gpt-image・Nano Banana 系は計算値のため前回のまま）。判断の前に出典を直接確認してください。
+      ★ 価格は予告なく変わります。<strong>取得日は2026-10-31</strong>（トークン課金の gpt-image・Nano Banana 系は、公式の単価×1枚あたりのトークン数の計算値です）。判断の前に出典を直接確認してください。
     </div>
     <a class="src-link" href="https://docs.comfy.org/ja/tutorials/partner-nodes/pricing" target="_blank">→
       docs.comfy.org/ja/tutorials/partner-nodes/pricing</a>
@@ -780,7 +783,7 @@
       { co: 'Ideogram', model: 'Ideogram V4', date: '2026-06-03', cond: 'QUALITY', cr: 30.17 },
 
       // ---- Kling ----
-      { co: 'Kling', model: 'kling-v2', date: '2025-05-06', approx: true, cond: '画像入力あり/なし', cr: 2.95 },
+      { co: 'Kling', model: 'kling-v2', date: '2025-05-06', approx: true, cond: '⛔2026-08-17 ノードから削除（比較用に残す）', cr: 2.95 },
       { co: 'Kling', model: 'kling-v3', date: '2026-02-10', cond: '画像入力なし', cr: 5.91 },
       { co: 'Kling', model: 'kling-image-o1', date: '2025-12-11', cond: '1K / 2K', cr: 5.91 },
       { co: 'Kling', model: 'kling-image-o1', date: '2025-12-11', cond: '4K', cr: 11.82 },
@@ -820,7 +823,7 @@
       { co: 'ByteDance', model: 'seedream-4-0-250828', date: '2025-09-10', approx: true, cond: '—', cr: 6.33 },
       { co: 'ByteDance', model: 'seedream-4-5-251128', date: null, cond: '—', cr: 8.44 },
       { co: 'ByteDance', model: 'seedream 5.0 lite', date: '2026-02-24', approx: true, cond: '—', cr: 7.39 },
-      { co: 'ByteDance', model: 'seedream 5.0 flash 🆕', date: '2026-09-24', cond: '概算・PRコード由来（公式表未掲載）', cr: 5.43 },
+      { co: 'ByteDance', model: 'seedream 5.0 flash', date: '2026-09-24', cond: '—', cr: 5.43 },
       { co: 'ByteDance', model: 'seedream 5.0 pro', date: '2026-07-09', approx: true, cond: '1K', cr: 9.50 },
       { co: 'ByteDance', model: 'seedream 5.0 pro', date: '2026-07-09', approx: true, cond: '2K', cr: 18.99 },
       { co: 'ByteDance', model: 'Seedream 5.0 Pro レイヤー分離', date: '2026-08-07', cond: '1K / 1.5K', cr: 6.79 },
@@ -848,11 +851,11 @@
       // ---- Recraft ----
       { co: 'Recraft', model: 'recraftv4_1', date: '2026-07-28', cond: 'V4 Text to Image', cr: 10.56 },
       { co: 'Recraft', model: 'recraftv4_1_utility', date: '2026-07-28', approx: true, cond: 'V4 Text to Image', cr: 10.56 },
-      { co: 'Recraft', model: 'recraftv4_1_flash 🆕', date: '2026-09-23', cond: 'V4 Text to Image', cr: 2.11 },
+      { co: 'Recraft', model: 'recraftv4_1_flash', date: '2026-09-23', cond: 'V4 Text to Image', cr: 2.11 },
       // ---- 2026-09-30 追加 ----
-      { co: 'Tencent', model: 'HY Image 3.5 Preview 🆕', date: '2026-09-22', cond: 'T2I / Edit・1K・2K・〜4.19MP', cr: 7.24 },
-      { co: 'Tencent', model: 'HY Image 3.5 Preview 🆕', date: '2026-09-22', cond: 'T2I / Edit・4K・4.19MP超', cr: 9.66 },
-      { co: 'Meta', model: 'Muse Image 🆕', date: '2026-09-05', approx: true, cond: 'Text to Image / Edit', cr: 3.017 },
+      { co: 'Tencent', model: 'HY Image 3.5 Preview', date: '2026-09-22', cond: 'T2I / Edit・1K・2K・〜4.19MP', cr: 7.24 },
+      { co: 'Tencent', model: 'HY Image 3.5 Preview', date: '2026-09-22', cond: 'T2I / Edit・4K・4.19MP超', cr: 9.66 },
+      { co: 'Meta', model: 'Muse Image', date: '2026-09-05', approx: true, cond: 'Text to Image / Edit', cr: 3.017 },
       { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Image', cr: 12.07 },
       { co: 'Recraft', model: 'recraftv3', date: '2025-05-06', approx: true, cond: 'T2I / I2I / インペイント', cr: 12.07 },
       { co: 'Recraft', model: 'recraftv4', date: '2026-02-17', cond: 'V4 Text to Vector', cr: 24.14 },
@@ -892,18 +895,43 @@
       { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'high / 1024×1024', cr: 28.09 },
       { co: 'OpenAI', model: 'gpt-image-1.5', date: '2025-12-17', cond: 'high / 1024×1536（縦）', cr: 42.13 },
 
-      // --- OpenAI gpt-image-2（出力6,330cr/1M=$30/1M公式確定／tok数は未公表・第三者推定） ---
-      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'low / 1024×1024 ※未公表・第三者推定', cr: 1.27 },
-      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'medium / 1024×1024 ※未公表・第三者推定', cr: 11.19 },
-      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'high / 1024×1024 ※未公表・第三者推定', cr: 44.52 },
+      // --- OpenAI gpt-image-2（出力7,600cr/1M＝2026-10-31公式／tok数は未公表・第三者推定） ---
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'low / 1024×1024 ※未公表・第三者推定', cr: 1.52 },
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'medium / 1024×1024 ※未公表・第三者推定', cr: 13.44 },
+      { co: 'OpenAI', model: 'gpt-image-2', date: '2026-04-22', cond: 'high / 1024×1024 ※未公表・第三者推定', cr: 53.45 },
 
-      // --- OpenAI gpt-image-2.5 Flare/Sunburst 🆕（2026-09-08公開・出力単価はgpt-image-2と同額／tok数は未公表・第三者推定） ---
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', cond: 'low / 1024×1024 ※未公表・第三者推定', cr: 1.27 },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', cond: 'medium / 1024×1024 ※未公表・第三者推定', cr: 11.19 },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Flare 🆕', date: '2026-09-09', cond: 'high / 1024×1024 ※未公表・第三者推定', cr: 44.52 },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', cond: '高精細編集向け・low / 1024×1024 ※未公表・第三者推定', cr: 1.27 },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', cond: '高精細編集向け・medium / 1024×1024 ※未公表・第三者推定', cr: 11.19 },
-      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst 🆕', date: '2026-09-09', cond: '高精細編集向け・high / 1024×1024 ※未公表・第三者推定', cr: 44.52 },
+      // --- OpenAI gpt-image-2.5 Flare/Sunburst（2026-09-08公開・出力9,051.9cr/1M＝2026-10-31公式。gpt-image-2より高い／tok数は未公表・第三者推定） ---
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare', date: '2026-09-09', cond: 'low / 1024×1024 ※未公表・第三者推定', cr: 1.82 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare', date: '2026-09-09', cond: 'medium / 1024×1024 ※未公表・第三者推定', cr: 16.0 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Flare', date: '2026-09-09', cond: 'high / 1024×1024 ※未公表・第三者推定', cr: 63.66 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst', date: '2026-09-09', cond: '高精細編集向け・low / 1024×1024 ※未公表・第三者推定', cr: 1.82 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst', date: '2026-09-09', cond: '高精細編集向け・medium / 1024×1024 ※未公表・第三者推定', cr: 16.0 },
+      { co: 'OpenAI', model: 'gpt-image-2.5 Sunburst', date: '2026-09-09', cond: '高精細編集向け・high / 1024×1024 ※未公表・第三者推定', cr: 63.66 },
+      // ---- 2026-10-31 追加 ----
+      { co: 'BFL', model: 'FLUX 3 Image 🆕', date: '2026-10-01', cond: '0.75K', cr: 12.37 },
+      { co: 'BFL', model: 'FLUX 3 Image 🆕', date: '2026-10-01', cond: '1K', cr: 14.48 },
+      { co: 'BFL', model: 'FLUX 3 Image 🆕', date: '2026-10-01', cond: '1.5K', cr: 21.12 },
+      { co: 'BFL', model: 'FLUX 3 Image 🆕', date: '2026-10-01', cond: '2K', cr: 30.17 },
+      { co: 'BFL', model: 'FLUX 3 Image 🆕', date: '2026-10-01', cond: '4K', cr: 183.15 },
+      { co: 'Krea', model: 'Krea 3 🆕', date: '2026-10-15', cond: '1K / fast（参照画像1枚ごとに+6.03〜）', cr: 9.05 },
+      { co: 'Krea', model: 'Krea 3 🆕', date: '2026-10-15', cond: '1K / high（参照画像1枚ごとに+6.03〜）', cr: 15.09 },
+      { co: 'Krea', model: 'Krea 3 🆕', date: '2026-10-15', cond: '2K / fast（参照画像1枚ごとに+6.03〜）', cr: 18.1 },
+      { co: 'Krea', model: 'Krea 3 🆕', date: '2026-10-15', cond: '2K / high（参照画像1枚ごとに+6.03〜）', cr: 24.14 },
+      { co: 'Ideogram', model: 'Ideogram 4.5 🆕', date: '2026-09-30', cond: 'Text to Image / very_low', cr: 2.41 },
+      { co: 'Ideogram', model: 'Ideogram 4.5 🆕', date: '2026-09-30', cond: 'Text to Image / low', cr: 9.05 },
+      { co: 'Ideogram', model: 'Ideogram 4.5 🆕', date: '2026-09-30', cond: 'Text to Image / medium', cr: 18.1 },
+      { co: 'Ideogram', model: 'Ideogram 4.5 🆕', date: '2026-09-30', cond: 'Text to Image / high', cr: 60.35 },
+      { co: 'Google', model: 'Nano Banana 2.1 🆕', date: '2026-10-06', cond: 'gemini-nano-banana-2.1（1290tok/枚）※推定(Google公表値)', cr: 11.67 },
+      { co: 'Luma', model: 'uni-1', date: '2026-05-05', cond: 'generation（+0.63 / 参照画像）', cr: 8.52 },
+      { co: 'Luma', model: 'uni-1-max', date: '2026-05-05', cond: 'generation（+0.63 / 参照画像）', cr: 21.1 },
+      { co: 'Recraft', model: 'recraftv4_styles', date: '2026-08-26', cond: 'V4 Text to Image・スタイル指定必須', cr: 10.56 },
+      { co: 'Recraft', model: 'recraftv4_styles_vector', date: '2026-08-26', cond: 'V4 Text to Vector・スタイル指定必須', cr: 15.09 },
+      { co: 'Recraft', model: 'recraftv4_styles_pro', date: '2026-09-04', cond: 'V4 Text to Image・スタイル指定必須', cr: 30.17 },
+      { co: 'Recraft', model: 'recraftv4_styles_pro_vector', date: '2026-09-04', cond: 'V4 Text to Vector・スタイル指定必須', cr: 36.21 },
+      { co: 'Kling', model: 'kling-v3-omni', date: null, cond: '1K / 2K', cr: 5.91 },
+      { co: 'Kling', model: 'kling-v3-omni', date: null, cond: '4K', cr: 11.82 },
+      { co: 'Runway', model: 'gen4_image', date: '2025-05-27', cond: '—', cr: 24.14 },
+      { co: 'ByteDance', model: 'Seedream 5.0 Flash レイヤー分離', date: null, cond: '—', cr: 5.43 },
     ];
 
     const CR_PER_USD = 211;   // 各社の公開API価格からの逆算（公式の明示ではない）
@@ -940,7 +968,7 @@
     // 追加日セル: 実測値はそのまま / approx は「頃」/ 不明は「不明」（動画コスト表と同じ表示規則）
     function dateCell(d) {
       if (!d.date) return '<span style="color:var(--text-dim);font-size:10px;font-family:var(--mono)">不明</span>';
-      const isNew = d.date >= '2026-08-08';
+      const isNew = d.date >= '2026-09-30';
       const col = isNew ? 'var(--accent)' : 'var(--text-muted)';
       const w = isNew ? '700' : '400';
       const suffix = d.approx ? '<span style="color:var(--text-dim);font-size:9px">頃</span>' : '';
